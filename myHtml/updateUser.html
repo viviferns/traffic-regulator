@@ -1,0 +1,101 @@
+<!--this page is only for update user details-->
+
+<html>
+  <head>
+    <title></title>
+	<script type="text/javascript">
+		function editPage(id1,id2,id3,id4,id5)
+		{
+			var dropDown1=document.getElementById(id1);
+			var textbox1=document.getElementById(id2);
+			var textbox2=document.getElementById(id3);
+			var carNumber=document.getElementById(id4);
+			var submitButton=document.getElementById(id5);
+			
+			if(dropDown1.value=="name")
+			{
+				textbox1.style.visibility = 'visible';
+				textbox2.style.visibility = 'visible';
+				submitButton.style.visibility = 'visible';
+			}
+			else if(dropDown1.value=="mob_number")
+			{
+				textbox2.placeholder=" Enter New Mobile Number"
+				textbox1.style.visibility = 'visible';
+				textbox2.style.visibility = 'visible';
+				submitButton.style.visibility = 'visible';
+			}
+			else if(dropDown1.value=="email_address")
+			{
+				textbox2.placeholder=" Enter New Email Address"
+				textbox1.style.visibility = 'visible';
+				textbox2.style.visibility = 'visible';
+				submitButton.style.visibility = 'visible';
+			}
+			else if(dropDown1.value=="car_number")
+			{
+				textbox1.style.visibility = 'visible';
+				textbox2.style.visibility = 'visible';
+				carNumber.style.visibility = 'visible';
+				submitButton.style.visibility = 'visible';
+			}
+		}
+	</script>
+  </head>
+  <body>
+    </br></br></br>
+  <form align="center">
+    <tr>
+    <td>
+      <h3 align="center">
+        Confirm details to be Updated
+      </h3>
+      </td>
+    </tr>
+    </br>
+	</br>
+	<tr>
+	<td>
+	<select id="dropDown1" name="number_code" onchange="editPage(this.id,'textbox1','textbox2','carNumber','submitButton')">
+        <option value="name" selected>Name</option>
+        <option value="mob_number">Mobile Number</option>
+        <option value="email_address">Email Address</option>
+        <option value="car_number">Car Number</option>
+    </select>
+	</td>
+	</tr>
+	<tr>
+    <td align="center">
+      <input type="tel" name="mob_number" id="textbox1" pattern="[0-9]{10}" maxlength="10" placeholder=" Enter Existing Mobile Number" visibility="hidden">
+      </td>
+    </tr>
+	<tr>
+    <td align="center">
+      <input type="text" name="name" id="textbox2" placeholder=" Enter Correct Name Of User" visibility="hidden">
+      </td>
+    </tr>
+	<tr id="carNumber" visibility="hidden">
+	<td>
+		<h6>Enter New Car Number</h6>
+      <select name="state_code">
+        <option value="MH" selected>MH</option>
+      </select>
+      <select name="number_code">
+        <option value="code1" selected>01</option>
+        <option value="code2">02</option>
+        <option value="code3">03</option>
+        <option value="code4">04</option>
+      </select>
+	  <input type="text" name="area_code" maxlength="2" size="2">
+      <input type="number" name="pin" maxlength="4" size="4">
+      </td>
+	</td>
+	</tr>
+	<tr>
+    <td align="center">
+      <input type="submit" value="Submit" id="submitButton" visibility="hidden">
+      </td>
+    </tr>
+    </form>  
+  </body>
+</html>

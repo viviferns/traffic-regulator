@@ -1,0 +1,46 @@
+<!--This page is to manually generate pdf-->
+
+<html>
+  <head>
+    <title></title>
+  </head>
+  <body>
+    </br></br></br>
+	<table border=1>
+		{% for key, value in result.iteritems() %}
+		
+		<tr>
+		<th> {{ key }} </th>
+		<td> {{ value }} </td>
+		</tr>
+		
+		{% endfor %}
+	</table>
+	
+  <form align="center">
+    <tr>
+    <td>
+      <h3 align="center">
+        Manually Generate PDF
+      </h3>
+	  </br>
+	  </br>
+	  </br>
+	  <h6 align="center">Provide Details Below</h6>
+      </td>
+    </tr>
+	<tr>
+    <td align="center">
+      <input type="tel" name="time_stamp" maxlength="17" placeholder=" Enter Time Stamp">
+      </td>
+    </tr>
+	<tr>
+    <td align="center">
+      <input type="submit" value="Submit">
+      </td>
+    </tr>
+    </br>
+</br>
+</form>  
+  </body>
+</html>

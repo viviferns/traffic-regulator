@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <title></title>
+  </head>
+  <body>
+    </br></br></br>
+  <form align="center">
+    <tr>
+    <td>
+      <h3 align="center">
+        Payments Dues
+      </h3>
+      </td>
+    </tr>
+    </br>
+</br>
+    <tr>
+	<td>
+	<select id="dropDown1" name="number_code" onchange="editPage(this.id,'textbox1','textbox2','carNumber','submitButton')">
+        <option value="payment" selected>Payment</option>
+		<option value="generate-pdf">Generate PDF</option>
+    </select>
+	</td>
+	</tr>
+</br></br>
+	<tr>
+    <td align="center">
+      <input type="tel" name="mob_number" id="textbox1" pattern="[0-9]{10}" maxlength="10" placeholder=" Enter Existing Mobile Number">
+      </td>
+    </tr>
+	<tr>
+    <td align="center">
+      <input type="submit" value="Submit" id="submitButton" visibility="hidden">
+      </td>
+    </tr>
+    </form>  
+  </body>
+</html>
