@@ -9,8 +9,8 @@ from flask import request
 @app.route('/login',methods=['POST'])
 def add_admin_control():
 
-    user_name=request.form['user_name']
-    pass_word=request.form['pass_word']
+	user_name=request.form['user_name']
+	pass_word=request.form['pass_word']
 	
 	return render_template('myHtml/home.html')
 
