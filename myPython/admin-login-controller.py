@@ -6,7 +6,7 @@
 
 from flask import request
 
-@app.route('/login',methods=['POST'])
+@app.route('/add_admin_control',methods=['POST'])
 def add_admin_control():
 
 	user_name=request.form['user_name']
