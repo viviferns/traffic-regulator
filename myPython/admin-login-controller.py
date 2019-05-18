@@ -30,5 +30,6 @@ def add_admin_control():
 '''Below statments have been kept as comments as not sure of what they do'''
 
 if __name__ == '__main__':
-    app.run(debug = True)
+	
+	app.run(debug = True)
     
