@@ -6,13 +6,13 @@
 
 from flask import request
 
-@app.route('/login',methods=['POST'])
+@app.route('/add_admin_control',methods=['POST'])
 def add_admin_control():
 
-    user_name=request.form['user_name']
-    pass_word=request.form['pass_word']
+	user_name=request.form['user_name']
+	pass_word=request.form['pass_word']
 	
-	return render_template('myHtml/home.html')
+	return render_template('/myHtml/home.html')
 
     '''obj_myDB=myDB()
 
@@ -30,5 +30,6 @@ def add_admin_control():
 '''Below statments have been kept as comments as not sure of what they do'''
 
 if __name__ == '__main__':
-    app.run(debug = True)
+	
+	app.run(debug = True)
     

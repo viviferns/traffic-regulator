@@ -5,7 +5,7 @@
 from flask import request
 
 @app.route('/add-admin-controller',methods=['POST'])
-def add_admin_control():
+def add-admin-controller():
 
     adm_name=request.form['adm_name']
     adm_mobNo=request.form['adm_mobNo']
