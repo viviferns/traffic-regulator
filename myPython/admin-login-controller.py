@@ -2,6 +2,8 @@
 
 '''This page is a Contoller for Admin Login'''
 
+
+
 from flask import request
 
 @app.route('/login',methods=['POST'])
@@ -9,8 +11,10 @@ def add_admin_control():
 
     user_name=request.form['user_name']
     pass_word=request.form['pass_word']
+	
+	print(user_name)
 
-    obj_myDB=myDB()
+    '''obj_myDB=myDB()
 
     login_string=obj_myDB.admin_login(user_name,pass_word)
 
@@ -20,11 +24,11 @@ def add_admin_control():
 
     else:
 
-        return render_template('home.html')
+        return render_template('home.html')'''
 
     
-    '''Below statments have been kept as comments as not sure of what they do'''
-    '''
-    if __name__ == '__main__':
+'''Below statments have been kept as comments as not sure of what they do'''
+
+if __name__ == '__main__':
     app.run(debug = True)
-    '''
+    
