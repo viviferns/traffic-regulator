@@ -12,7 +12,7 @@ def add_admin_control():
     user_name=request.form['user_name']
     pass_word=request.form['pass_word']
 	
-	print(user_name)
+	return render_template('myHtml/home.html')
 
     '''obj_myDB=myDB()
 
