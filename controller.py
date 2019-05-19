@@ -4,7 +4,7 @@ from flask import Flask, redirect, url_for, render_template, request
 
 app = Flask(__name__)
 
-@app.route('/admin_login_control',methods=['POST'])
+@app.route('/admin_login_control',methods=['POST'.'GET'])
 def admin_login_control():
 
 	user_name=request.form['user_name']
