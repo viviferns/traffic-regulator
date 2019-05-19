@@ -6,8 +6,8 @@ app = Flask(__name__)
 
 render_template("<p>Successful switch</p>")
 
-@app.route('/admin_login_control',methods=['POST','GET'])
-def admin_login_control():
+@app.route('/control',methods=['POST','GET'])
+def control():
 
 	user_name=request.form['user_name']
 	pass_word=request.form['pass_word']
