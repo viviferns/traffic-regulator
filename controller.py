@@ -12,7 +12,7 @@ def control():
 	user_name=request.form['user_name']
 	pass_word=request.form['pass_word']
 	
-	return render_template('myHtml/home.html')
+	return render_template('home.html')
 
 '''obj_myDB=myDB()'''
 
