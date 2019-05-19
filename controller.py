@@ -27,7 +27,7 @@ def admin_login_control():
     
 '''Below statments have been kept as comments as not sure of what they do'''
 
-@app.route('/add_admin_control',methods=['POST'])
+@app.route('/add_admin_control',methods=['POST','GET'])
 def add_admin_control():
 
 	adm_name=request.form['adm_name']
