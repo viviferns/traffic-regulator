@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 render_template("<p>Successful switch</p>")
 
-@app.route('/control',methods=['POST','GET'])
+@app.route('/controller',methods=['POST','GET'])
 def control():
 
 	user_name=request.form['user_name']
