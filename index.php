@@ -1,1 +1,1 @@
-<?php include_once("myHtml/admin-login.html"); ?>
+<?php include_once("templates/admin-login.html"); ?>
