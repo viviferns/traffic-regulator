@@ -59,8 +59,8 @@ def add_user_control():
 
 	return render_template('verbose-page.html', verbose)
 	
-@app.route('/admin-temp-password-controller',methods=['POST'])
-def add_admin_control():
+@app.route('/temp_password_control',methods=['POST'])
+def temp_password_control():
 
 	user_name=request.form['user_name']
 	temp_password=request.form['temp_password']
