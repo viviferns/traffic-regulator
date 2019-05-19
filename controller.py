@@ -4,10 +4,8 @@ from flask import Flask, redirect, url_for, render_template, request
 
 app = Flask(__name__)
 
-render_template("<p>Successful switch</p>")
-
 @app.route('/controller',methods=['POST','GET'])
-def control():
+def controller():
 
 	user_name=request.form['user_name']
 	pass_word=request.form['pass_word']
