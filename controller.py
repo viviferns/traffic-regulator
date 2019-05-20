@@ -4,6 +4,11 @@ from flask import Flask, redirect, url_for, render_template, request
 
 app = Flask(__name__)
 
+@app.route('/',methods=['POST','GET'])
+def index():
+
+	return render_template('admin-login.html')
+
 @app.route('/controller',methods=['POST','GET'])
 def controller():
 
