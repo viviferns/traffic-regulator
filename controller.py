@@ -9,8 +9,8 @@ def index():
 
 	return render_template('admin-login.html')
 
-@app.route('/controller',methods=['POST','GET'])
-def controller():
+@app.route('/admin_login',methods=['POST','GET'])
+def admin_login():
 
 	user_name=request.form['user_name']
 	pass_word=request.form['pass_word']
