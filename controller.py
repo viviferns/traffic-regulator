@@ -14,23 +14,21 @@ def admin_login():
 
 	user_name=request.form['user_name']
 	pass_word=request.form['pass_word']
-	
-	return render_template('home.html')
 
-'''obj_myDB=myDB()'''
+	obj_myDB=myDB()
 
-'''login_string=obj_myDB.admin_login(user_name,pass_word)
+	login_string=obj_myDB.admin_login(user_name,pass_word)
 
-    if(login_string!="SUCCESSFUL"):
+	if(login_string!="SUCCESSFUL"):
 
-        return render_template('admin-login.html')
+		return render_template('admin-login.html')
 
-    else:
+	else:
 
-        return render_template('home.html')'''
+		return render_template('home.html')
 
     
-'''Below statments have been kept as comments as not sure of what they do'''
+
 
 @app.route('/add_admin_control',methods=['POST','GET'])
 def add_admin_control():
