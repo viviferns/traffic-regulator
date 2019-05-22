@@ -38,11 +38,15 @@ class myDB:
 
 			# Commit your changes in the database
 			cursor.commit()
+			
+			cursor.close()
 
 		except:
 
 			# Rollback in case there is any error
 			cursor.rollback()
+			
+			cursor.close()
 
 	def add_violation_record(time_stamp,car_number,location,vio_image):
 
@@ -57,11 +61,15 @@ class myDB:
 
 			# Commit your changes in the database
 			cursor.commit()
+			
+			cursor.close()
 
 		except:
 
 			# Rollback in case there is any error
 			cursor.rollback()
+			
+			cursor.close()
 
 	def update_violation_record(time_stamp):
 
@@ -78,6 +86,8 @@ class myDB:
 
 		# Commit your changes in the database
 		cursor.commit()
+		
+		cursor.close()
 
 		return_statement="Payment Received"
 
@@ -85,6 +95,8 @@ class myDB:
 
 		# Rollback in case there is any error
 		cursor.rollback()
+		
+		cursor.close()
 
 		return_statement="Could not collect Payment"
 
@@ -108,6 +120,8 @@ class myDB:
 				cursor.execute(query2)
 
 				cursor.commit()
+				
+				cursor.close()
 
 				verbose="New User ",name_of_user," Added"
 
@@ -123,6 +137,8 @@ class myDB:
 
 			# Rollback in case there is any error
 			cursor.rollback()
+			
+			cursor.close()
 
 			verbose="Error Unknown"
 
@@ -146,6 +162,8 @@ class myDB:
 				cursor.execute(query2)
 
 				cursor.commit()
+				
+				cursor.close()
 
 				verbose="New Admin Added, please ask ", adm_name, " to Login and change his Login Password Immediately"
 
@@ -157,6 +175,8 @@ class myDB:
 
 			# Rollback in case there is any error
 			cursor.rollback()
+			
+			cursor.close()
             
 	def fetch_record(mob_number):
 
@@ -171,6 +191,8 @@ class myDB:
 
 			# Fetch result
 			result=cursor.fetchall()
+			
+			cursor.close()
 
 			return result
 
@@ -192,11 +214,15 @@ class myDB:
 
 			# Commit your changes in the database
 			cursor.commit()
+			
+			cursor.close()
 
 		except:
 
 			# Rollback in case there is any error
 			cursor.rollback()
+			
+			cursor.close()
 
 	def update_temp_admin_password(user_name,temp_password):
 
@@ -213,6 +239,8 @@ class myDB:
 
 			# Commit your changes in the database
 			cursor.commit()
+			
+			cursor.close()
 
 			verbose="Password Updated, please ask ", user_name ," to update his password Immediately!!!"
 
@@ -220,6 +248,8 @@ class myDB:
 
 			# Rollback in case there is any error
 			cursor.rollback()
+			
+			cursor.close()
 
 			verbose="Password cannot be updated right now, please try later."
 
@@ -241,6 +271,8 @@ class myDB:
 
 			# Fetch result
 			result=cursor.fetchall()
+			
+			cursor.close()
 
 		except:
             
