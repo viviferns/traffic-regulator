@@ -12,247 +12,248 @@ class myDB:
         myDB.database_name=database_name
 '''
 		
-    def connect_database():
+	def connect_database():
 	
 		DATABASE_URL=os.environ['DATABASE_URL']
 
-        # Open database connection
-        conn=psycopg2.connect(DATABASE_URL,sslmode='require')
+		# Open database connection
+		conn=psycopg2.connect(DATABASE_URL,sslmode='require')
 
-        # Prepare a cursor object
-        cursor = conn.cursor()
+		# Prepare a cursor object
+		cursor = conn.cursor()
 
-        return cursor
+		return cursor
         
 
-    def add_location(location):
+	def add_location(location):
 
-        cursor=myDB.connect_database()
+		cursor=myDB.connect_database()
 
-        query="INSERT INTO locations VALUES(",location,")"
-        try:
+		query="INSERT INTO locations VALUES(",location,")"
+		
+		try:
 
-            # Execute SQL query using execute() method.
-            cursor.execute(query)
+			# Execute SQL query using execute() method.
+			cursor.execute(query)
 
-            # Commit your changes in the database
-            cursor.commit()
+			# Commit your changes in the database
+			cursor.commit()
 
-        except:
+		except:
 
-            # Rollback in case there is any error
-            cursor.rollback()
+			# Rollback in case there is any error
+			cursor.rollback()
 
-    def add_violation_record(time_stamp,car_number,location,vio_image):
+	def add_violation_record(time_stamp,car_number,location,vio_image):
 
-        cursor=myDB.connect_database()
+		cursor=myDB.connect_database()
 
-        query="insert into violation_record VALUES(",time_stamp,",",car_number,",",location,",",vio_image,",","1000",")"
+		query="insert into violation_record VALUES(",time_stamp,",",car_number,",",location,",",vio_image,",","1000",")"
 
-        try:
+		try:
 
-            # Execute SQL query using execute() method.
-            cursor.execute(query)
+			# Execute SQL query using execute() method.
+			cursor.execute(query)
 
-            # Commit your changes in the database
-            cursor.commit()
+			# Commit your changes in the database
+			cursor.commit()
 
-        except:
+		except:
 
-            # Rollback in case there is any error
-            cursor.rollback()
+			# Rollback in case there is any error
+			cursor.rollback()
 
-    def update_violation_record(time_stamp):
+	def update_violation_record(time_stamp):
 
-        cursor=myDB.connect_database()
+		cursor=myDB.connect_database()
 
-        query="DELETE FROM violation_record WHERE AND TIME_STAMP=",time_stamp
+		query="DELETE FROM violation_record WHERE AND TIME_STAMP=",time_stamp
 
-        return_statement=""
+		return_statement=""
 
-        try:
+	try:
 
-            # Execute SQL query using execute() method.
-            cursor.execute(query)
+		# Execute SQL query using execute() method.
+		cursor.execute(query)
 
-            # Commit your changes in the database
-            cursor.commit()
+		# Commit your changes in the database
+		cursor.commit()
 
-            return_statement="Payment Received"
+		return_statement="Payment Received"
 
-        except:
+	except:
 
-            # Rollback in case there is any error
-            cursor.rollback()
+		# Rollback in case there is any error
+		cursor.rollback()
 
-            return_statement="Could not collect Payment"
+		return_statement="Could not collect Payment"
 
         return return_statement
 
-    def user_details(name_of_user,mobile_number,email_address,car_number):
+	def user_details(name_of_user,mobile_number,email_address,car_number):
         
-        cursor=myDB.connect_database()
+		cursor=myDB.connect_database()
 
-        query1="select count(car_number) from user_table WHERE CAR_NO=",car_number," and EMAIL_ID=",email_address
+		query1="select count(car_number) from user_table WHERE CAR_NO=",car_number," and EMAIL_ID=",email_address
 
-        query2="insert into user_table values(",name_of_user,",",mobile_number,",",email_address,",",car_number,")"
+		query2="insert into user_table values(",name_of_user,",",mobile_number,",",email_address,",",car_number,")"
 
-        verbose=""
+		verbose=""
 
-        try:
+		try:
 
-            # Execute SQL query using execute() method.
-            if(cursor.execute(query1)>0):
+			# Execute SQL query using execute() method.
+			if(cursor.execute(query1)>0):
                 
-                cursor.execute(query2)
+				cursor.execute(query2)
 
-                cursor.commit()
+				cursor.commit()
 
-                verbose="New User ",name_of_user," Added"
+				verbose="New User ",name_of_user," Added"
 
-                return verbose
+				return verbose
 
-            else:
+			else:
 
-                verbose="User already exists"
+				verbose="User already exists"
 
-                return verbose
+                		return verbose
 
-        except:
+		except:
 
-                # Rollback in case there is any error
-                cursor.rollback()
+			# Rollback in case there is any error
+			cursor.rollback()
 
-                verbose="Error Unknown"
+			verbose="Error Unknown"
 
-                return verbose
+			return verbose
 
-    def add_admin(adm_name,adm_mobNo,adm_userName,adm_password):
+	def add_admin(adm_name,adm_mobNo,adm_userName,adm_password):
 
-        cursor=myDB.connect_database()
+		cursor=myDB.connect_database()
 
-        query1="select count(ADMIN_USER_NAME) from admin_table WHERE ADMIN_USER_NAME=",adm_userName," and MOBILE_NUMBER=",adm_mobNo
+		query1="select count(ADMIN_USER_NAME) from admin_table WHERE ADMIN_USER_NAME=",adm_userName," and MOBILE_NUMBER=",adm_mobNo
 
-        query2="INSERT INTO admin_table VALUES(",adm_name,",",adm_mobNo,",",adm_userName,",",adm_password,")"
+		query2="INSERT INTO admin_table VALUES(",adm_name,",",adm_mobNo,",",adm_userName,",",adm_password,")"
 
-        verbose=""
+		verbose=""
 
-        try:
+		try:
 
-            # Execute SQL query using execute() method.
-            if(cursor.execute(query1)>0):
+			# Execute SQL query using execute() method.
+			if(cursor.execute(query1)>0):
                 
-                cursor.execute(query2)
+				cursor.execute(query2)
 
-                cursor.commit()
+				cursor.commit()
 
-                verbose="New Admin Added, please ask ", adm_name, " to Login and change his Login Password Immediately"
+				verbose="New Admin Added, please ask ", adm_name, " to Login and change his Login Password Immediately"
 
-            else:
+			else:
 
-                verbose="Admin already exists"
+				verbose="Admin already exists"
 
-        except:
+		except:
 
-            # Rollback in case there is any error
-            cursor.rollback()
+			# Rollback in case there is any error
+			cursor.rollback()
             
-    def fetch_record(mob_number):
+	def fetch_record(mob_number):
 
-        cursor=myDB.connect_database()
+		cursor=myDB.connect_database()
 
-        query="select v.TIME_STAMP,v.CAR_NO,v.LOC_NAME,v.FINE_AMOUNT,v.VIOLATION_IMAGE,u.EMAIL_ID from violation_record v INNER JOIN user_table u ON v.CAR_NO=u.CAR_NO and u.MOBILE_NUMBER=",mob_number
+		query="select v.TIME_STAMP,v.CAR_NO,v.LOC_NAME,v.FINE_AMOUNT,v.VIOLATION_IMAGE,u.EMAIL_ID from violation_record v INNER JOIN user_table u ON v.CAR_NO=u.CAR_NO and u.MOBILE_NUMBER=",mob_number
 
-        try:
+		try:
 
-            # Execute SQL query using execute() method.
-            cursor.execute(query)
+			# Execute SQL query using execute() method.
+			cursor.execute(query)
 
-            # Fetch result
-            result=cursor.fetchall()
+			# Fetch result
+			result=cursor.fetchall()
 
-            return result
+			return result
 
-        except:
+		except:
             
-            return "Error while fetching record"
+			return "Error while fetching record"
 
 
-    def update_admin_password(user_name,old_pass_word,new_pass_word):
+	def update_admin_password(user_name,old_pass_word,new_pass_word):
 
-        cursor=myDB.connect_database()
+		cursor=myDB.connect_database()
 
-        query="UPDATE admin_table SET ADMIN_PASSWORD=",new_pass_word," WHERE ADMIN_USER_NAME LIKE ",user_name
+		query="UPDATE admin_table SET ADMIN_PASSWORD=",new_pass_word," WHERE ADMIN_USER_NAME LIKE ",user_name
 
-        try:
+		try:
 
-            # Execute SQL query using execute() method.
-            cursor.execute(query)
+			# Execute SQL query using execute() method.
+			cursor.execute(query)
 
-            # Commit your changes in the database
-            cursor.commit()
+			# Commit your changes in the database
+			cursor.commit()
 
-        except:
+		except:
 
-            # Rollback in case there is any error
-            cursor.rollback()
+			# Rollback in case there is any error
+			cursor.rollback()
 
-    def update_temp_admin_password(user_name,temp_password):
+	def update_temp_admin_password(user_name,temp_password):
 
-        cursor=myDB.connect_database()
+		cursor=myDB.connect_database()
 
-        verbose=""
+		verbose=""
 
-        query="UPDATE admin_table SET ADMIN_PASSWORD=",temp_password," WHERE ADMIN_USER_NAME LIKE ",user_name
+		query="UPDATE admin_table SET ADMIN_PASSWORD=",temp_password," WHERE ADMIN_USER_NAME LIKE ",user_name
 
-        try:
+		try:
 
-            # Execute SQL query using execute() method.
-            cursor.execute(query)
+			# Execute SQL query using execute() method.
+			cursor.execute(query)
 
-            # Commit your changes in the database
-            cursor.commit()
+			# Commit your changes in the database
+			cursor.commit()
 
-            verbose="Password Updated, please ask ", user_name ," to update his password Immediately!!!"
+			verbose="Password Updated, please ask ", user_name ," to update his password Immediately!!!"
 
-        except:
+		except:
 
-            # Rollback in case there is any error
-            cursor.rollback()
+			# Rollback in case there is any error
+			cursor.rollback()
 
-            verbose="Password cannot be updated right now, please try later."
+			verbose="Password cannot be updated right now, please try later."
 
-        return verbose
+			return verbose
 
 
-    def admin_login(user_name,pass_word):
+	def admin_login(user_name,pass_word):
 
-        cursor=myDB.connect_database()
+		cursor=myDB.connect_database()
 
-        query="select count(ADMIN_USER_NAME) from admin_table WHERE ADMIN_USER_NAME=",user_name," and ADMIN_PASSWORD=",pass_word
+		query="select count(ADMIN_USER_NAME) from admin_table WHERE ADMIN_USER_NAME=",user_name," and ADMIN_PASSWORD=",pass_word
 
-        login_string=""
+		login_string=""
 
-        try:
+		try:
 
-            # Execute SQL query using execute() method.
-            cursor.execute(query)
+			# Execute SQL query using execute() method.
+			cursor.execute(query)
 
-            # Fetch result
-            result=cursor.fetchall()
+			# Fetch result
+			result=cursor.fetchall()
 
-        except:
+		except:
             
-            return "Error while fetching record"
+			return "Error while fetching record"
         
-        if(result==1):
+		if(result==1):
 
-            login_string="SUCCESSFUL"
+			login_string="SUCCESSFUL"
 
-        else:
+		else:
 
-            login_string="FAILED"
+			login_string="FAILED"
 
         
 
-        return login_string
+		return login_string
