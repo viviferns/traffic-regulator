@@ -45,11 +45,15 @@ class initiateDB:
 
 			# Commit your changes in the database
 			cursor.commit()
+			
+			cursor.close()
 
 		except:
 
 			# Rollback in case there is any error
 			cursor.rollback()
+			
+			cursor.close()
 			
 init=initiateDB()
 init.intialization_of_db()
