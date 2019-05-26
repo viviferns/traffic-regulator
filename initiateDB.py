@@ -1,5 +1,6 @@
 import os
 import psycopg2
+from myPython.myDB import *
 
 class initiateDB:
 
