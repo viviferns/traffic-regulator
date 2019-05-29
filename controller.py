@@ -22,10 +22,6 @@ def index():
 		
 	try:
 		
-		cursor=initiateDB.connect_database()
-		
-		return "Fine till here"
-
 		# Execute SQL query using execute() method.
 		cursor.execute(query)
 
