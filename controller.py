@@ -12,6 +12,8 @@ def index():
 
 	# Open database connection
 	conn=psycopg2.connect(DATABASE_URL,sslmode='require')
+	
+	print(DATABASE_URL)
 
 	# Prepare a cursor object
 	cursor = conn.cursor()
