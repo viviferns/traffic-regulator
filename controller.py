@@ -8,12 +8,14 @@ app = Flask(__name__)
 @app.route('/',methods=['POST','GET'])
 def index():
 	
-	DATABASE_URL=os.environ['DATABASE_URL']
+	#DATABASE_URL=os.environ['DATABASE_URL']
+	
+	db_url="postgres://bjjsheknydiasx:12ed7523f49dd98a0e7ab7877a50e68fcab3e1899f5eb9fe06d9e7d55a172c44@ec2-54-225-95-183.compute-1.amazonaws.com:5432/dfcuab4bf4j09"
 
 	# Open database connection
-	conn=psycopg2.connect(DATABASE_URL,sslmode='require')
+	conn=psycopg2.connect(db_url,sslmode='require')
 	
-	print(DATABASE_URL)
+	print(db_url)
 
 	# Prepare a cursor object
 	cursor = conn.cursor()
