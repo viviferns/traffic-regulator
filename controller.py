@@ -12,11 +12,11 @@ def index():
 	
 	# Open database connection
 	conn=psycopg2.connect(DATABASE_URL,sslmode='require')
-	
-	return "Fine till here"
 
 	# Prepare a cursor object
 	cursor = conn.cursor()
+	
+	return "Fine till here"
 	
 	query="select count(ADMIN_USER_NAME) from admin_table"
 		
