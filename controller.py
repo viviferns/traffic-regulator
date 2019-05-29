@@ -59,14 +59,16 @@ def index():
 
 			cursor.execute(query2)
 
-			cursor.execute(query3)
-
 			cursor.execute(query4)
 			
 			cursor.execute(query5)
 
 
 			# Commit your changes in the database
+			cursor.commit()
+			
+			cursor.execute(query3)
+			
 			cursor.commit()
 			
 			cursor.close()
