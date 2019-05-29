@@ -12,6 +12,8 @@ def index():
 	
 	# Open database connection
 	conn=psycopg2.connect(DATABASE_URL,sslmode='require')
+	
+	return "Fine till here"
 
 	# Prepare a cursor object
 	cursor = conn.cursor()
@@ -23,8 +25,6 @@ def index():
 	try:
 		
 		cursor=initiateDB.connect_database()
-		
-		return "Fine till here"
 
 		# Execute SQL query using execute() method.
 		cursor.execute(query)
