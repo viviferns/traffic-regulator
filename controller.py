@@ -10,10 +10,6 @@ def index():
 	
 	DATABASE_URL=os.environ['DATABASE_URL']
 	
-	#db_url="postgres://bjjsheknydiasx:12ed7523f49dd98a0e7ab7877a50e68fcab3e1899f5eb9fe06d9e7d55a172c44@ec2-54-225-95-183.compute-1.amazonaws.com:5432/dfcuab4bf4j09"
-	
-	return DATABASE_URL
-	
 	# Open database connection
 	conn=psycopg2.connect(db_url,sslmode='require')
 	
@@ -29,6 +25,8 @@ def index():
 	try:
 		
 		cursor=initiateDB.connect_database()
+		
+		return "Fine till here"
 
 		# Execute SQL query using execute() method.
 		cursor.execute(query)
