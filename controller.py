@@ -21,11 +21,10 @@ def index():
 	result=0
 		
 	try:
+		return "Fine till here"
 		
 		# Execute SQL query using execute() method.
 		cursor.execute(query)
-		
-		return "Fine till here"
 
 		# Fetch result
 		result=cursor.fetchall()
