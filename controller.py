@@ -16,8 +16,6 @@ def index():
 	# Prepare a cursor object
 	cursor = conn.cursor()
 	
-	return "Fine till here"
-	
 	query="select count(ADMIN_USER_NAME) from admin_table"
 		
 	result=0
@@ -25,6 +23,8 @@ def index():
 	try:
 		
 		cursor=initiateDB.connect_database()
+		
+		return "Fine till here"
 
 		# Execute SQL query using execute() method.
 		cursor.execute(query)
