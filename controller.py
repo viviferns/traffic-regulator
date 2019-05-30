@@ -8,10 +8,21 @@ app = Flask(__name__)
 @app.route('/',methods=['POST','GET'])
 def index():
 	
-	DATABASE_URL=os.environ['DATABASE_URL']
+	url = urlparse.urlparse(os.environ['DATABASE_URL'])
+	dbname = url.path[1:]
+	user = url.username
+	password = url.password
+	host = url.hostname
+	port = url.port
 	
 	# Open database connection
-	conn=psycopg2.connect(DATABASE_URL,sslmode='require')
+	conn=psycopg2.connect(
+            dbname=dbname,
+            user=user,
+            password=password,
+            host=host,
+            port=port
+            )
 
 	# Prepare a cursor object
 	cursor = conn.cursor()
