@@ -2,6 +2,7 @@
 import os
 import psycopg2
 from flask import Flask, redirect, url_for, render_template, request
+import urllib.parse as urlparse
 
 app = Flask(__name__)
 
