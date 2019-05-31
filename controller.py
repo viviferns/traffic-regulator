@@ -29,7 +29,7 @@ def index():
 		
 	try:
 		
-		return "Fine till here"
+		#return "Fine till here"
 		
 		# Execute SQL query using execute() method.
 		cursor.execute(query)
