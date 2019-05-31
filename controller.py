@@ -48,8 +48,8 @@ def index():
 		#return "Error while fetching record"
 		
 	except Exception as e:
-		print(e)
-		return []
+		
+		return e
 	
 	if(result>0):
 		
