@@ -4,23 +4,23 @@ import psycopg2
 from flask import Flask, redirect, url_for, render_template, request
 import urllib.parse as urlparse
 
+url = urlparse.urlparse(os.environ.get('DATABASE_URL'))
+db = "dbname=%s user=%s password=%s host=%s " % (url.path[1:], url.username, url.password, url.hostname)
+schema = "schema.sql"
+conn = psycopg2.connect(db)
+
+cur = conn.cursor()
+
 app = Flask(__name__)
 
 @app.route('/',methods=['POST','GET'])
 def index():
 	
-	url = urlparse.urlparse(os.environ['DATABASE_URL'])
-	dbname = url.path[1:]
-	user = url.username
-	password = url.password
-	host = url.hostname
-	port = url.port
-	
 	# Open database connection
-	conn=psycopg2.connect(dbname=dbname,user=user,password=password,host=host,port=port)
+	#conn=psycopg2.connect(dbname=dbname,user=user,password=password,host=host,port=port)
 
 	# Prepare a cursor object
-	cursor = conn.cursor()
+	#cursor = conn.cursor()
 	
 	#query="select count(ADMIN_USER_NAME) from admin_table"
 	query="CREATE TABLE admin_table(ADM_NO SERIAL PRIMARY KEY NOT NULL, ADMIN_NAME VARCHAR(30) NOT NULL, MOBILE_NUMBER NUMBER NOT NULL,ADMIN_USER_NAME VARCHAR(20) NOT NULL, ADMIN_PASSWORD VARCHAR(16) NOT NULL)"
@@ -32,16 +32,24 @@ def index():
 		#return "Fine till here"
 		
 		# Execute SQL query using execute() method.
-		cursor.execute(query)
+		#cursor.execute(query)
 
 		# Fetch result
-		result=cursor.fetchall()
+		#result=cursor.fetchall()
 			
-		cursor.close()
+		#cursor.close()
+		
+		cur.execute(statement)
+		
+		conn.commit()
 
-	except:
+	#except:
             
-		return "Error while fetching record"
+		#return "Error while fetching record"
+		
+	except Exception as e:
+		print(e)
+		return []
 	
 	if(result>0):
 		
