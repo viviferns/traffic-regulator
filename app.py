@@ -4,23 +4,16 @@ import psycopg2
 from flask import Flask, redirect, url_for, render_template, request
 import urllib.parse as urlparse
 from flask_sqlalchemy import SQLAlchemy
+from initDB import admin_table
 
 app = Flask(__name__)
-
+app.config['SQLALCHEMY_DATABASE_URI']=os.environ.get('DATABASE_URL')
+db=SQLAlchemy(app)
 
 @app.route('/')
 def index():
-
-	result=0
-
-	if(result>0):
-		
-		return render_template('admin-login.html')
-			
-	else:		
-
-		return render_template('admin-login.html')
-
+	
+	return render_template('admin-login.html')
 
 
 @app.route('/admin_login',methods=['POST','GET'])
@@ -28,16 +21,15 @@ def admin_login():
 
 	user_name=request.form['user_name']
 	pass_word=request.form['pass_word']
-
-	obj_myDB=myDB()
-
-	login_string=obj_myDB.admin_login(user_name,pass_word)
-
-	if(login_string!="SUCCESSFUL"):
+	
+	obj_admin_table=admin_table()
+	login_string=obj_admin_table.adminLogin(user_name,pass_word)
+	
+	if(login_string.ADMIN_USER_NAME!=user_name):
 
 		return render_template('admin-login.html')
 
-	else:
+	else if(login_string.ADMIN_USER_NAME==user_name):
 
 		return render_template('home.html')
 
