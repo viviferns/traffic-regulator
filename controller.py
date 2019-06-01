@@ -37,11 +37,11 @@ def index():
 		schema = "schema.sql"
 		conn = psycopg2.connect(db)
 
-		'''cur = conn.cursor()
+		cur = conn.cursor()
 		
 		cur.execute(statement)
 		
-		conn.commit()'''
+		'''conn.commit()'''
 		
 		return "No error"	
 		
