@@ -3,11 +3,17 @@ import os
 import psycopg2
 from flask import Flask, redirect, url_for, render_template, request
 import urllib.parse as urlparse
+from flask_sqlalchemy import SQLAlchemy
+
+db=SQLAlchemy()
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
+
+	app.config['SQLALCHEMY_DATABASE_URI']=os.environ.get('DATABASE_URL')
+	db=SQLAlchemy(app)
 	
 	# Open database connection
 	#conn=psycopg2.connect(dbname=dbname,user=user,password=password,host=host,port=port)
