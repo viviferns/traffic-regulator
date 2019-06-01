@@ -22,6 +22,8 @@ def index():
 	# Prepare a cursor object
 	#cursor = conn.cursor()
 	
+	return "No error"
+	
 	#query="select count(ADMIN_USER_NAME) from admin_table"
 	query="CREATE TABLE admin_table(ADM_NO SERIAL PRIMARY KEY NOT NULL, ADMIN_NAME VARCHAR(30) NOT NULL, MOBILE_NUMBER NUMBER NOT NULL,ADMIN_USER_NAME VARCHAR(20) NOT NULL, ADMIN_PASSWORD VARCHAR(16) NOT NULL)"
 		
@@ -52,8 +54,6 @@ def index():
 		return e
 	
 	if(result>0):
-	
-		return result
 		
 		return render_template('admin-login.html')
 			
