@@ -4,16 +4,9 @@ import psycopg2
 from flask import Flask, redirect, url_for, render_template, request
 import urllib.parse as urlparse
 
-url = urlparse.urlparse(os.environ.get('DATABASE_URL'))
-db = "dbname=%s user=%s password=%s host=%s " % (url.path[1:], url.username, url.password, url.hostname)
-schema = "schema.sql"
-conn = psycopg2.connect(db)
-
-cur = conn.cursor()
-
 app = Flask(__name__)
 
-@app.route('/',methods=['POST'])
+@app.route('/')
 def index():
 	
 	# Open database connection
@@ -39,9 +32,19 @@ def index():
 			
 		#cursor.close()
 		
-		cur.execute(statement)
+		url = urlparse.urlparse(os.environ.get('DATABASE_URL'))
+		db = "dbname=%s user=%s password=%s host=%s " % (url.path[1:], url.username, url.password, url.hostname)
+		schema = "schema.sql"
+		conn = psycopg2.connect(db)
+
+		cur = conn.cursor()
 		
-		conn.commit()
+		cur.execute(query)
+		
+		'''cur.commit()'''
+		
+		return "No error"	
+		
 
 	#except:
             
@@ -52,8 +55,6 @@ def index():
 		return e
 	
 	if(result>0):
-	
-		return result
 		
 		return render_template('admin-login.html')
 			
