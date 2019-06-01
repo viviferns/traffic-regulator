@@ -6,10 +6,11 @@ import urllib.parse as urlparse
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI']=os.environ.get('DATABASE_URL')
-db=SQLAlchemy(app)
 
-class Person(db.Model):
+class Person:#(db.Model):
+
+	app.config['SQLALCHEMY_DATABASE_URI']=os.environ.get('DATABASE_URL')
+	db=SQLAlchemy(app)
 
 	ADM_NO=db.Column(db.Integer,primary_key=True)
 	ADMIN_NAME=db.Column(db.String(20),unique=False)
@@ -40,6 +41,8 @@ def index():
 	#query="CREATE TABLE admin_table(ADM_NO SERIAL PRIMARY KEY NOT NULL, ADMIN_NAME VARCHAR(30) NOT NULL, MOBILE_NUMBER NUMBER NOT NULL,ADMIN_USER_NAME VARCHAR(20) NOT NULL, ADMIN_PASSWORD VARCHAR(16) NOT NULL)"
 		
 	result=0
+	app.config['SQLALCHEMY_DATABASE_URI']=os.environ.get('DATABASE_URL')
+	db=SQLAlchemy(app)
 		
 	try:
 		
