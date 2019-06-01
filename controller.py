@@ -41,7 +41,7 @@ def index():
 		
 		cur.execute(query)
 		
-		cur.commit()
+		'''cur.commit()'''
 		
 		return "No error"	
 		
