@@ -13,7 +13,7 @@ cur = conn.cursor()
 
 app = Flask(__name__)
 
-@app.route('/',methods=['POST','GET'])
+@app.route('/',methods=['POST'])
 def index():
 	
 	# Open database connection
@@ -88,7 +88,7 @@ def index():
 			
 			cursor.close()
 			
-			return render_template('admin-login.html')
+			return render_template('templates/admin-login.html')
 
 		except:
 
