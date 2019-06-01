@@ -41,7 +41,7 @@ def index():
 		
 		cur.execute(statement)
 		
-		'''conn.commit()'''
+		cur.commit()
 		
 		return "No error"	
 		
