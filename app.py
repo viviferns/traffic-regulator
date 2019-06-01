@@ -6,125 +6,22 @@ import urllib.parse as urlparse
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI']=os.environ.get('DATABASE_URL')
-db=SQLAlchemy(app)
 
-class Person(db.Model):
-
-	ADM_NO=db.Column(db.Integer,primary_key=True)
-	ADMIN_NAME=db.Column(db.String(20),unique=False)
-	MOBILE_NUMBER=db.Column(db.Integer,unique=True)
-	ADMIN_USER_NAME=db.Column(db.String(10),unique=True)
-	ADMIN_PASSWORD=db.Column(db.String(16),unique=False)
-	
-	def __init__(self,ADM_NO,ADMIN_NAME,MOBILE_NUMBER,ADMIN_USER_NAME,ADMIN_PASSWORD):
-		self.ADM_NO=ADM_NO
-		self.ADMIN_NAME=ADMIN_NAME
-		self.MOBILE_NUMBER=MOBILE_NUMBER
-		self.ADMIN_USER_NAME=ADMIN_USER_NAME
-		self.ADMIN_PASSWORD=ADMIN_PASSWORD
 
 @app.route('/')
 def index():
 
-	#app.config['SQLALCHEMY_DATABASE_URI']=os.environ.get('DATABASE_URL')
-	#db=SQLAlchemy(app)
-	
-	# Open database connection
-	#conn=psycopg2.connect(dbname=dbname,user=user,password=password,host=host,port=port)
-
-	# Prepare a cursor object
-	#cursor = conn.cursor()
-	
-	#query="select count(ADMIN_USER_NAME) from admin_table"
-	#query="CREATE TABLE admin_table(ADM_NO SERIAL PRIMARY KEY NOT NULL, ADMIN_NAME VARCHAR(30) NOT NULL, MOBILE_NUMBER NUMBER NOT NULL,ADMIN_USER_NAME VARCHAR(20) NOT NULL, ADMIN_PASSWORD VARCHAR(16) NOT NULL)"
-		
 	result=0
-	app.config['SQLALCHEMY_DATABASE_URI']=os.environ.get('DATABASE_URL')
-	db=SQLAlchemy(app)
-		
-	try:
-		
-		#return "Fine till here"
-		
-		# Execute SQL query using execute() method.
-		#cursor.execute(query)
 
-		# Fetch result
-		#result=cursor.fetchall()
-			
-		#cursor.close()
-		
-		
-		db.create_all()
-		return "No error"
-		
-		
-		url = urlparse.urlparse(os.environ.get('DATABASE_URL'))
-		db = "dbname=%s user=%s password=%s host=%s " % (url.path[1:], url.username, url.password, url.hostname)
-		schema = "schema.sql"
-		conn = psycopg2.connect(db)
-
-		cur = conn.cursor()
-		
-		cur.execute(query)
-		
-		'''cur.commit()'''	
-		
-
-	#except:
-            
-		#return "Error while fetching record"
-		
-	except Exception as e:
-		
-		return e
-	
 	if(result>0):
 		
 		return render_template('admin-login.html')
 			
 	else:		
 
-		query1="CREATE TABLE user_table(USR_NO SERIAL PRIMARY KEY NOT NULL, NAME_OF_USER VARCHAR(30) NOT NULL, MOBILE_NUMBER NUMBER NOT NULL, EMAIL_ID VARCHAR(30) NOT NULL, CAR_NO VARCHAR(10) NOT NULL)"
-
-		query2="CREATE TABLE admin_table(ADM_NO SERIAL PRIMARY KEY NOT NULL, ADMIN_NAME VARCHAR(30) NOT NULL, MOBILE_NUMBER NUMBER NOT NULL,ADMIN_USER_NAME VARCHAR(20) NOT NULL, ADMIN_PASSWORD VARCHAR(16) NOT NULL)"
-
-		query3="INSERT INTO  admin_table VALUES(1,'MAIN_ADMIN',123456789,'root','ROOT1234')"
-
-		query4="CREATE TABLE locations (LOC_NO SERIAL PRIMARY KEY NOT NULL,LOC_NAME VARCHAR(10) NOT NULL)"
-
-		query5="CREATE TABLE violation_record(REC_NO SERIAL PRIMARY KEY NOT NULL, TIME_STAMP TIMESTAMP NOT NULL,CAR_NO VARCHAR(10) NOT NULL,LOC_NAME VARCHAR(10) NOT NULL,VIOLATION_IMAGE BLOB NOT NULL,FINE_AMOUNT VARCHAR(30) NOT NULL)"
-
-		try:
-
-			# Execute SQL query using execute() method.
-			cursor.execute(query1)
-
-			cursor.execute(query2)
-
-			cursor.execute(query4)
-			
-			cursor.execute(query5)
+		return render_template('admin-login.html')
 
 
-			# Commit your changes in the database
-			cursor.commit()
-			
-			cursor.execute(query3)
-			
-			cursor.commit()
-			
-			cursor.close()
-			
-			return render_template('admin-login.html')
-
-		except:
-
-			# Rollback in case there is any error
-			cursor.rollback()
-			
-			cursor.close()
 
 @app.route('/admin_login',methods=['POST','GET'])
 def admin_login():

@@ -66,4 +66,6 @@ class violation_record(db.Model):
 if __name__ == '__main__':
 	#app.run(debug = True)
 	db.create_all()
-	
+	insert=admin_table(1,'MAIN_ADMIN',123456789,'root','ROOT1234')
+	db.session.add(insert)
+	db.session.commit()
