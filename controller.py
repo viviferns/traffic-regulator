@@ -39,11 +39,13 @@ def index():
 			
 		#cursor.close()
 		
+		return "No error"
+		
 		cur.execute(statement)
 		
 		conn.commit()
 		
-		return "No error"
+		
 
 	#except:
             
