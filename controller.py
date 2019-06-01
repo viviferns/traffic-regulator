@@ -9,7 +9,7 @@ db = "dbname=%s user=%s password=%s host=%s " % (url.path[1:], url.username, url
 #schema = "schema.sql"
 #conn = psycopg2.connect(db)
 
-cur = conn.cursor()
+#cur = conn.cursor()
 
 app = Flask(__name__)
 
