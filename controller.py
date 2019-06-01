@@ -33,9 +33,9 @@ def index():
 		#cursor.close()
 		
 		url = urlparse.urlparse(os.environ.get('DATABASE_URL'))
-		''''db = "dbname=%s user=%s password=%s host=%s " % (url.path[1:], url.username, url.password, url.hostname)
+		db = "dbname=%s user=%s password=%s host=%s " % (url.path[1:], url.username, url.password, url.hostname)
 		schema = "schema.sql"
-		conn = psycopg2.connect(db)
+		'''conn = psycopg2.connect(db)
 
 		cur = conn.cursor()
 		
