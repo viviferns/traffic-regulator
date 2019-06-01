@@ -56,10 +56,9 @@ def index():
 			
 		#cursor.close()
 		
-		return "No error"
 		
 		db.create_all()
-		
+		return "No error"
 		
 		
 		url = urlparse.urlparse(os.environ.get('DATABASE_URL'))
