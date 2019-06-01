@@ -6,8 +6,8 @@ import urllib.parse as urlparse
 
 url = urlparse.urlparse(os.environ.get('DATABASE_URL'))
 db = "dbname=%s user=%s password=%s host=%s " % (url.path[1:], url.username, url.password, url.hostname)
-schema = "schema.sql"
-conn = psycopg2.connect(db)
+#schema = "schema.sql"
+#conn = psycopg2.connect(db)
 
 cur = conn.cursor()
 
