@@ -53,7 +53,6 @@ class violation_record(db.Model):
 	TIME_STAMP=db.Column(db.Integer,unique=False)
 	CAR_NO=db.Column(db.String(30),unique=True)
 	LOC_NAME=db.Column(db.String(30),unique=True)
-	VIOLATION_IMAGE=db.Column(db.bytea,unique=False)
 	FINE_AMOUNT=db.Column(db.Integer,unique=False)
 	
 	def __init__(self,REC_NO,TIME_STAMP,CAR_NO,LOC_NAME,VIOLATION_IMAGE,FINE_AMOUNT):
