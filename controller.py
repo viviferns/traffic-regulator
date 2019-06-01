@@ -52,6 +52,8 @@ def index():
 		return e
 	
 	if(result>0):
+	
+		return result
 		
 		return render_template('admin-login.html')
 			
@@ -88,7 +90,7 @@ def index():
 			
 			cursor.close()
 			
-			return render_template('templates/admin-login.html')
+			return render_template('admin-login.html')
 
 		except:
 
