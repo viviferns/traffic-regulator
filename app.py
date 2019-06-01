@@ -7,10 +7,9 @@ from flask_sqlalchemy import SQLAlchemy
 from initDB import admin_table
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI']=os.environ.get('DATABASE_URL')
-db=SQLAlchemy(app)
 
-@app.route('/')
+
+@app.route('/',methods = ['POST', 'GET'])
 def index():
 	
 	return render_template('admin-login.html')
