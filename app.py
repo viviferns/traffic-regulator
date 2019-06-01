@@ -53,9 +53,11 @@ def index():
 			
 		#cursor.close()
 		
+		return "No error"
+		
 		db.create_all()
 		
-		return "No error"
+		
 		
 		url = urlparse.urlparse(os.environ.get('DATABASE_URL'))
 		db = "dbname=%s user=%s password=%s host=%s " % (url.path[1:], url.username, url.password, url.hostname)
