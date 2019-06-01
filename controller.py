@@ -39,7 +39,7 @@ def index():
 
 		cur = conn.cursor()
 		
-		cur.execute(statement)
+		cur.execute(query)
 		
 		cur.commit()
 		
