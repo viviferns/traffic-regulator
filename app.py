@@ -6,11 +6,10 @@ import urllib.parse as urlparse
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI']=os.environ.get('DATABASE_URL')
+db=SQLAlchemy(app)
 
 class Person(db.Model):
-
-	app.config['SQLALCHEMY_DATABASE_URI']=os.environ.get('DATABASE_URL')
-	db=SQLAlchemy(app)
 
 	ADM_NO=db.Column(db.Integer,primary_key=True)
 	ADMIN_NAME=db.Column(db.String(20),unique=False)
