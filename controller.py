@@ -13,7 +13,7 @@ db = "dbname=%s user=%s password=%s host=%s " % (url.path[1:], url.username, url
 
 app = Flask(__name__)
 
-@app.route('/',methods=['POST'])
+@app.route('/')
 def index():
 	
 	# Open database connection
