@@ -42,7 +42,6 @@ def index():
 	#query="CREATE TABLE admin_table(ADM_NO SERIAL PRIMARY KEY NOT NULL, ADMIN_NAME VARCHAR(30) NOT NULL, MOBILE_NUMBER NUMBER NOT NULL,ADMIN_USER_NAME VARCHAR(20) NOT NULL, ADMIN_PASSWORD VARCHAR(16) NOT NULL)"
 		
 	result=0
-	db.create_all()
 		
 	try:
 		
@@ -56,6 +55,10 @@ def index():
 			
 		#cursor.close()
 		
+		db.create_all()
+		
+		return "No error"
+		
 		url = urlparse.urlparse(os.environ.get('DATABASE_URL'))
 		db = "dbname=%s user=%s password=%s host=%s " % (url.path[1:], url.username, url.password, url.hostname)
 		schema = "schema.sql"
@@ -65,9 +68,7 @@ def index():
 		
 		cur.execute(query)
 		
-		'''cur.commit()'''
-		
-		return "No error"	
+		'''cur.commit()'''	
 		
 
 	#except:
