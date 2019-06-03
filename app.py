@@ -23,6 +23,8 @@ def admin_login():
 	objAdminTable=fetch_recod()
 	loginString=objAdminTable.adminLogin(username,password)
 	
+	return loginString
+	
 	
 	if(loginString!=username):
 
