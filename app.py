@@ -23,9 +23,10 @@ def admin_login():
 	objAdminTable=fetch_recod()
 	loginString=objAdminTable.adminLogin(username,password)
 	
+	
 	if(loginString!=username):
 
-		return render_template('admin-login.html',loginString)
+		return render_template('admin-login.html',loginString=loginString)
 
 	elif(loginString==username):
 
