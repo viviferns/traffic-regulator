@@ -75,22 +75,13 @@ class fetch_recod:
 	
 		stringE=""
 	
-		try:
 			#login_string=Admin_table.query.filter_by(ADMIN_USER_NAME = username).all()
 			#login_string=db
 			#from sqlalchemy import and_
 			#login_string=DBSession.query(Admin_table).filter(and_(Admin_table.ADMIN_USER_NAME=username,Admin_table.ADMIN_PASSWORD=password))
 			#return login_string.ADMIN_USER_NAME
-			adminsTest=Admins.query.all()
-			return adminsTest.ADMIN_USER_NAME
-			stringE=adminsTest.ADMIN_USER_NAME
-			
-		except Exception as e:
-		
-			return e
-			stringE=e
-			
-		print(stringE)
+		adminsTest=Admins.query.all()
+		return adminsTest.ADMIN_USER_NAME
 
 		
 if __name__ == '__main__':
