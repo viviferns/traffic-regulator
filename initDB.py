@@ -67,8 +67,14 @@ class violation_record(db.Model):
 		
 class fetch_recod:
 	def adminLogin(self,username,password):
-		login_string=admin_table.query.filter_by(ADMIN_USER_NAME=username,ADMIN_PASSWORD=password).first()
-		return login_string
+	
+		try:
+			login_string=admin_table.query.filter_by(ADMIN_USER_NAME=username,ADMIN_PASSWORD=password).first()
+			return login_string
+			
+		except Exception as e:
+		
+			return e
 
 		
 if __name__ == '__main__':
