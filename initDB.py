@@ -2,6 +2,7 @@ import os
 import urllib.parse as urlparse
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, redirect, url_for, render_template, request
+from models import *
 
 
 app = Flask(__name__)
@@ -69,7 +70,7 @@ class fetch_recod:
 	def adminLogin(self,username,password):
 	
 		try:
-			login_string=admin_table.query.filter_by((ADMIN_USER_NAME = username) & (ADMIN_PASSWORD = password)).all()
+			login_string=Admin_table.query.filter_by((Admin_table.ADMIN_USER_NAME = username) & (Admin_table.ADMIN_PASSWORD = password)).all()
 			#login_string=db
 			return login_string.ADMIN_USER_NAME
 			
