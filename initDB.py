@@ -76,7 +76,7 @@ class fetch_recod:
 		try:
 			#login_string=Admin_table.query.filter_by(ADMIN_USER_NAME = username).all()
 			#login_string=db
-			login_string=DBSession.query(admin_table).filter(and_(admin_table.ADMIN_USER_NAME=username,admin_table.ADMIN_PASSWORD=password))
+			login_string=DBSession.query(admin_table).filter(admin_table.ADMIN_USER_NAME=username,admin_table.ADMIN_PASSWORD=password))
 			return login_string.ADMIN_USER_NAME
 			
 		except Exception as e:
