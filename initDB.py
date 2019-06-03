@@ -70,7 +70,7 @@ class fetch_recod:
 	
 		try:
 			login_string=admin_table.query.filter_by(ADMIN_USER_NAME=username,ADMIN_PASSWORD=password).first()
-			return login_string
+			return login_string.ADMIN_USER_NAME
 			
 		except Exception as e:
 		
