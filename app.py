@@ -27,7 +27,7 @@ def admin_login():
 
 		return render_template('admin-login.html')
 
-	else if(login_string.ADMIN_USER_NAME==user_name):
+	elif(login_string.ADMIN_USER_NAME==user_name):
 
 		return render_template('home.html')
 
