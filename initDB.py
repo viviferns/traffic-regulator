@@ -69,7 +69,8 @@ class fetch_recod:
 	def adminLogin(self,username,password):
 	
 		try:
-			login_string=admin_table.query.filter_by(ADMIN_USER_NAME=username,ADMIN_PASSWORD=password).first()
+			login_string=admin_table.query.filter_by((ADMIN_USER_NAME = username) & (ADMIN_PASSWORD = password)).all()
+			#login_string=db
 			return login_string.ADMIN_USER_NAME
 			
 		except Exception as e:
