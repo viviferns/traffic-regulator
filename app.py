@@ -4,7 +4,7 @@ import psycopg2
 from flask import Flask, redirect, url_for, render_template, request
 import urllib.parse as urlparse
 from flask_sqlalchemy import SQLAlchemy
-from initDB import admin_table
+from initDB import fetch_recod
 
 app = Flask(__name__)
 
@@ -20,7 +20,7 @@ def admin_login():
 	user_name=request.form['user_name']
 	pass_word=request.form['pass_word']
 	
-	obj_admin_table=admin_table()
+	obj_admin_table=fetch_recod()
 	login_string=obj_admin_table.adminLogin(user_name,pass_word)
 	
 	if(login_string.ADMIN_USER_NAME!=user_name):

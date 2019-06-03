@@ -23,10 +23,6 @@ class admin_table(db.Model):
 		self.ADMIN_USER_NAME=ADMIN_USER_NAME
 		self.ADMIN_PASSWORD=ADMIN_PASSWORD
 		
-	def adminLogin(user_name,pass_word):
-		login_string=self.query.filter_by(ADMIN_USER_NAME=user_name,ADMIN_PASSWORD=pass_word).first()
-		return login_string
-		
 		
 class user_table(db.Model):
 
@@ -67,6 +63,12 @@ class violation_record(db.Model):
 		self.LOC_NAME=LOC_NAME
 		self.VIOLATION_IMAGE=VIOLATION_IMAGE
 		self.FINE_AMOUNT=FINE_AMOUNT
+		
+class fetch_recod:
+	def adminLogin(user_name,pass_word):
+		login_string=admin_table.query.filter_by(ADMIN_USER_NAME=user_name,ADMIN_PASSWORD=pass_word).first()
+		return login_string
+
 		
 if __name__ == '__main__':
 	#app.run(debug = True)
