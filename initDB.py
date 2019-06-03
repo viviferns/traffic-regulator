@@ -5,8 +5,8 @@ from flask import Flask, redirect, url_for, render_template, request
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI']=os.environ.get('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_DATABASE_URI']=os.environ.get('DATABASE_URL')
 db=SQLAlchemy(app)
 
 class admin_table(db.Model):
@@ -67,7 +67,6 @@ class violation_record(db.Model):
 		
 class fetch_recod:
 	def adminLogin(self,username,password):
-		app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 		login_string=admin_table.query.filter_by(ADMIN_USER_NAME=username,ADMIN_PASSWORD=password).first()
 		return login_string
 
