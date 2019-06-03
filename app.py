@@ -14,7 +14,6 @@ def index():
 	
 	return render_template('admin-login.html')
 
-
 @app.route('/admin_login',methods=['POST','GET'])
 def admin_login():
 
