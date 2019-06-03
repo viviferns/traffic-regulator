@@ -21,13 +21,16 @@ def admin_login():
 	username=request.form['user_name']
 	password=request.form['pass_word']
 	
-	objAdminTable=fetch_recod()
-	loginString=objAdminTable.adminLogin(username,password)
+	loginString=adminLogin(username,password)
 		
 	if(loginString.ADMIN_USER_NAME!=username and loginString.ADMIN_PASSWORD!=password):
 
 		return render_template('admin-login.html',loginString=loginString)
 
+	elif(loginString.ADMIN_USER_NAME==username and loginString.ADMIN_PASSWORD==password and username=="root"):
+
+		return render_template('root-home.html')
+		
 	elif(loginString.ADMIN_USER_NAME==username and loginString.ADMIN_PASSWORD==password):
 
 		return render_template('home.html')
@@ -42,9 +45,7 @@ def add_admin_control():
     
 	verbose="Admin could not be Added"
 
-	obj_myDB=myDB()
-
-	verbose=obj_myDB.add_admin(adm_name,adm_mobNo,adm_userName,adm_password)
+	verbose=addAdmins(adm_name,adm_mobNo,adm_userName,adm_password)
 
 	return render_template('verbose-page.html', verbose)
 	
@@ -60,7 +61,7 @@ def add_user_control():
 
 	obj_myDB=myDB()
 
-	verbose=obj_myDB.user_details(name_of_user,mobile_number,email_address,car_number)
+	verbose=addUsers(name_of_user,mobile_number,email_address,car_number)
 
 	return render_template('verbose-page.html', verbose)
 	
@@ -137,15 +138,32 @@ class Violations(db.Model):
 		self.VIOLATION_IMAGE=VIOLATION_IMAGE
 		self.FINE_AMOUNT=FINE_AMOUNT
 		
-class fetch_recod:
-	def adminLogin(self,username,password):
+
+def adminLogin(username,password):
 	
-		adminsTest=Admins.query.filter_by(ADMIN_USER_NAME=username).first()
-		return adminsTest
+	adminsTest=Admins.query.filter_by(ADMIN_USER_NAME=username).first()
+	return adminsTest
+		
+def addAdmins(adm_name,adm_mobNo,adm_userName,adm_password):
+
+	insert=Admins(adm_name,adm_mobNo,adm_userName,adm_password)
+	db.session.add(insert)
+	db.session.commit()
+	verbose="New Admin Added"
+	return verbose
+	
+def addUsers(name_of_user,mobile_number,email_address,car_number):
+	
+	insert=Users(adm_name,adm_mobNo,adm_userName,adm_password)
+	db.session.add(insert)
+	db.session.commit()
+	verbose="New User Added"
+	return verbose
+	
 
 if __name__ == '__main__':
 	#app.run(debug = True)
 	db.create_all()
-	insert=Admins(1,'MAIN_ADMIN',123456789,'root','ROOT1234')
+	insert=Admins('MAIN_ADMIN',123456789,'root','ROOT1234')
 	db.session.add(insert)
 	db.session.commit()
