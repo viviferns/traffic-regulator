@@ -24,11 +24,11 @@ def admin_login():
 	objAdminTable=fetch_recod()
 	loginString=objAdminTable.adminLogin(username,password)
 		
-	if(loginString!=username):
+	if(loginString.ADMIN_USER_NAME!=username and loginString.ADMIN_PASSWORD!=password):
 
 		return render_template('admin-login.html',loginString=loginString)
 
-	elif(loginString==username):
+	elif(loginString.ADMIN_USER_NAME==username and loginString.ADMIN_PASSWORD==password):
 
 		return render_template('home.html')
 
@@ -141,7 +141,7 @@ class fetch_recod:
 	def adminLogin(self,username,password):
 	
 		adminsTest=Admins.query.filter_by(ADMIN_USER_NAME=username).first()
-		return adminsTest.ADMIN_USER_NAME
+		return adminsTest
 
 if __name__ == '__main__':
 	#app.run(debug = True)
