@@ -65,8 +65,8 @@ class violation_record(db.Model):
 		self.FINE_AMOUNT=FINE_AMOUNT
 		
 class fetch_recod:
-	def adminLogin(user_name,pass_word):
-		login_string=admin_table.query.filter_by(ADMIN_USER_NAME=user_name,ADMIN_PASSWORD=pass_word).first()
+	def adminLogin(self,username,password):
+		login_string=admin_table.query.filter_by(ADMIN_USER_NAME=username,ADMIN_PASSWORD=username).first()
 		return login_string
 
 		
