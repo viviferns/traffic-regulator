@@ -20,8 +20,8 @@ def admin_login():
 	username=request.form['user_name']
 	password=request.form['pass_word']
 	
-	obj_admin_table=fetch_recod()
-	loginString=objAdmin_table.adminLogin(username,password)
+	objAdminTable=fetch_recod()
+	loginString=objAdminTable.adminLogin(username,password)
 	
 	if(loginString.ADMIN_USER_NAME!=username):
 
