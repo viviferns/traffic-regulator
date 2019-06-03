@@ -17,17 +17,17 @@ def index():
 @app.route('/admin_login',methods=['POST','GET'])
 def admin_login():
 
-	user_name=request.form['user_name']
-	pass_word=request.form['pass_word']
+	username=request.form['user_name']
+	password=request.form['pass_word']
 	
 	obj_admin_table=fetch_recod()
-	login_string=obj_admin_table.adminLogin(user_name,pass_word)
+	loginString=objAdmin_table.adminLogin(username,password)
 	
-	if(login_string.ADMIN_USER_NAME!=user_name):
+	if(loginString.ADMIN_USER_NAME!=username):
 
 		return render_template('admin-login.html')
 
-	elif(login_string.ADMIN_USER_NAME==user_name):
+	elif(loginString.ADMIN_USER_NAME==username):
 
 		return render_template('home.html')
 
