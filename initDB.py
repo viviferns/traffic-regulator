@@ -3,8 +3,7 @@ import urllib.parse as urlparse
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, redirect, url_for, render_template, request
 from sqlalchemy.orm import scoped_session,sessionmaker
-from zope.sqlalchemy import ZopeTransactionExtension
-from sqlalchemy import and_
+#from zope.sqlalchemy import ZopeTransactionExtension
 
 
 app = Flask(__name__)
@@ -12,9 +11,9 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI']=os.environ.get('DATABASE_URL')
 db=SQLAlchemy(app)
 
-DBSession = scoped_session(sessionmaker(extension=ZopeTransactionExtension()))
+#DBSession = scoped_session(sessionmaker(extension=ZopeTransactionExtension()))
 
-class admin_table(db.Model):
+class Admins(db.Model):
 
 	ADM_NO=db.Column(db.Integer,primary_key=True)
 	ADMIN_NAME=db.Column(db.String(20),unique=False)
@@ -30,7 +29,7 @@ class admin_table(db.Model):
 		self.ADMIN_PASSWORD=ADMIN_PASSWORD
 		
 		
-class user_table(db.Model):
+class Users(db.Model):
 
 	USR_NO=db.Column(db.Integer,primary_key=True)
 	NAME_OF_USER=db.Column(db.String(20),unique=False)
@@ -45,7 +44,7 @@ class user_table(db.Model):
 		self.EMAIL_ID=EMAIL_ID
 		self.CAR_NO=CAR_NO
 		
-class locations(db.Model):
+class Locations(db.Model):
 
 	LOC_NO=db.Column(db.Integer,primary_key=True)
 	LOC_NAME=db.Column(db.String(20),unique=True)
@@ -54,7 +53,7 @@ class locations(db.Model):
 		self.LOC_NO=LOC_NO
 		self.LOC_NAME=LOC_NAME
 		
-class violation_record(db.Model):
+class Violations(db.Model):
 
 	REC_NO=db.Column(db.Integer,primary_key=True)
 	TIME_STAMP=db.Column(db.Integer,unique=False)
@@ -76,8 +75,11 @@ class fetch_recod:
 		try:
 			#login_string=Admin_table.query.filter_by(ADMIN_USER_NAME = username).all()
 			#login_string=db
-			login_string=DBSession.query(admin_table).filter(admin_table.ADMIN_USER_NAME=username,admin_table.ADMIN_PASSWORD=password))
-			return login_string.ADMIN_USER_NAME
+			#from sqlalchemy import and_
+			#login_string=DBSession.query(Admin_table).filter(and_(Admin_table.ADMIN_USER_NAME=username,Admin_table.ADMIN_PASSWORD=password))
+			#return login_string.ADMIN_USER_NAME
+			adminsTest=Admins.query.all()
+			return adminsTest
 			
 		except Exception as e:
 		
