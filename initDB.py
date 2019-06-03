@@ -2,12 +2,17 @@ import os
 import urllib.parse as urlparse
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, redirect, url_for, render_template, request
+from sqlalchemy.orm import scoped_session,sessionmaker
+from zope.sqlalchemy import ZopeTransactionExtension
+from sqlalchemy import and_
 
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI']=os.environ.get('DATABASE_URL')
 db=SQLAlchemy(app)
+
+DBSession = scoped_session(sessionmaker(extension=ZopeTransactionExtension()))
 
 class admin_table(db.Model):
 
@@ -69,8 +74,9 @@ class fetch_recod:
 	def adminLogin(self,username,password):
 	
 		try:
-			login_string=Admin_table.query.filter_by(ADMIN_USER_NAME = username).all()
+			#login_string=Admin_table.query.filter_by(ADMIN_USER_NAME = username).all()
 			#login_string=db
+			login_string=DBSession.query(admin_table).filter(and_(admin_table.ADMIN_USER_NAME=username,ADMIN_PASSWORD))
 			return login_string.ADMIN_USER_NAME
 			
 		except Exception as e:
