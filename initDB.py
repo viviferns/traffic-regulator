@@ -80,7 +80,7 @@ class fetch_recod:
 			#from sqlalchemy import and_
 			#login_string=DBSession.query(Admin_table).filter(and_(Admin_table.ADMIN_USER_NAME=username,Admin_table.ADMIN_PASSWORD=password))
 			#return login_string.ADMIN_USER_NAME
-		adminsTest=Admins.query.all()
+		adminsTest=Admins.query.filter_by(ADMIN_USER_NAME=username).first()
 		return adminsTest.ADMIN_USER_NAME
 
 		
