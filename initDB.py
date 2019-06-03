@@ -66,12 +66,13 @@ class violation_record(db.Model):
 		
 class fetch_recod:
 	def adminLogin(self,username,password):
-		login_string=admin_table.query.filter_by(ADMIN_USER_NAME=username,ADMIN_PASSWORD=username).first()
+		login_string=admin_table.query.filter_by(ADMIN_USER_NAME=username,ADMIN_PASSWORD=password).first()
 		return login_string
 
 		
 if __name__ == '__main__':
 	#app.run(debug = True)
+	app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 	db.create_all()
 	insert=admin_table(1,'MAIN_ADMIN',123456789,'root','ROOT1234')
 	db.session.add(insert)
