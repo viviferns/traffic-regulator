@@ -2,7 +2,6 @@ import os
 import urllib.parse as urlparse
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, redirect, url_for, render_template, request
-from models import *
 
 
 app = Flask(__name__)
