@@ -1,7 +1,7 @@
 import os
 import urllib.parse as urlparse
 from flask_sqlalchemy import SQLAlchemy
-from flask import Flask, redirect, url_for, render_template, requests
+from flask import Flask, redirect, url_for, render_template, request
 from sqlalchemy.orm import scoped_session,sessionmaker
 #from zope.sqlalchemy import ZopeTransactionExtension
 #import requests
