@@ -25,7 +25,7 @@ def admin_login():
 	
 	if(loginString!=username):
 
-		return render_template('admin-login.html')
+		return render_template('admin-login.html',loginString)
 
 	elif(loginString==username):
 
