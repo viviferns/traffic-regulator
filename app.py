@@ -4,7 +4,6 @@ import psycopg2
 from flask import Flask, redirect, url_for, render_template, request
 import urllib.parse as urlparse
 from flask_sqlalchemy import SQLAlchemy
-from initDB import fetch_recod
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI']=os.environ.get('DATABASE_URL')
@@ -24,10 +23,7 @@ def admin_login():
 	
 	objAdminTable=fetch_recod()
 	loginString=objAdminTable.adminLogin(username,password)
-	
-	return loginString
-	
-	
+		
 	if(loginString!=username):
 
 		return render_template('admin-login.html',loginString=loginString)
@@ -35,9 +31,6 @@ def admin_login():
 	elif(loginString==username):
 
 		return render_template('home.html')
-
-    
-
 
 @app.route('/add_admin_control',methods=['POST','GET'])
 def add_admin_control():
@@ -143,6 +136,12 @@ class Violations(db.Model):
 		self.LOC_NAME=LOC_NAME
 		self.VIOLATION_IMAGE=VIOLATION_IMAGE
 		self.FINE_AMOUNT=FINE_AMOUNT
+		
+class fetch_recod:
+	def adminLogin(self,username,password):
+	
+		adminsTest=Admins.query.filter_by(ADMIN_USER_NAME=username).first()
+		return adminsTest.ADMIN_USER_NAME
 
 if __name__ == '__main__':
 	#app.run(debug = True)
