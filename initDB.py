@@ -88,6 +88,8 @@ class fetch_recod:
 		
 			return e
 			stringE=e
+			
+		print(stringE)
 
 		
 if __name__ == '__main__':
