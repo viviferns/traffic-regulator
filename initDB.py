@@ -72,6 +72,8 @@ class Violations(db.Model):
 class fetch_recod:
 	def adminLogin(self,username,password):
 	
+		stringE=""
+	
 		try:
 			#login_string=Admin_table.query.filter_by(ADMIN_USER_NAME = username).all()
 			#login_string=db
@@ -80,10 +82,12 @@ class fetch_recod:
 			#return login_string.ADMIN_USER_NAME
 			adminsTest=Admins.query.all()
 			return adminsTest.ADMIN_USER_NAME
+			stringE=adminsTest.ADMIN_USER_NAME
 			
 		except Exception as e:
 		
 			return e
+			stringE=e
 
 		
 if __name__ == '__main__':
