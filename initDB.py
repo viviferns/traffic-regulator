@@ -70,7 +70,7 @@ class fetch_recod:
 	def adminLogin(self,username,password):
 	
 		try:
-			login_string=Admin_table.query.filter_by(ADMIN_USER_NAME = username & Admin_table.ADMIN_PASSWORD = password).all()
+			login_string=Admin_table.query.filter_by(ADMIN_USER_NAME = username).all()
 			#login_string=db
 			return login_string.ADMIN_USER_NAME
 			
