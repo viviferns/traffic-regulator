@@ -46,9 +46,8 @@ def add_admin_control():
 	adm_mobNo=request.form['adm_mobNo']
 	adm_userName=request.form['adm_userName']
 	adm_password=request.form['adm_password']
-    
 	#verbose="Admin could not be Added"
-	verbose = Admins.query.order_by(Admins.ADM_NO.desc()).first
+	verbose = Admins.query.order_by(Admins.ADM_NO.desc()).first()
 	#insert=Admins(1,'MAIN_ADMIN',123456789,'root','ROOT1234')
 	#db.session.add(insert)
 
