@@ -48,10 +48,13 @@ def add_admin_control():
 	adm_password=request.form['adm_password']
     
 	verbose="Admin could not be Added"
+	maxAdmNo = Admins.query.order_by(Admins.ADM_NO.desc()).first
+	#insert=Admins(1,'MAIN_ADMIN',123456789,'root','ROOT1234')
+	#db.session.add(insert)
 
 	verbose=addAdmins(adm_name,adm_mobNo,adm_userName,adm_password)
 
-	return render_template('verbose-page.html', verbose)
+	return render_template('verbose-page.html', maxAdmNo=maxAdmNo)
 	
 @app.route('/add_user_control',methods=['POST'])
 def add_user_control():
