@@ -89,42 +89,42 @@ def route_addAdmin():
 	return render_template('addAdmin.html')
 	
 @app.route('/route-updateAdminPassword',methods=['POST','GET'])
-def route_addAdmin():
+def route_updateAdminPassword():
 	
 	return render_template('updateAdmin.html')
 	
 @app.route('/route-removeAdmin',methods=['POST','GET'])
-def route_addAdmin():
+def route_removeAdmin():
 	
 	return render_template('removeAdmins.html')
 	
 @app.route('/route-addUser',methods=['POST','GET'])
-def route_addAdmin():
+def route_addUser():
 	
 	return render_template('addUser.html')
 	
 @app.route('/route-updateUser',methods=['POST','GET'])
-def route_addAdmin():
+def route_updateUser():
 	
 	return render_template('updateUser.html')
 	
 @app.route('/route-removeUser',methods=['POST','GET'])
-def route_addAdmin():
+def route_removeUser():
 	
 	return render_template('removeUser.html')
 	
 @app.route('/route-fetchUserDetails',methods=['POST','GET'])
-def route_addAdmin():
+def route_fetchUserDetails():
 	
 	return render_template('payment.html')
 	
-@app.route('/route-route-payment',methods=['POST','GET'])
-def route_addAdmin():
+@app.route('/route-payment',methods=['POST','GET'])
+def route_payment():
 	
 	return render_template('payment-details.html')
 	
 @app.route('/route-generate-pdf',methods=['POST','GET'])
-def route_addAdmin():
+def route_generate_pdf():
 	
 	return render_template('generate-pdf.html')
 	
