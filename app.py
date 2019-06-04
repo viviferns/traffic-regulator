@@ -54,7 +54,7 @@ def add_admin_control():
 
 	#verbose=addAdmins(adm_name,adm_mobNo,adm_userName,adm_password)
 
-	return render_template('verbose-page.html', verbose=verbose)
+	return render_template('verbose-page.html', verbose=maxAdmNo)
 	
 @app.route('/add_user_control',methods=['POST'])
 def add_user_control():
