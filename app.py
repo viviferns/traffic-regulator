@@ -51,6 +51,8 @@ def add_admin_control():
 	setAdmNo=maxAdm.ADM_NO + 1
 	insertNew=Admins(setAdmNo,adm_name,adm_mobNo,adm_userName,adm_password)
 	db.session.add(insertNew)
+	db.session.commit()
+
 
 	verbose="User ",adm_name," Added as New Admin"
 
