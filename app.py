@@ -145,7 +145,7 @@ class Admins(db.Model):
 
 	ADM_NO=db.Column(db.Integer,primary_key=True)
 	ADMIN_NAME=db.Column(db.String(20),unique=False)
-	MOBILE_NUMBER=db.Column(db.Integer,unique=True)
+	MOBILE_NUMBER=db.Column(db.BigInteger,unique=True)
 	ADMIN_USER_NAME=db.Column(db.String(10),unique=True)
 	ADMIN_PASSWORD=db.Column(db.String(16),unique=False)
 	
@@ -161,7 +161,7 @@ class Users(db.Model):
 
 	USR_NO=db.Column(db.Integer,primary_key=True)
 	NAME_OF_USER=db.Column(db.String(20),unique=False)
-	MOBILE_NUMBER=db.Column(db.Integer,unique=True)
+	MOBILE_NUMBER=db.Column(db.BigInteger,unique=True)
 	EMAIL_ID=db.Column(db.String(30),unique=True)
 	CAR_NO=db.Column(db.String(10),unique=False)
 	
