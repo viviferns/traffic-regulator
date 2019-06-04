@@ -164,6 +164,6 @@ def addUsers(name_of_user,mobile_number,email_address,car_number):
 if __name__ == '__main__':
 	#app.run(debug = True)
 	db.create_all()
-	insert=Admins('MAIN_ADMIN',123456789,'root','ROOT1234')
+	insert=Admins(1,'MAIN_ADMIN',123456789,'root','ROOT1234')
 	db.session.add(insert)
 	db.session.commit()
