@@ -34,7 +34,7 @@ def admin_login():
 		
 	elif(adminsTest.ADMIN_USER_NAME==username and adminsTest.ADMIN_PASSWORD==password):
 
-		return render_template('home.html'authentication=authentication)
+		return render_template('home.html',authentication=authentication)
 
 @app.route('/add_admin_control',methods=['POST','GET'])
 def add_admin_control():
