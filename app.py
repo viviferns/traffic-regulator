@@ -21,17 +21,17 @@ def admin_login():
 	username=request.form['user_name']
 	password=request.form['pass_word']
 	
-	loginString=adminLogin(username,password)
+	adminsTest=Admins.query.filter_by(ADMIN_USER_NAME=username).first()
 		
-	if(loginString.ADMIN_USER_NAME!=username and loginString.ADMIN_PASSWORD!=password):
+	if(adminsTest.ADMIN_USER_NAME!=username and adminsTest.ADMIN_PASSWORD!=password):
 
-		return render_template('admin-login.html',loginString=loginString)
+		return render_template('admin-login.html')
 
-	elif(loginString.ADMIN_USER_NAME==username and loginString.ADMIN_PASSWORD==password and username=="root"):
+	elif(adminsTest.ADMIN_USER_NAME==username and adminsTest.ADMIN_PASSWORD==password and username=="root"):
 
 		return render_template('root-home.html')
 		
-	elif(loginString.ADMIN_USER_NAME==username and loginString.ADMIN_PASSWORD==password):
+	elif(adminsTest.ADMIN_USER_NAME==username and adminsTest.ADMIN_PASSWORD==password):
 
 		return render_template('home.html')
 
