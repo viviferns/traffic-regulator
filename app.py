@@ -48,13 +48,13 @@ def add_admin_control():
 	adm_password=request.form['adm_password']
 	verbose="Admin could not be Added"
 	maxAdm = Admins.query.order_by(Admins.ADM_NO.desc()).first()
-	maxAdmNo=maxAdm.ADM_NO + 1
-	#insert=Admins(1,'MAIN_ADMIN',123456789,'root','ROOT1234')
-	#db.session.add(insert)
+	setAdmNo=maxAdm.ADM_NO + 1
+	insertNew=Admins(setAdmNo,adm_name,adm_mobNo,adm_userName,adm_password)
+	db.session.add(insertNew)
 
-	#verbose=addAdmins(adm_name,adm_mobNo,adm_userName,adm_password)
+	verbose="User ",adm_name," Added as New Admin"
 
-	return render_template('verbose-page.html', verbose=maxAdmNo)
+	return render_template('verbose-page.html', verbose=verbose)
 	
 @app.route('/add_user_control',methods=['POST'])
 def add_user_control():
@@ -134,7 +134,11 @@ def route_generate_pdf():
 	
 	return render_template('generate-pdf.html')
 	
-		
+@app.route('/route-returnHome',methods=['POST','GET'])
+def route_returnHome():
+	
+	return render_template('generate-pdf.html')
+	
 class Admins(db.Model):
 
 	ADM_NO=db.Column(db.Integer,primary_key=True)
