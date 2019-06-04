@@ -83,6 +83,11 @@ def temp_password_control():
 
 		return render_template('verbose-page.html', verbose_string)
 		
+@app.route('/route-addAdmin',methods=['POST','GET'])
+def route_addAdmin():
+	
+	return render_template('addAdmin.html')
+		
 class Admins(db.Model):
 
 	ADM_NO=db.Column(db.Integer,primary_key=True)
