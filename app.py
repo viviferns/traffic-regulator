@@ -13,21 +13,23 @@ db=SQLAlchemy(app)
 @app.route('/',methods = ['POST', 'GET'])
 def index():
 	
-	return render_template('admin-login.html')
+	verbose="Please Enter Username and Password"
+	return render_template('admin-login.html',verbose=verbose)
 
 @app.route('/admin_login',methods=['POST','GET'])
 def admin_login():
 
 	username=request.form['user_name']
 	password=request.form['pass_word']
-	authentication=True
-	verbose="Incorrect Username or Password, Please re-enter your Details!!!"
+	verbose=""
+
 	
 	adminsTest=Admins.query.filter_by(ADMIN_USER_NAME=username).first()
 		
 	if(adminsTest.ADMIN_USER_NAME!=username or adminsTest.ADMIN_PASSWORD!=password):
-
-		return render_template('admin-login.html')
+		
+		verbose="Incorrect Username or Password, Please re-enter your Details!!!"
+		return render_template('admin-login.html',verbose=verbose)
 
 	elif(adminsTest.ADMIN_USER_NAME==username and adminsTest.ADMIN_PASSWORD==password and username=="root"):
 
