@@ -24,7 +24,7 @@ def admin_login():
 	
 	adminsTest=Admins.query.filter_by(ADMIN_USER_NAME=username).first()
 		
-	if(adminsTest.ADMIN_USER_NAME!=username and adminsTest.ADMIN_PASSWORD!=password):
+	if(adminsTest.ADMIN_USER_NAME!=username or adminsTest.ADMIN_PASSWORD!=password):
 
 		return render_template('admin-login.html')
 
