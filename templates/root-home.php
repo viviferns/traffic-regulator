@@ -4,6 +4,7 @@
     <title></title>
   </head>
   <body>
+  <b>Root Home</b>
     </br></br>
 	<a href="templates/addAdmin.html">Add Admins</a>
 	</br></br>
