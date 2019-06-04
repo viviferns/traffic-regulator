@@ -20,6 +20,7 @@ def admin_login():
 
 	username=request.form['user_name']
 	password=request.form['pass_word']
+	authentication=True
 	
 	adminsTest=Admins.query.filter_by(ADMIN_USER_NAME=username).first()
 		
@@ -29,11 +30,11 @@ def admin_login():
 
 	elif(adminsTest.ADMIN_USER_NAME==username and adminsTest.ADMIN_PASSWORD==password and username=="root"):
 
-		return render_template('root-home.html')
+		return render_template('root-home.html',authentication=authentication)
 		
 	elif(adminsTest.ADMIN_USER_NAME==username and adminsTest.ADMIN_PASSWORD==password):
 
-		return render_template('home.html')
+		return render_template('home.html'authentication=authentication)
 
 @app.route('/add_admin_control',methods=['POST','GET'])
 def add_admin_control():
