@@ -21,6 +21,7 @@ def admin_login():
 	username=request.form['user_name']
 	password=request.form['pass_word']
 	authentication=True
+	verbose="Incorrect Username or Password, Please re-enter your Details!!!"
 	
 	adminsTest=Admins.query.filter_by(ADMIN_USER_NAME=username).first()
 		
