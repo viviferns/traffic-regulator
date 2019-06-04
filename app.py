@@ -56,7 +56,7 @@ def add_admin_control():
 
 	verbose="User ",adm_name," Added as New Admin"
 
-	return render_template('verbose-page.html', verbose=verbose)
+	return render_template('verbose-page.html', verbose=maxAdm.ADM_NO)
 	
 @app.route('/add_user_control',methods=['POST'])
 def add_user_control():
