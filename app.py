@@ -341,15 +341,21 @@ def addAdmins(setAdmNo,adm_name,adm_mobNo,adm_userName,adm_password):
 	insert=Admins(setAdmNo,adm_name,adm_mobNo,adm_userName,adm_password)
 	db.session.add(insert)
 	db.session.commit()
-	verbose="New Admin "+adm_name+" Added" 
+	newMaxAdmId=Admins.query.order_by(Admins.ADM_NO.desc()).first()
+	verbose="New Admin "+adm_name+" Added with ID " +newMaxAdmId
 	return verbose
 	
 def addUsers(setUsrNo,name_of_user,mobile_number,email_address,car_number):
 	
+	if(setAdmNo!=1):
+	
+		maxUsr = Users.query.order_by(Admins.ADM_NO.desc()).first()
+		setUsrNo=maxUsr.USR_NO + 1
 	insert=Users(setUsrNo,name_of_user,mobile_number,email_address,car_number)
 	db.session.add(insert)
 	db.session.commit()
-	verbose="New User "+name_of_user+" Added"
+	newMaxUsrId=Users.query.order_by(Admins.ADM_NO.desc()).first()
+	verbose="New User "+name_of_user+" Added " newMaxUsrId
 	return verbose
 	
 
