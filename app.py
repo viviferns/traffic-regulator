@@ -111,7 +111,7 @@ def add_admin_control():
 	#db.session.commit()
 
 	#verbose="User "+adm_name+" Added as New Admin"
-	verbose=addAdmins(adm_name,adm_mobNo,adm_userName,adm_password)
+	verbose=addAdmins(0,adm_name,adm_mobNo,adm_userName,adm_password)
 
 	return render_template('verbose-page.html', verbose=verbose)
 	
@@ -331,9 +331,14 @@ def adminLogin(username,password):
 	adminsTest=Admins.query.filter_by(ADMIN_USER_NAME=username).first()
 	return adminsTest
 		
-def addAdmins(adm_name,adm_mobNo,adm_userName,adm_password):
-
-	insert=Admins(0,adm_name,adm_mobNo,adm_userName,adm_password)
+def addAdmins(setAdmNo,adm_name,adm_mobNo,adm_userName,adm_password):
+	
+	if(setAdmNo!=1):
+	
+		maxAdm = Admins.query.order_by(Admins.ADM_NO.desc()).first()
+		setAdmNo=maxAdm.ADM_NO + 1
+	
+	insert=Admins(setAdmNo,adm_name,adm_mobNo,adm_userName,adm_password)
 	db.session.add(insert)
 	db.session.commit()
 	verbose="New Admin "+adm_name+" Added" 
@@ -357,5 +362,5 @@ if __name__ == '__main__':
 	insertUsr=Users(1,"User1",987654321,"testuser123@gmail.com","MH-01-CH-0007")
 	db.session.add(insertUsr)
 	db.session.commit()'''
-	addAdmins('MAIN_ADMIN',12345789,'root','ROOT1234')
-	addUsers("User1",987654321,"testuser123@gmail.com","MH-01-CH-0007")
+	addAdmins(1,'MAIN_ADMIN',12345789,'root','ROOT1234')
+	addUsers(1,"User1",987654321,"testuser123@gmail.com","MH-01-CH-0007")
