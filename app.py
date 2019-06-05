@@ -180,7 +180,11 @@ def update_user():
 
 	dropDown1=request.form['dropDwn1']
 	mob_number=request.form['mob_number']
-	usr_name,state_code,number_code,area_code,pin=""
+	usr_name=""
+	state_code=""
+	number_code=""
+	area_code=""
+	pin=""
 	
 	if(dropDown1!="car_number"):
 		
