@@ -141,7 +141,7 @@ def add_user_control():
 	
 	#verbose="User "+name_of_user+" Added"
 
-	return render_template('verbose-page.html', verbose)
+	return render_template('verbose-page.html', verbose=verbose)
 	
 @app.route('/update-admin',methods=['POST'])
 def update_admin():
@@ -156,16 +156,24 @@ def update_admin():
 		
 		admDetails.ADMIN_NAME=admin_name
 		db.session.commit()
-	
+		updatedAdmDetails=Admins.query.filter_by(MOBILE_NUMBER=mob_number).first()
+		verbose="Updated details for Admin, Corrected Name: "updatedAdmDetails.ADMIN_NAME
+		
 	elif(dropDown1=="mob_number"):
 		
 		admDetails.MOBILE_NUMBER=admin_name
 		db.session.commit()
+		updatedAdmDetails=Admins.query.filter_by(MOBILE_NUMBER=admin_name).first()
+		verbose="Updated details for Admin "+updatedAdmDetails.ADMIN_NAME+" Corrected/New Number: "updatedAdmDetails.MOBILE_NUMBER
 		
 	elif(dropDown1=="user_name"):
 		
 		admDetails.ADMIN_USER_NAME=admin_name
 		db.session.commit()
+		updatedAdmDetails=Admins.query.filter_by(MOBILE_NUMBER=mob_number).first()
+		verbose="Updated details for Admin "+updatedAdmDetails.ADMIN_NAME+" Corrected/New Username: "updatedAdmDetails.ADMIN_USER_NAME
+		
+	return render_template('verbose-page.html', verbose=verbose)
 		
 @app.route('/update-user',methods=['POST'])
 def update_user():
@@ -184,22 +192,33 @@ def update_user():
 		
 		userDetails.NAME_OF_USER=usr_name
 		db.session.commit()
+		updatedUserDetails=Users.query.filter_by(MOBILE_NUMBER=mob_number).first()
+		verbose="Updated details for User Corrected Name: "+updatedUserDetails.NAME_OF_USER
 	
 	elif(dropDown1=="mob_number"):
 		
 		userDetails.MOBILE_NUMBER=usr_name
 		db.session.commit()
+		updatedUserDetails=Users.query.filter_by(MOBILE_NUMBER=usr_name).first()
+		verbose="Updated details for User "+updatedUserDetails.NAME_OF_USER+" Corrected/New Mobile Number: "updatedUserDetails.MOBILE_NUMBER
 		
 	elif(dropDown1=="email_address"):
 		
-		userDetails.ADMIN_USER_NAME=usr_name
+		userDetails.EMAIL_ID=usr_name
 		db.session.commit()
+		updatedUserDetails=Users.query.filter_by(MOBILE_NUMBER=mob_number).first()
+		verbose="Updated details for User "+updatedUserDetails.NAME_OF_USER+" Corrected/New Mobile Number: "updatedUserDetails.EMAIL_ID
+		
 		
 	elif(dropDown1=="car_number"):
 		
 		car_no=state_code+"-"+number_code+"-"+area_code+"-"+pin
 		userDetails.CAR_NO=car_no
 		db.session.commit()
+		updatedUserDetails=Users.query.filter_by(MOBILE_NUMBER=mob_number).first()
+		verbose="Updated details for User "+updatedUserDetails.NAME_OF_USER+" Corrected/New Car Number: "updatedUserDetails.CAR_NO
+		
+	return render_template('verbose-page.html', verbose=verbose)
 	
 @app.route('/temp_password_control',methods=['POST'])
 def temp_password_control():
