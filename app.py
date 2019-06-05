@@ -123,7 +123,8 @@ def add_user_control():
 	number_code=request.form['number_code']
 	area_code=request.form['area_code']
 	pin=request.form['pin']
-    car_number=state_code,number_code,area_code,pin
+    
+	car_number=state_code+number_code+area_code+pin
 	
 	verbose="User could not be Added"
 
