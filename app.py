@@ -115,7 +115,7 @@ def add_admin_control():
 
 	return render_template('verbose-page.html', verbose=verbose)
 	
-@app.route('/add_user_control',methods=['POST'])
+@app.route('/add-user-control',methods=['POST'])
 def add_user_control():
 
 	name_of_user=request.form['name_of_user']
