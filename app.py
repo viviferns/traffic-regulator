@@ -341,7 +341,7 @@ def addAdmins(adm_name,adm_mobNo,adm_userName,adm_password):
 	
 def addUsers(name_of_user,mobile_number,email_address,car_number):
 	
-	insert=Users(0,adm_name,adm_mobNo,adm_userName,adm_password)
+	insert=Users(0,name_of_user,mobile_number,email_address,car_number)
 	db.session.add(insert)
 	db.session.commit()
 	verbose="New User Added"
