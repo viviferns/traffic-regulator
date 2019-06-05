@@ -343,7 +343,7 @@ def addAdmins(setAdmNo,adm_name,adm_mobNo,adm_userName,adm_password):
 	db.session.commit()
 	newMaxAdmId=Admins.query.order_by(Admins.ADM_NO.desc()).first()
 	fetchAdmNo=newMaxAdmId.ADM_NO
-	verbose="New Admin "+adm_name+" Added with ID " +fetchAdmNo
+	verbose="New Admin "+adm_name+" Added with ID " +str(fetchAdmNo)
 	return verbose
 	
 def addUsers(setUsrNo,name_of_user,mobile_number,email_address,car_number):
@@ -357,7 +357,7 @@ def addUsers(setUsrNo,name_of_user,mobile_number,email_address,car_number):
 	db.session.commit()
 	newMaxUsrId=Users.query.order_by(Admins.ADM_NO.desc()).first()
 	fetchUsrNo=newMaxUsrId.USR_NO
-	verbose="New User "+name_of_user+" Added " +fetchUsrNo
+	verbose="New User "+name_of_user+" Added " +str(fetchUsrNo)
 	return verbose
 	
 
