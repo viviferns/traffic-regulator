@@ -355,7 +355,7 @@ def addUsers(setUsrNo,name_of_user,mobile_number,email_address,car_number):
 	db.session.add(insert)
 	db.session.commit()
 	newMaxUsrId=Users.query.order_by(Admins.ADM_NO.desc()).first()
-	verbose="New User "+name_of_user+" Added " newMaxUsrId
+	verbose="New User "+name_of_user+" Added " +newMaxUsrId
 	return verbose
 	
 
