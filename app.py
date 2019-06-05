@@ -355,5 +355,5 @@ if __name__ == '__main__':
 	insertUsr=Users(1,"User1",987654321,"testuser123@gmail.com","MH-01-CH-0007")
 	db.session.add(insertUsr)
 	db.session.commit()'''
-	addAdmins(1,'MAIN_ADMIN',12345789,'root','ROOT1234')
-	addUsers(1,"User1",987654321,"testuser123@gmail.com","MH-01-CH-0007")
+	addAdmins('MAIN_ADMIN',12345789,'root','ROOT1234')
+	addUsers("User1",987654321,"testuser123@gmail.com","MH-01-CH-0007")
