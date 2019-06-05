@@ -178,7 +178,6 @@ def update_user():
 	area_code=request.form['area_code']
 	pin=request.form['pin']
 	
-	
 	userDetails=Users.query.filter_by(MOBILE_NUMBER=mob_number).first()
 	
 	if(dropDown1=="name"):
