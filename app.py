@@ -180,11 +180,17 @@ def update_user():
 
 	dropDown1=request.form['dropDown1']
 	mob_number=request.form['mob_number']
-	usr_name=request.form['usr_name']
-	state_code=request.form['state_code']
-	number_code=request.form['number_code']
-	area_code=request.form['area_code']
-	pin=request.form['pin']
+	usr_name,state_code,number_code,area_code,pin=""
+	
+	if(dropDown1!="car_number"):
+		
+		usr_name=request.form['usr_name']
+		
+	elif(dropDown1=="car_number"):
+		state_code=request.form['state_code']
+		number_code=request.form['number_code']
+		area_code=request.form['area_code']
+		pin=request.form['pin']
 	
 	userDetails=Users.query.filter_by(MOBILE_NUMBER=mob_number).first()
 	
