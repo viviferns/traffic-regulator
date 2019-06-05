@@ -333,7 +333,7 @@ def adminLogin(username,password):
 		
 def addAdmins(adm_name,adm_mobNo,adm_userName,adm_password):
 
-	insert=Admins(adm_name,adm_mobNo,adm_userName,adm_password)
+	insert=Admins(0,adm_name,adm_mobNo,adm_userName,adm_password)
 	db.session.add(insert)
 	db.session.commit()
 	verbose="New Admin "+adm_name+" Added" 
