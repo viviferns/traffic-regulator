@@ -42,7 +42,7 @@ def remove_admin():
 	rmAdmin=Admins.query.filter_by(MOBILE_NUMBER=mob_number).first()
 	if(rmAdmin.ADMIN_USER_NAME==user_name):
 		
-		verbose="Removed admin ",user_name
+		verbose="Removed admin "+user_name
 		db.session.delete(rmAdmin)
 		db.session.commit()
 		return render_template('verbose-page.html', verbose)
@@ -60,13 +60,13 @@ def remove_user():
 	rmUser=Users.query.filter_by(MOBILE_NUMBER=mob_number).first()
 	if(rmAdmin.EMAIL_ID==email_address):
 		
-		verbose="Removed User ",user_name
+		verbose="Removed User "+user_name
 		db.session.delete(rmUser)
 		db.session.commit()
 		return render_template('verbose-page.html', verbose)
 		
 	else:
-		verbose="Unable to remove User ",user_name
+		verbose="Unable to remove User "+user_name
 		return render_template('verbose-page.html', verbose)
 	
 @app.route('/admin_login',methods=['POST','GET'])
@@ -100,16 +100,18 @@ def add_admin_control():
 	adm_userName=request.form['adm_userName']
 	adm_password=request.form['adm_password']
 	
-	verbose="Admin could not be Added"
+	#verbose="Admin could not be Added"
 	
-	db=SQLAlchemy(app)
-	maxAdm = Admins.query.order_by(Admins.ADM_NO.desc()).first()
-	setAdmNo=maxAdm.ADM_NO + 1
-	insertNew=Admins(setAdmNo,adm_name,adm_mobNo,adm_userName,adm_password)
-	db.session.add(insertNew)
-	db.session.commit()
+	#app.config['SQLALCHEMY_DATABASE_URI']=os.environ.get('DATABASE_URL')
+	#db=SQLAlchemy(app)
+	#maxAdm = Admins.query.order_by(Admins.ADM_NO.desc()).first()
+	#setAdmNo=maxAdm.ADM_NO + 1
+	#insertNew=Admins(setAdmNo,adm_name,adm_mobNo,adm_userName,adm_password)
+	#db.session.add(insertNew)
+	#db.session.commit()
 
-	verbose="User ",adm_name," Added as New Admin"
+	#verbose="User "+adm_name+" Added as New Admin"
+	verbose=addAdmins(adm_name,adm_mobNo,adm_userName,adm_password)
 
 	return render_template('verbose-page.html', verbose=verbose)
 	
@@ -124,7 +126,7 @@ def add_user_control():
 	area_code=request.form['area_code']
 	pin=request.form['pin']
     
-	car_number=state_code+number_code+area_code+pin
+	car_number=state_code+"-"+number_code+"-"+area_code+"-"+pin
 	
 	verbose="User could not be Added"
 
@@ -135,7 +137,7 @@ def add_user_control():
 	db.session.add(insertNew)
 	db.session.commit()
 	
-	verbose="User ",name_of_user," Added"
+	verbose="User "+name_of_user+" Added"
 
 	return render_template('verbose-page.html', verbose)
 	
@@ -194,7 +196,7 @@ def update_user():
 		
 	elif(dropDown1=="car_number"):
 		
-		car_no=state_code,number_code,area_code,pin
+		car_no=state_code+"-"+number_code+"-"+area_code+"-"+pin
 		userDetails.CAR_NO=car_no
 		db.session.commit()
 	
@@ -332,7 +334,7 @@ def addAdmins(adm_name,adm_mobNo,adm_userName,adm_password):
 	insert=Admins(adm_name,adm_mobNo,adm_userName,adm_password)
 	db.session.add(insert)
 	db.session.commit()
-	verbose="New Admin Added"
+	verbose="New Admin "+adm_name+" Added" 
 	return verbose
 	
 def addUsers(name_of_user,mobile_number,email_address,car_number):
