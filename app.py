@@ -130,14 +130,15 @@ def add_user_control():
 	
 	verbose="User could not be Added"
 
-	db=SQLAlchemy(app)
-	maxUsr = Users.query.order_by(Admins.ADM_NO.desc()).first()
-	setUsrNo=maxUsr.USR_NO + 1
-	insertNew=Users(setUsrNo,adm_name,adm_mobNo,adm_userName,adm_password)
-	db.session.add(insertNew)
-	db.session.commit()
+	#db=SQLAlchemy(app)
+	#maxUsr = Users.query.order_by(Admins.ADM_NO.desc()).first()
+	#setUsrNo=maxUsr.USR_NO + 1
+	#insertNew=Users(setUsrNo,adm_name,adm_mobNo,adm_userName,adm_password)
+	#db.session.add(insertNew)
+	#db.session.commit()
+	verbose=addUsers(0,name_of_user,mobile_number,email_address,car_number)
 	
-	verbose="User "+name_of_user+" Added"
+	#verbose="User "+name_of_user+" Added"
 
 	return render_template('verbose-page.html', verbose)
 	
