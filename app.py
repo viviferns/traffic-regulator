@@ -146,7 +146,7 @@ def add_user_control():
 @app.route('/update-admin',methods=['POST'])
 def update_admin():
 
-	dropDown1=request.form['dropDown1']
+	dropDown1=request.form['dropDwn1']
 	mob_number=request.form['mob_number']
 	admin_name=request.form['admin_name']
 	
@@ -175,10 +175,10 @@ def update_admin():
 		
 	return render_template('verbose-page.html', verbose=verbose)
 		
-@app.route('/update-user',methods=['POST'])
+@app.route('/update-user',methods=['POST','GET'])
 def update_user():
 
-	dropDown1=request.form['dropDown1']
+	dropDown1=request.form['dropDwn1']
 	mob_number=request.form['mob_number']
 	usr_name,state_code,number_code,area_code,pin=""
 	
