@@ -344,9 +344,9 @@ def addAdmins(setAdmNo,adm_name,adm_mobNo,adm_userName,adm_password):
 	verbose="New Admin "+adm_name+" Added" 
 	return verbose
 	
-def addUsers(name_of_user,mobile_number,email_address,car_number):
+def addUsers(setUsrNo,name_of_user,mobile_number,email_address,car_number):
 	
-	insert=Users(0,name_of_user,mobile_number,email_address,car_number)
+	insert=Users(setUsrNo,name_of_user,mobile_number,email_address,car_number)
 	db.session.add(insert)
 	db.session.commit()
 	verbose="New User "+name_of_user+" Added"
