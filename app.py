@@ -350,7 +350,7 @@ def addAdmins(setAdmNo,adm_name,adm_mobNo,adm_userName,adm_password):
 	
 def addUsers(setUsrNo,name_of_user,mobile_number,email_address,car_number):
 	
-	if(setAdmNo!=1):
+	if(setUsrNo!=1):
 	
 		maxUsr = Users.query.order_by(Admins.ADM_NO.desc()).first()
 		setUsrNo=maxUsr.USR_NO + 1
