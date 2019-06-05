@@ -344,7 +344,7 @@ def addUsers(name_of_user,mobile_number,email_address,car_number):
 	insert=Users(0,name_of_user,mobile_number,email_address,car_number)
 	db.session.add(insert)
 	db.session.commit()
-	verbose="New User Added"
+	verbose="New User "+name_of_user+" Added"
 	return verbose
 	
 
