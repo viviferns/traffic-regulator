@@ -352,12 +352,12 @@ def addUsers(setUsrNo,name_of_user,mobile_number,email_address,car_number):
 	
 	if(setUsrNo!=1):
 	
-		maxUsr = Users.query.order_by(Admins.ADM_NO.desc()).first()
+		maxUsr = Users.query.order_by(Users.USR_NO.desc()).first()
 		setUsrNo=maxUsr.USR_NO + 1
 	insert=Users(setUsrNo,name_of_user,mobile_number,email_address,car_number)
 	db.session.add(insert)
 	db.session.commit()
-	newMaxUsrId=Users.query.order_by(Admins.ADM_NO.desc()).first()
+	newMaxUsrId=Users.query.order_by(Users.USR_NO.desc()).first()
 	fetchUsrNo=newMaxUsrId.USR_NO
 	verbose="New User "+name_of_user+" Added " +str(fetchUsrNo)
 	return verbose
