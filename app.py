@@ -267,7 +267,7 @@ def route_generate_pdf():
 @app.route('/route-returnHome',methods=['POST','GET'])
 def route_returnHome():
 	
-	return render_template('generate-pdf.html')
+	return render_template('root-home.html')
 	
 class Admins(db.Model):
 
