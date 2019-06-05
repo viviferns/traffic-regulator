@@ -15,7 +15,60 @@ def index():
 	
 	verbose="Please Enter Username and Password"
 	return render_template('admin-login.html',verbose=verbose)
+	
+@app.route('/payment-details-control',methods = ['POST', 'GET'])
+def payment_details_control():
 
+	dropDown1=request.form['dropDown1']
+	mob_number=request.form['mob_number']
+	userDetails=Users.query.filter_by(MOBILE_NUMBER=mob_number).first()
+	voilationRecord=Violations.query.filter_by(CAR_NO=userDetails.CAR_NO).first()
+	
+	if(dropDown1=="payment"):
+	
+		return render_template('payment.html',voilationRecord)
+		
+	elif(dropDown1=="generate-pdf"):
+	
+		return render_template('generate-pdf.html',voilationRecord)
+		
+
+@app.route('/remove-admin',methods = ['POST', 'GET'])
+def remove_admin():
+	
+	user_name=request.form['user_name']
+	mob_number=request.form['mob_number']
+	
+	rmAdmin=Admins.query.filter_by(MOBILE_NUMBER=mob_number).first()
+	if(rmAdmin.ADMIN_USER_NAME==user_name):
+		
+		verbose="Removed admin ",user_name
+		db.session.delete(rmAdmin)
+		db.session.commit()
+		return render_template('verbose-page.html', verbose)
+		
+	else:
+		verbose="Unable to remove Admin ",user_name
+		return render_template('verbose-page.html', verbose)
+		
+@app.route('/remove-user',methods = ['POST', 'GET'])
+def remove_user():
+	
+	mob_number=request.form['mob_number']
+	email_address=request.form['email_address']
+	
+	rmUser=Users.query.filter_by(MOBILE_NUMBER=mob_number).first()
+	if(rmAdmin.EMAIL_ID==email_address):
+		
+		verbose="Removed User ",user_name
+		db.session.delete(rmUser)
+		db.session.commit()
+		return render_template('verbose-page.html', verbose)
+		
+	else:
+		verbose="Unable to remove User ",user_name
+		return render_template('verbose-page.html', verbose)
+	
 @app.route('/admin_login',methods=['POST','GET'])
 def admin_login():
 
@@ -46,33 +99,103 @@ def add_admin_control():
 	adm_mobNo=request.form['adm_mobNo']
 	adm_userName=request.form['adm_userName']
 	adm_password=request.form['adm_password']
+	
 	verbose="Admin could not be Added"
+	
+	db=SQLAlchemy(app)
 	maxAdm = Admins.query.order_by(Admins.ADM_NO.desc()).first()
 	setAdmNo=maxAdm.ADM_NO + 1
 	insertNew=Admins(setAdmNo,adm_name,adm_mobNo,adm_userName,adm_password)
 	db.session.add(insertNew)
 	db.session.commit()
 
-
 	verbose="User ",adm_name," Added as New Admin"
 
-	return render_template('verbose-page.html', verbose=maxAdm.ADM_NO)
+	return render_template('verbose-page.html', verbose=verbose)
 	
-@app.route('/add_user_control',methods=['POST'])
+@app.route('/add-user-control',methods=['POST'])
 def add_user_control():
 
 	name_of_user=request.form['name_of_user']
 	mobile_number=request.form['mobile_number']
 	email_address=request.form['email_address']
-	car_number=request.form['car_number']
-    
+	state_code=request.form['state_code']
+	number_code=request.form['number_code']
+	area_code=request.form['area_code']
+	pin=request.form['pin']
+    car_number=state_code,number_code,area_code,pin
+	
 	verbose="User could not be Added"
 
-	obj_myDB=myDB()
-
-	verbose=addUsers(name_of_user,mobile_number,email_address,car_number)
+	db=SQLAlchemy(app)
+	maxUsr = Users.query.order_by(Admins.ADM_NO.desc()).first()
+	setUsrNo=maxUsr.USR_NO + 1
+	insertNew=Users(setUsrNo,adm_name,adm_mobNo,adm_userName,adm_password)
+	db.session.add(insertNew)
+	db.session.commit()
+	
+	verbose="User ",name_of_user," Added"
 
 	return render_template('verbose-page.html', verbose)
+	
+@app.route('/update-admin',methods=['POST'])
+def update_admin():
+
+	dropDown1=request.form['dropDown1']
+	mob_number=request.form['mob_number']
+	admin_name=request.form['admin_name']
+	
+	admDetails=Admins.query.filter_by(MOBILE_NUMBER=mob_number).first()
+	
+	if(dropDown1=="name"):
+		
+		admDetails.ADMIN_NAME=admin_name
+		db.session.commit()
+	
+	elif(dropDown1=="mob_number"):
+		
+		admDetails.MOBILE_NUMBER=admin_name
+		db.session.commit()
+		
+	elif(dropDown1=="user_name"):
+		
+		admDetails.ADMIN_USER_NAME=admin_name
+		db.session.commit()
+		
+@app.route('/update-user',methods=['POST'])
+def update_user():
+
+	dropDown1=request.form['dropDown1']
+	mob_number=request.form['mob_number']
+	usr_name=request.form['usr_name']
+	state_code=request.form['state_code']
+	number_code=request.form['number_code']
+	area_code=request.form['area_code']
+	pin=request.form['pin']
+	
+	
+	userDetails=Users.query.filter_by(MOBILE_NUMBER=mob_number).first()
+	
+	if(dropDown1=="name"):
+		
+		userDetails.NAME_OF_USER=usr_name
+		db.session.commit()
+	
+	elif(dropDown1=="mob_number"):
+		
+		userDetails.MOBILE_NUMBER=usr_name
+		db.session.commit()
+		
+	elif(dropDown1=="email_address"):
+		
+		userDetails.ADMIN_USER_NAME=usr_name
+		db.session.commit()
+		
+	elif(dropDown1=="car_number"):
+		
+		car_no=state_code,number_code,area_code,pin
+		userDetails.CAR_NO=car_no
+		db.session.commit()
 	
 @app.route('/temp_password_control',methods=['POST'])
 def temp_password_control():
@@ -223,6 +346,9 @@ def addUsers(name_of_user,mobile_number,email_address,car_number):
 if __name__ == '__main__':
 	#app.run(debug = True)
 	db.create_all()
-	insert=Admins(1,'MAIN_ADMIN',123456789,'root','ROOT1234')
-	db.session.add(insert)
+	insertAdm=Admins(1,'MAIN_ADMIN',123456789,'root','ROOT1234')
+	db.session.add(insertAdm)
+	db.session.commit()
+	insertUsr=Users(1,"User1",987654321,"testuser123@gmail.com","MH-01-CH-0007")
+	db.session.add(insertUsr)
 	db.session.commit()
