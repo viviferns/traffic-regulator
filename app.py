@@ -287,7 +287,7 @@ class Users(db.Model):
 	NAME_OF_USER=db.Column(db.String(20),unique=False)
 	MOBILE_NUMBER=db.Column(db.BigInteger,unique=True)
 	EMAIL_ID=db.Column(db.String(30),unique=True)
-	CAR_NO=db.Column(db.String(10),unique=False)
+	CAR_NO=db.Column(db.String(13),unique=False)
 	
 	def __init__(self,USR_NO,NAME_OF_USER,MOBILE_NUMBER,EMAIL_ID,CAR_NO):
 		
@@ -347,7 +347,7 @@ def addUsers(name_of_user,mobile_number,email_address,car_number):
 if __name__ == '__main__':
 	#app.run(debug = True)
 	db.create_all()
-	insertAdm=Admins(1,'MAIN_ADMIN',123456789,'root','ROOT1234')
+	insertAdm=Admins(1,'MAIN_ADMIN',12345789,'root','ROOT1234')
 	db.session.add(insertAdm)
 	db.session.commit()
 	insertUsr=Users(1,"User1",987654321,"testuser123@gmail.com","MH-01-CH-0007")
