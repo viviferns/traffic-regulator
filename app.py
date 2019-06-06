@@ -60,12 +60,15 @@ def remove_user():
 	rmUser=Users.query.filter_by(MOBILE_NUMBER=mob_number).first()
 	if(rmUser.EMAIL_ID==email_address):
 		
+		user_name=rmUser.NAME_OF_USER
 		db.session.delete(rmUser)
-		verbose="Removed User "+user_name
 		db.session.commit()
+		verbose="Removed User "+user_name
 		return render_template('verbose-page.html', verbose=verbose)
 		
 	else:
+	
+		user_name=rmUser.NAME_OF_USER
 		verbose="Unable to remove User "+user_name
 		return render_template('verbose-page.html', verbose=verbose)
 	
