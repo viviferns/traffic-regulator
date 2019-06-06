@@ -8,17 +8,15 @@
 	<tr>
 		<th> Time Stamp </th><th> Car Number </th><th> Location </th><th> Fine Amount </th><th> Email Address </th><th> Time Stamp </th></tr>
 		<!--{% for key, value in result.iteritems() %}-->
+		{% block body %}
 		{% for row in voilationRecord:
-                time_stamp=row["TIME_STAMP"]
-                car_no=row["CAR_NO"]
-                loc_name=row["LOC_NAME"]
-                fine_amount=row["FINE_AMOUNT"]
-                email_id=row["EMAIL_ID"] %}
 		<tr>
-		<td> {{ time_stamp }} </td><td> {{ car_no }} </td><td> {{ loc_name }} </td><td> {{ fine_amount }} </td><td> {{ email_id }} </td>
+		<td> {{ row.TIME_STAMP }} </td><td> {{ row.CAR_NO }} </td><td> {{ row.LOC_NAME }} </td><td> {{ row.FINE_AMOUNT }} </td>
 		</tr>
 		
 		{% endfor %}
+		
+		{% endblock %}
 	</table>
 	
   <form align="center" method="POST" action="/make-payment-control">
