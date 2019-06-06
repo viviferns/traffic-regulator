@@ -58,7 +58,7 @@ def remove_user():
 	email_address=request.form['email_address']
 	
 	rmUser=Users.query.filter_by(MOBILE_NUMBER=mob_number).first()
-	if(rmAdmin.EMAIL_ID==email_address):
+	if(rmUser.EMAIL_ID==email_address):
 		
 		db.session.delete(rmUser)
 		verbose="Removed User "+user_name
