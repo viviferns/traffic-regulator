@@ -362,8 +362,9 @@ class Violations(db.Model):
 	LOC_NAME=db.Column(db.String(30),unique=True)
 	FINE_AMOUNT=db.Column(db.Integer,unique=False)
 	
-	def __init__(self,REC_NO,TIME_STAMP,CAR_NO,LOC_NAME,VIOLATION_IMAGE,FINE_AMOUNT):
+	def __init__(self,REC_NO,TIME_STAMP,CAR_NO,LOC_NAME,FINE_AMOUNT):
 		
+		self.REC_NO=REC_NO
 		self.TIME_STAMP=TIME_STAMP
 		self.CAR_NO=CAR_NO
 		self.LOC_NAME=LOC_NAME
@@ -417,7 +418,7 @@ if __name__ == '__main__':
 	addAdmins(1,'MAIN_ADMIN',12345789,'root','ROOT1234')
 	addUsers(1,"User1",987654321,"testuser123@gmail.com","MH-01-CH-0007")
 	insertVoilation=Violations(1,444654555,'MH-01-CH-1660','ChurchGate',500)
-	db.session.add(insertUsr)
+	db.session.add(insertVoilation)
 	db.session.commit()
 	
 	
