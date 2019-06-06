@@ -42,9 +42,9 @@ def remove_admin():
 	rmAdmin=Admins.query.filter_by(MOBILE_NUMBER=mob_number).first()
 	if(rmAdmin.ADMIN_USER_NAME==user_name):
 		
-		verbose="Removed admin "+user_name
 		db.session.delete(rmAdmin)
 		db.session.commit()
+		verbose="Removed admin "+user_name
 		return render_template('verbose-page.html', verbose)
 		
 	else:
@@ -60,8 +60,8 @@ def remove_user():
 	rmUser=Users.query.filter_by(MOBILE_NUMBER=mob_number).first()
 	if(rmAdmin.EMAIL_ID==email_address):
 		
-		verbose="Removed User "+user_name
 		db.session.delete(rmUser)
+		verbose="Removed User "+user_name
 		db.session.commit()
 		return render_template('verbose-page.html', verbose)
 		
