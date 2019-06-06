@@ -19,18 +19,18 @@ def index():
 @app.route('/payment-details-control',methods = ['POST', 'GET'])
 def payment_details_control():
 
-	dropDown1=request.form['dropDown1']
+	dropDown1=request.form['dropDwn1']
 	mob_number=request.form['mob_number']
 	userDetails=Users.query.filter_by(MOBILE_NUMBER=mob_number).first()
 	voilationRecord=Violations.query.filter_by(CAR_NO=userDetails.CAR_NO).all()
 	
 	if(dropDown1=="payment"):
 	
-		return render_template('payment.html',voilationRecord)
+		return render_template('payment.html',voilationRecord=voilationRecord)
 		
 	elif(dropDown1=="generate-pdf"):
 	
-		return render_template('generate-pdf.html',voilationRecord)
+		return render_template('generate-pdf.html',voilationRecord=voilationRecord)
 		
 
 @app.route('/remove-admin',methods = ['POST', 'GET'])
