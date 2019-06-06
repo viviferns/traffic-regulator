@@ -45,11 +45,11 @@ def remove_admin():
 		db.session.delete(rmAdmin)
 		db.session.commit()
 		verbose="Removed admin "+user_name
-		return render_template('verbose-page.html', verbose)
+		return render_template('verbose-page.html', verbose=verbose)
 		
 	else:
 		verbose="Unable to remove Admin ",user_name
-		return render_template('verbose-page.html', verbose)
+		return render_template('verbose-page.html', verbose=verbose)
 		
 @app.route('/remove-user',methods = ['POST', 'GET'])
 def remove_user():
@@ -63,11 +63,11 @@ def remove_user():
 		db.session.delete(rmUser)
 		verbose="Removed User "+user_name
 		db.session.commit()
-		return render_template('verbose-page.html', verbose)
+		return render_template('verbose-page.html', verbose=verbose)
 		
 	else:
 		verbose="Unable to remove User "+user_name
-		return render_template('verbose-page.html', verbose)
+		return render_template('verbose-page.html', verbose=verbose)
 	
 @app.route('/admin_login',methods=['POST','GET'])
 def admin_login():
