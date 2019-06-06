@@ -22,7 +22,7 @@ def payment_details_control():
 	dropDown1=request.form['dropDown1']
 	mob_number=request.form['mob_number']
 	userDetails=Users.query.filter_by(MOBILE_NUMBER=mob_number).first()
-	voilationRecord=Violations.query.filter_by(CAR_NO=userDetails.CAR_NO).first()
+	voilationRecord=Violations.query.filter_by(CAR_NO=userDetails.CAR_NO).all()
 	
 	if(dropDown1=="payment"):
 	
@@ -71,6 +71,18 @@ def remove_user():
 		user_name=rmUser.NAME_OF_USER
 		verbose="Unable to remove User "+user_name
 		return render_template('verbose-page.html', verbose=verbose)
+		
+@app.route('/make-payment-control',methods = ['POST', 'GET'])
+def make_payment_control():
+
+	time_stamp=request.form['time_stamp']
+	rmViolation=Violations.query.filter_by(TIME_STAMP=time_stamp).first()
+	usrCarNo=rmViolation.CAR_NO
+	fetchUsr=Users.query.filter_by(CAR_NO=usrCarNo).first()
+	usrName=fetchUsr.NAME_OF_USER
+	db.session.delete(rmViolation)
+	db.session.commit()
+	verbose="Payment Received from User "+usrName
 	
 @app.route('/admin_login',methods=['POST','GET'])
 def admin_login():
@@ -345,7 +357,7 @@ class Locations(db.Model):
 class Violations(db.Model):
 
 	REC_NO=db.Column(db.Integer,primary_key=True)
-	TIME_STAMP=db.Column(db.Integer,unique=False)
+	TIME_STAMP=db.Column(db.BigInteger,unique=False)
 	CAR_NO=db.Column(db.String(30),unique=True)
 	LOC_NAME=db.Column(db.String(30),unique=True)
 	FINE_AMOUNT=db.Column(db.Integer,unique=False)
@@ -355,9 +367,8 @@ class Violations(db.Model):
 		self.TIME_STAMP=TIME_STAMP
 		self.CAR_NO=CAR_NO
 		self.LOC_NAME=LOC_NAME
-		self.VIOLATION_IMAGE=VIOLATION_IMAGE
+		#self.VIOLATION_IMAGE=VIOLATION_IMAGE
 		self.FINE_AMOUNT=FINE_AMOUNT
-		
 
 def adminLogin(username,password):
 	
@@ -405,3 +416,8 @@ if __name__ == '__main__':
 	db.session.commit()'''
 	addAdmins(1,'MAIN_ADMIN',12345789,'root','ROOT1234')
 	addUsers(1,"User1",987654321,"testuser123@gmail.com","MH-01-CH-0007")
+	insertVoilation=Violations(1,444654555,'MH-01-CH-1660','ChurchGate',500)
+	db.session.add(insertUsr)
+	db.session.commit()
+	
+	
