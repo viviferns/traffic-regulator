@@ -6,17 +6,17 @@
     </br></br></br>
 	<table border=1>
 	<tr>
-		<th> Time Stamp </th><th> Car Number </th><th> Location </th><th> Fine Amount </th><th> Email Address </th><th> Time Stamp </th></tr>
+		<th> Time Stamp </th><th> Car Number </th><th> Location </th><th> Fine Amount </th>
+	</tr>
 		<!--{% for key, value in result.iteritems() %}-->
-		{% block body %}
-		{% for row in voilationRecord:
+		{% for row in voilationRecord: %}
 		<tr>
-		<td> {{ row.TIME_STAMP }} </td><td> {{ row.CAR_NO }} </td><td> {{ row.LOC_NAME }} </td><td> {{ row.FINE_AMOUNT }} </td>
+			<td> {{ row.TIME_STAMP }} </td>
+			<td> {{ row.CAR_NO }} </td>
+			<td> {{ row.LOC_NAME }} </td>
+			<td> {{ row.FINE_AMOUNT }} </td>
 		</tr>
-		
 		{% endfor %}
-		
-		{% endblock %}
 	</table>
 	
   <form align="center" method="POST" action="/make-payment-control">
