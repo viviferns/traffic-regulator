@@ -4,6 +4,7 @@
   </head>
   <body>
     </br></br></br>
+	<div>
 	<table border=1>
 	<tr>
 		<th> Time Stamp </th><th> Car Number </th><th> Location </th><th> Fine Amount </th>
@@ -11,6 +12,7 @@
 	</table>
 		<!--{% for key, value in result.iteritems() %}-->
 		{% for row in voilationRecord: %}
+		<div>
 		<table border=1>
 		<tr>
 			<td> {{ row.TIME_STAMP }} </td>
@@ -19,6 +21,7 @@
 			<td> {{ row.FINE_AMOUNT }} </td>
 		</tr>
 		</table>
+		</div>
 		{% endfor %}
 	
   <form align="center" method="POST" action="/make-payment-control">
