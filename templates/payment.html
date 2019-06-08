@@ -3,28 +3,31 @@
     <title></title>
   </head>
   <body>
+  <form align="center" method="POST" action="/make-payment-control">
     </br></br></br>
 	<table border=1>
+	<thead>
 	<tr>
 		<th> Time Stamp </th><th> Car Number </th><th> Location </th><th> Fine Amount </th>
 	</tr>
-	</table>
+	</thead>
+	<tbody>
 		<!--{% for key, value in result.iteritems() %}-->
-		<div>
-		{% for row in voilationRecord: %}
-		<table border=1>
+		{% for item in voilationRecord %}
 		<tr>
-			<td> {{ row.TIME_STAMP }} </td>
-			<td> {{ row.CAR_NO }} </td>
-			<td> {{ row.LOC_NAME }} </td>
-			<td> {{ row.FINE_AMOUNT }} </td>
+			<td> {{ item.TIME_STAMP }} </td>
+			<td> {{ item.CAR_NO }} </td>
+			<td> {{ item.LOC_NAME }} </td>
+			<td> {{ item.FINE_AMOUNT }} </td>
 		</tr>
-		</table>
-		
-		{% endfor %}
-		</div>
 	
-  <form align="center" method="POST" action="/make-payment-control">
+		{% endfor %}
+		
+	</tbody>
+		
+	</table>
+		
+	
     <tr>
     <td>
       <h3 align="center">
