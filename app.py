@@ -24,6 +24,8 @@ def payment_details_control():
 	userDetails=Users.query.filter_by(MOBILE_NUMBER=mob_number).first()
 	voilationRecord=Violations.query.filter_by(CAR_NO=userDetails.CAR_NO).all()
 	
+	return voilationRecord
+	
 	if(dropDown1=="payment"):
 	
 		return render_template('payment.html',voilationRecord=voilationRecord)
