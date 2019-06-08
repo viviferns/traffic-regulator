@@ -13,16 +13,12 @@
 	</thead>
 	<tbody>
 		<!--{% for key, value in result.iteritems() %}-->
-		{% for item in voilationRecord %}
 		<tr>
 			<td> {{ item.TIME_STAMP }} </td>
 			<td> {{ item.CAR_NO }} </td>
 			<td> {{ item.LOC_NAME }} </td>
 			<td> {{ item.FINE_AMOUNT }} </td>
-		</tr>
-	
-		{% endfor %}
-		
+		</tr>		
 	</tbody>
 		
 	</table>
