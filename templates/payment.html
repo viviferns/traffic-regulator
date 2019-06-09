@@ -12,13 +12,14 @@
 	</tr>
 	</thead>
 	<tbody>
-		
+		{% for row in voilationRecord %}
 		<tr>
 			<td> {{ voilationRecord.TIME_STAM }} </td>
 			<td> {{ voilationRecord.CAR_NO }} </td>
 			<td> {{ voilationRecord.LOC_NAME }} </td>
 			<td> {{ voilationRecord.FINE_AMOUNT }} </td>
 		</tr>		
+		{% endfor %}
 	</tbody>
 		
 	</table>
