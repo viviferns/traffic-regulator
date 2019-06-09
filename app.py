@@ -336,7 +336,7 @@ class Locations(db.Model):
 	LOC_NAME=db.Column(db.String(20),unique=True)
 	
 	def __init__(self,LOC_NO,LOC_NAME):
-		
+		self.LOC_NO=LOC_NO
 		self.LOC_NAME=LOC_NAME
 		
 class Violations(db.Model):
@@ -401,9 +401,10 @@ def payment_details_control():
 	
 	
 	userDetails=Users.query.filter_by(MOBILE_NUMBER=mob_number).first()
+	car_number=userDetails.CAR_NO
 	
 	#return "User table recodr for the "+ str(userDetails.MOBILE_NUMBER) + " " + userDetails.CAR_NO
-	voilationRecord=Violations.query.filter_by(CAR_NO=userDetails.CAR_NO).all()
+	voilationRecord=Violations.query.filter_by(CAR_NO=car_number).all()
 	
 	return "Voilation table recodr for the user"+voilationRecord.TIME_STAMP+ " " + voilationRecord.CAR_NO
 	
