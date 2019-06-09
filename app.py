@@ -334,7 +334,7 @@ class Users(db.Model):
 class Violations(db.Model):
 
 	REC_NO=db.Column(db.Integer,primary_key=True)
-	TIME_STAMP=db.Column(db.BigInteger,unique=False)
+	TIME_STAM=db.Column(db.BigInteger,unique=False)
 	CAR_NO=db.Column(db.String(13),unique=False)
 	LOC_NAME=db.Column(db.String(30),unique=False)
 	FINE_AMOUNT=db.Column(db.Integer,unique=False)
@@ -342,7 +342,7 @@ class Violations(db.Model):
 	def __init__(self,REC_NO,TIME_STAMP,CAR_NO,LOC_NAME,FINE_AMOUNT):
 		
 		self.REC_NO=REC_NO
-		self.TIME_STAMP=TIME_STAMP
+		self.TIME_STAM=TIME_STAM
 		self.CAR_NO=CAR_NO
 		self.LOC_NAME=LOC_NAME
 		self.FINE_AMOUNT=FINE_AMOUNT
@@ -397,7 +397,7 @@ def payment_details_control():
 	#return "User table recodr for the "+ str(userDetails.MOBILE_NUMBER) + " " + userDetails.CAR_NO
 	voilationRecord=Violations.query.filter_by(CAR_NO=car_number).first()
 	
-	return "Voilation table recodr for the user"+voilationRecord.TIME_STAMP+ " " + voilationRecord.CAR_NO
+	return "Voilation table recodr for the user"+str(voilationRecord.TIME_STAM) + " " + voilationRecord.CAR_NO
 	
 	if(dropDown1=="payment"):
 	
