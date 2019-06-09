@@ -16,28 +16,6 @@ def index():
 	verbose="Please Enter Username and Password"
 	return render_template('admin-login.html',verbose=verbose)
 	
-@app.route('/payment-details-control',methods = ['POST', 'GET'])
-def payment_details_control():
-
-	dropDown1=request.form['dropDwn1']
-	mob_number=request.form['mob_number']
-	
-	return "Values from form: " + dropDown1 + " " + mob_number
-	
-	userDetails=Users.query.filter_by(MOBILE_NUMBER=mob_number).first()
-	
-	#return "User table recodr for the "+ userDetails.MOBILE_NUMBER + " " + userDetails.CAR_NO
-	voilationRecord=Violations.query.filter_by(CAR_NO=userDetails.CAR_NO).all()
-	
-	#return "Voilation table recodr for the user"+voilationRecord.TIME_STAMP, " ", voilationRecord.CAR_NO
-	
-	if(dropDown1=="payment"):
-	
-		return render_template('payment.html',voilationRecord=voilationRecord)
-		
-	elif(dropDown1=="generate-pdf"):
-	
-		return render_template('generate-pdf.html',voilationRecord=voilationRecord)
 		
 
 @app.route('/remove-admin',methods = ['POST', 'GET'])
@@ -412,6 +390,30 @@ def addUsers(setUsrNo,name_of_user,mobile_number,email_address,car_number):
 	verbose="New User "+name_of_user+" Added " +str(fetchUsrNo)
 	return verbose
 	
+	
+@app.route('/payment-details-control',methods = ['POST', 'GET'])
+def payment_details_control():
+
+	dropDown1=request.form['dropDwn1']
+	mob_number=request.form['mob_number']
+	
+	#return "Values from form: " + dropDown1 + " " + mob_number
+	
+	
+	userDetails=Users.query.filter_by(MOBILE_NUMBER=mob_number).first()
+	
+	return "User table recodr for the "+ userDetails.MOBILE_NUMBER + " " + userDetails.CAR_NO
+	voilationRecord=Violations.query.filter_by(CAR_NO=userDetails.CAR_NO).all()
+	
+	#return "Voilation table recodr for the user"+voilationRecord.TIME_STAMP, " ", voilationRecord.CAR_NO
+	
+	if(dropDown1=="payment"):
+	
+		return render_template('payment.html',voilationRecord=voilationRecord)
+		
+	elif(dropDown1=="generate-pdf"):
+	
+		return render_template('generate-pdf.html',voilationRecord=voilationRecord)
 
 if __name__ == '__main__':
 	#app.run(debug = True)
