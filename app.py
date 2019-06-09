@@ -22,9 +22,11 @@ def payment_details_control():
 	dropDown1=request.form['dropDwn1']
 	mob_number=request.form['mob_number']
 	userDetails=Users.query.filter_by(MOBILE_NUMBER=mob_number).first()
+	
+	return "User table recodr for the "+ userDetails.MOBILE_NUMBER + " " + userDetails.CAR_NO
 	voilationRecord=Violations.query.filter_by(CAR_NO=userDetails.CAR_NO).all()
 	
-	return "Voilation table recodr for the user"+voilationRecord.TIME_STAMP, " ", voilationRecord.CAR_NO
+	#return "Voilation table recodr for the user"+voilationRecord.TIME_STAMP, " ", voilationRecord.CAR_NO
 	
 	if(dropDown1=="payment"):
 	
@@ -337,7 +339,7 @@ class Users(db.Model):
 	NAME_OF_USER=db.Column(db.String(20),unique=False)
 	MOBILE_NUMBER=db.Column(db.BigInteger,unique=True)
 	EMAIL_ID=db.Column(db.String(30),unique=True)
-	CAR_NO=db.Column(db.String(13),unique=False)
+	=db.Column(db.String(13),unique=False)
 	
 	def __init__(self,USR_NO,NAME_OF_USER,MOBILE_NUMBER,EMAIL_ID,CAR_NO):
 		
@@ -352,7 +354,7 @@ class Locations(db.Model):
 	LOC_NO=db.Column(db.Integer,primary_key=True)
 	LOC_NAME=db.Column(db.String(20),unique=True)
 	
-	def __init__(self,LOC_NO,LOC_NAME,MOBILE_NUMBER,EMAIL_ID,CAR_NO):
+	def __init__(self,LOC_NO,LOC_NAME):
 		
 		self.LOC_NAME=LOC_NAME
 		
