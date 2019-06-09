@@ -330,21 +330,13 @@ class Users(db.Model):
 		self.EMAIL_ID=EMAIL_ID
 		self.CAR_NO=CAR_NO
 		
-class Locations(db.Model):
-
-	LOC_NO=db.Column(db.Integer,primary_key=True)
-	LOC_NAME=db.Column(db.String(20),unique=True)
-	
-	def __init__(self,LOC_NO,LOC_NAME):
-		self.LOC_NO=LOC_NO
-		self.LOC_NAME=LOC_NAME
 		
 class Violations(db.Model):
 
 	REC_NO=db.Column(db.Integer,primary_key=True)
 	TIME_STAMP=db.Column(db.BigInteger,unique=False)
-	CAR_NO=db.Column(db.String(13),unique=True)
-	LOC_NAME=db.Column(db.String(30),unique=True)
+	CAR_NO=db.Column(db.String(13),unique=False)
+	LOC_NAME=db.Column(db.String(30),unique=False)
 	FINE_AMOUNT=db.Column(db.Integer,unique=False)
 	
 	def __init__(self,REC_NO,TIME_STAMP,CAR_NO,LOC_NAME,FINE_AMOUNT):
@@ -353,7 +345,6 @@ class Violations(db.Model):
 		self.TIME_STAMP=TIME_STAMP
 		self.CAR_NO=CAR_NO
 		self.LOC_NAME=LOC_NAME
-		#self.VIOLATION_IMAGE=VIOLATION_IMAGE
 		self.FINE_AMOUNT=FINE_AMOUNT
 
 def adminLogin(username,password):
