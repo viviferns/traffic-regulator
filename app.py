@@ -404,7 +404,7 @@ def payment_details_control():
 	car_number=userDetails.CAR_NO
 	
 	#return "User table recodr for the "+ str(userDetails.MOBILE_NUMBER) + " " + userDetails.CAR_NO
-	voilationRecord=Violations.query.filter_by(CAR_NO=car_number)
+	voilationRecord=Violations.query.filter_by(CAR_NO=car_number).first()
 	
 	return "Voilation table recodr for the user"+voilationRecord.TIME_STAMP+ " " + voilationRecord.CAR_NO
 	
