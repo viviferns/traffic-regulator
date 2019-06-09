@@ -339,7 +339,7 @@ class Violations(db.Model):
 	LOC_NAME=db.Column(db.String(30),unique=False)
 	FINE_AMOUNT=db.Column(db.Integer,unique=False)
 	
-	def __init__(self,REC_NO,TIME_STAMP,CAR_NO,LOC_NAME,FINE_AMOUNT):
+	def __init__(self,REC_NO,TIME_STAM,CAR_NO,LOC_NAME,FINE_AMOUNT):
 		
 		self.REC_NO=REC_NO
 		self.TIME_STAM=TIME_STAM
