@@ -24,7 +24,7 @@ def payment_details_control():
 	userDetails=Users.query.filter_by(MOBILE_NUMBER=mob_number).first()
 	voilationRecord=Violations.query.filter_by(CAR_NO=userDetails.CAR_NO).all()
 	
-	return "Voilation table recodr for the user"+voilationRecord
+	return "Voilation table recodr for the user"+voilationRecord.TIME_STAMP, " ", voilationRecord.CAR_NO
 	
 	if(dropDown1=="payment"):
 	
