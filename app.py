@@ -339,7 +339,7 @@ class Users(db.Model):
 	NAME_OF_USER=db.Column(db.String(20),unique=False)
 	MOBILE_NUMBER=db.Column(db.BigInteger,unique=True)
 	EMAIL_ID=db.Column(db.String(30),unique=True)
-	=db.Column(db.String(13),unique=False)
+	CAR_NO=db.Column(db.String(13),unique=False)
 	
 	def __init__(self,USR_NO,NAME_OF_USER,MOBILE_NUMBER,EMAIL_ID,CAR_NO):
 		
