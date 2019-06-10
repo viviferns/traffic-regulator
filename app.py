@@ -69,6 +69,7 @@ def make_payment_control():
 	db.session.delete(rmViolation)
 	db.session.commit()
 	verbose="Payment Received from User "+usrName
+	return render_template('verbose-page.html', verbose=verbose)
 	
 @app.route('/admin_login',methods=['POST','GET'])
 def admin_login():
