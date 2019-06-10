@@ -4,6 +4,7 @@ import psycopg2
 from flask import Flask, redirect, url_for, render_template, request
 import urllib.parse as urlparse
 from flask_sqlalchemy import SQLAlchemy
+from fpdf import FPDF
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI']=os.environ.get('DATABASE_URL')
@@ -57,19 +58,6 @@ def remove_user():
 		verbose="Unable to remove User "+user_name
 		return render_template('verbose-page.html', verbose=verbose)
 		
-@app.route('/make-payment-control',methods = ['POST', 'GET'])
-def make_payment_control():
-
-	time_stamp=request.form['time_stamp']
-	
-	rmViolation=Violations.query.filter_by(TIME_STAM=time_stamp).first()
-	usrCarNo=rmViolation.CAR_NO
-	fetchUsr=Users.query.filter_by(CAR_NO=usrCarNo).first()
-	usrName=fetchUsr.NAME_OF_USER
-	db.session.delete(rmViolation)
-	db.session.commit()
-	verbose="Payment Received from User "+usrName
-	return render_template('verbose-page.html', verbose=verbose)
 	
 @app.route('/admin_login',methods=['POST','GET'])
 def admin_login():
@@ -408,6 +396,48 @@ def payment_details_control():
 	elif(dropDown1=="generate-pdf"):
 	
 		return render_template('generate-pdf.html',voilationRecord=voilationRecord)
+		
+@app.route('/make-payment-control',methods = ['POST', 'GET'])
+def make_payment_control():
+
+	time_stamp=request.form['time_stamp']
+	
+	rmViolation=Violations.query.filter_by(TIME_STAM=time_stamp).first()
+	usrCarNo=rmViolation.CAR_NO
+	fetchUsr=Users.query.filter_by(CAR_NO=usrCarNo).first()
+	usrName=fetchUsr.NAME_OF_USER
+	db.session.delete(rmViolation)
+	db.session.commit()
+	verbose="Payment Received from User "+usrName
+	return render_template('verbose-page.html', verbose=verbose)
+		
+@app.route('/generate-pdf',methods = ['POST', 'GET'])
+def payment_details_control():
+
+	mob_number=request.form['mob_number']
+	
+	userDetails=Users.query.filter_by(MOBILE_NUMBER=mob_number).first()
+	car_number=userDetails.CAR_NO
+	voilationRecord=Violations.query.filter_by(CAR_NO=car_number).first()
+	pdf_name=str(voilationRecord.TIME_STAM)+".pdf"
+	verbose_string="PDF sent to Email Address:'",userDetails.EMAIL_ID,","
+
+	pdf = FPDF()
+	# compression is not yet supported in py3k version
+	pdf.compress = False
+	pdf.add_page()
+	# Unicode is not yet supported in the py3k version; use windows-1252 standard font
+	pdf.set_font('Arial', '', 14)  
+	pdf.ln(10)
+	pdf.write("Time Stamp/Unique Id:     ",str(voilationRecord.TIME_STAM),"\n")
+	pdf.write("Car Number:               ",voilationRecord.CAR_NO,"\n")
+	pdf.write("Location:                 ",voilationRecord.LOC_NAME,"\n")
+	pdf.write("Fine Amount:              ",voilationRecord.FINE_AMOUNT,"\n")
+	#pdf.write("Image:\n",violation_image)
+	pdf.image("pyfpdf/tutorial/logo.png", 50, 50)
+	pdf.output(pdf_name, 'F')
+	
+	return render_template('verbose-page.html', verbose_string)
 
 if __name__ == '__main__':
 	#app.run(debug = True)
