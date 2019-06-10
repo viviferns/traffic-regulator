@@ -61,7 +61,8 @@ def remove_user():
 def make_payment_control():
 
 	time_stamp=request.form['time_stamp']
-	rmViolation=Violations.query.filter_by(TIME_STAMP=time_stamp).first()
+	
+	rmViolation=Violations.query.filter_by(TIME_STAM=time_stamp).first()
 	usrCarNo=rmViolation.CAR_NO
 	fetchUsr=Users.query.filter_by(CAR_NO=usrCarNo).first()
 	usrName=fetchUsr.NAME_OF_USER
