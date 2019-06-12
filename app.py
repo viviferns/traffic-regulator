@@ -4,7 +4,8 @@ import psycopg2
 from flask import Flask, redirect, url_for, render_template, request
 import urllib.parse as urlparse
 from flask_sqlalchemy import SQLAlchemy
-from fpdf import FPDF
+from myPython.sendmail import SendMail
+import time
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI']=os.environ.get('DATABASE_URL')
@@ -324,7 +325,7 @@ class Users(db.Model):
 class Violations(db.Model):
 
 	REC_NO=db.Column(db.Integer,primary_key=True)
-	TIME_STAM=db.Column(db.BigInteger,unique=False)
+	TIME_STAM=db.Column(db.String(30),unique=False)
 	CAR_NO=db.Column(db.String(13),unique=False)
 	LOC_NAME=db.Column(db.String(30),unique=False)
 	FINE_AMOUNT=db.Column(db.Integer,unique=False)
@@ -370,6 +371,20 @@ def addUsers(setUsrNo,name_of_user,mobile_number,email_address,car_number):
 	fetchUsrNo=newMaxUsrId.USR_NO
 	verbose="New User "+name_of_user+" Added " +str(fetchUsrNo)
 	return verbose
+	
+def addVoilations(setRecNo,car_no,loc_name):
+	
+	amount=500
+	time_stam=time.time()
+	insertVoilation=Violations(setRecNo,str(time_stam),car_no,loc_name,amount)
+	db.session.add(insertVoilation)
+	db.session.commit()
+	userDetails=Users.query.filter_by(CAR_NO=car_no).first()
+	email_id=userDetails.EMAIL_ID
+	name_of_user=userDetails.NAME_OF_USER
+	send_mail=SendMail()
+	verbose=send_mail.send_mail(time_stam,car_no,loc_name,amount,email_id,name_of_user)
+	return render_template('verbose-page.html', verbose=verbose)
 	
 	
 @app.route('/payment-details-control',methods = ['POST', 'GET'])
@@ -422,20 +437,7 @@ def payment_details_control():
 	pdf_name=str(voilationRecord.TIME_STAM)+".pdf"
 	verbose_string="PDF sent to Email Address:'",userDetails.EMAIL_ID,","
 
-	pdf = FPDF()
-	# compression is not yet supported in py3k version
-	pdf.compress = False
-	pdf.add_page()
-	# Unicode is not yet supported in the py3k version; use windows-1252 standard font
-	pdf.set_font('Arial', '', 14)  
-	pdf.ln(10)
-	pdf.write("Time Stamp/Unique Id:     ",str(voilationRecord.TIME_STAM),"\n")
-	pdf.write("Car Number:               ",voilationRecord.CAR_NO,"\n")
-	pdf.write("Location:                 ",voilationRecord.LOC_NAME,"\n")
-	pdf.write("Fine Amount:              ",voilationRecord.FINE_AMOUNT,"\n")
-	#pdf.write("Image:\n",violation_image)
-	pdf.image("pyfpdf/tutorial/logo.png", 50, 50)
-	pdf.output(pdf_name, 'F')
+
 	
 	return render_template('verbose-page.html', verbose_string)
 
@@ -450,8 +452,5 @@ if __name__ == '__main__':
 	db.session.commit()'''
 	addAdmins(1,'MAIN_ADMIN',12345789,'root','ROOT1234')
 	addUsers(1,"User1",9876543212,"testuser123@gmail.com","MH-01-CH-0007")
-	insertVoilation=Violations(1,585865,'MH-01-CH-0007','ChurchGate',500)
-	db.session.add(insertVoilation)
-	db.session.commit()
-	
+	addVoilations(1,'MH-01-CH-0007','ChurchGate')
 	
