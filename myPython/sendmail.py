@@ -4,7 +4,7 @@ from sendgrid.helpers.mail import *
 
 class SendMail:
 
-	def send_mail(time_stam,car_no,loc_name,fine_amount,email_id,name_of_user):
+	def send_mail(self,time_stam,car_no,loc_name,fine_amount,email_id,name_of_user):
 		sg = sendgrid.SendGridAPIClient(apikey=os.environ.get('SENDGRID_API_KEY'))
 		from_email = Email(email_id)
 		subject = "Test Mail to Display Voilation!"
