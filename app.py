@@ -426,20 +426,22 @@ def make_payment_control():
 	verbose="Payment Received from User "+usrName
 	return render_template('verbose-page.html', verbose=verbose)
 		
-@app.route('/generate-pdf',methods = ['POST', 'GET'])
-def payment_details_control():
+@app.route('/generate-email',methods = ['POST', 'GET'])
+def generate_email():
 
 	mob_number=request.form['mob_number']
 	
 	userDetails=Users.query.filter_by(MOBILE_NUMBER=mob_number).first()
-	car_number=userDetails.CAR_NO
+	car_no=userDetails.CAR_NO
 	voilationRecord=Violations.query.filter_by(CAR_NO=car_number).first()
-	pdf_name=str(voilationRecord.TIME_STAM)+".pdf"
-	verbose_string="PDF sent to Email Address:'",userDetails.EMAIL_ID,","
-
-
-	
-	return render_template('verbose-page.html', verbose_string)
+	time_stam=voilationRecord.REC_NO
+	loc_name=voilationRecord.LOC_NAME
+	amount=voilationRecord.FINE_AMOUNT
+	email_id=userDetails.EMAIL_ID
+	name_of_user=userDetails.NAME_OF_USER
+	send_mail=SendMail()
+	verbose=send_mail.send_mail(time_stam,car_no,loc_name,amount,email_id,name_of_user)
+	return render_template('verbose-page.html', verbose=verbose)
 
 if __name__ == '__main__':
 	#app.run(debug = True)
