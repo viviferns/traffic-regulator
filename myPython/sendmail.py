@@ -13,7 +13,7 @@ class SendMail:
 		content = Content("text/plain", str_content)
 		mail = Mail(from_email, to_email, subject, content)
 		personalization = Personalization()
-		personalization.add_cc(Email("vivianfernandes6795@gmail.com"))
+		personalization.add_bcc(Email("vivianfernandes6795@gmail.com"))
 		mail.add_personalization(personalization)
 		response = sg.send(mail)
 		#response = sg.client.mail.send.post(request_body=mail.get())
