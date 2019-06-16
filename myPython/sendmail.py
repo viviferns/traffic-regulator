@@ -1,8 +1,5 @@
 import sendgrid
 import os
-from sendgrid.helpers.mail import *
-require 'rest-client'
-
 
 class SendMail:
 
