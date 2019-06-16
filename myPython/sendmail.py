@@ -1,27 +1,27 @@
 import smtplib
 from email.mime.text import MIMETextclass
 
-	def send_mail(self,time_stam,car_no,loc_name,fine_amount,email_id,name_of_user):
+def send_mail(self,time_stam,car_no,loc_name,fine_amount,email_id,name_of_user):
 	
-		API_KEY = os.environ.get('MAILGUN_API_KEY')
-		API_MAIL_DOMAIN = os.environ.get('MAILGUN_DOMAIN')
-		API_URL = "https://api:#{API_KEY}@api.mailgun.net/v2/{API_MAIL_DOMAIN}"
-		API_USERNAME = os.environ.get('MAILGUN_SMTP_LOGIN')
-		API_PASSWORD = os.environ.get('MAILGUN_SMTP_PASSWORD')
-		MAILGUN_SMTP_SERVER = os.environ.get('MAILGUN_SMTP_SERVER')
+	API_KEY = os.environ.get('MAILGUN_API_KEY')
+	API_MAIL_DOMAIN = os.environ.get('MAILGUN_DOMAIN')
+	API_URL = "https://api:#{API_KEY}@api.mailgun.net/v2/{API_MAIL_DOMAIN}"
+	API_USERNAME = os.environ.get('MAILGUN_SMTP_LOGIN')
+	API_PASSWORD = os.environ.get('MAILGUN_SMTP_PASSWORD')
+	MAILGUN_SMTP_SERVER = os.environ.get('MAILGUN_SMTP_SERVER')
 
-		msg = MIMEText('Testing some Mailgun awesomness')
-		msg['Subject'] = "Hello"
-		msg['From']    = "root@"+API_MAIL_DOMAIN
-		msg['To']      = email_id
-		
-		s = smtplib.SMTP(MAILGUN_SMTP_SERVER, 587)
-		
-		s.login(API_USERNAME, API_PASSWORD)
-		s.sendmail(msg['From'], msg['To'], msg.as_string())
-		s.quit()
-		verbose="Sent Mail to User "+name_of_user
-		return verbose
+	msg = MIMEText('Testing some Mailgun awesomness')
+	msg['Subject'] = "Hello"
+	msg['From']    = "root@"+API_MAIL_DOMAIN
+	msg['To']      = email_id
+	
+	s = smtplib.SMTP(MAILGUN_SMTP_SERVER, 587)
+	
+	s.login(API_USERNAME, API_PASSWORD)
+	s.sendmail(msg['From'], msg['To'], msg.as_string())
+	s.quit()
+	verbose="Sent Mail to User "+name_of_user
+	return verbose
 
 		
 		'''sg = sendgrid.SendGridAPIClient(apikey=SENDGRID_API_KEY)
