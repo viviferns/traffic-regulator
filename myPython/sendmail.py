@@ -8,13 +8,14 @@ from email.mime.text import MIMETextclass
 		API_URL = "https://api:#{API_KEY}@api.mailgun.net/v2/{API_MAIL_DOMAIN}"
 		API_USERNAME = os.environ.get('MAILGUN_SMTP_LOGIN')
 		API_PASSWORD = os.environ.get('MAILGUN_SMTP_PASSWORD')
+		MAILGUN_SMTP_SERVER = os.environ.get('MAILGUN_SMTP_SERVER')
 
 		msg = MIMEText('Testing some Mailgun awesomness')
 		msg['Subject'] = "Hello"
 		msg['From']    = "root@"+API_MAIL_DOMAIN
 		msg['To']      = email_id
 		
-		s = smtplib.SMTP('smtp.mailgun.org', 587)
+		s = smtplib.SMTP(MAILGUN_SMTP_SERVER, 587)
 		
 		s.login(API_USERNAME, API_PASSWORD)
 		s.sendmail(msg['From'], msg['To'], msg.as_string())
