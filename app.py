@@ -381,6 +381,7 @@ def addVoilations(setRecNo,car_no,loc_name):
 	email_id=userDetails.EMAIL_ID
 	name_of_user=userDetails.NAME_OF_USER
 	#send_mail=SendMail()
+	
 	verbose=sen_mail(time_stam,car_no,loc_name,amount,email_id,name_of_user)
 	insertVoilation=Violations(setRecNo,str(time_stam),car_no,loc_name,amount)
 	db.session.add(insertVoilation)
@@ -393,9 +394,9 @@ def addVoilations(setRecNo,car_no,loc_name):
 	
 def sen_mail(time_stam,car_no,loc_name,fine_amount,email_id,name_of_user):
 	
-	'''API_KEY = os.environ.get('MAILGUN_API_KEY')
+	#API_KEY = os.environ.get('MAILGUN_API_KEY')
 	API_MAIL_DOMAIN = os.environ.get('MAILGUN_DOMAIN')
-	API_URL = "https://api:#{API_KEY}@api.mailgun.net/v2/{API_MAIL_DOMAIN}"
+	#API_URL = "https://api:#{API_KEY}@api.mailgun.net/v2/{API_MAIL_DOMAIN}"
 	API_USERNAME = os.environ.get('MAILGUN_SMTP_LOGIN')
 	API_PASSWORD = os.environ.get('MAILGUN_SMTP_PASSWORD')
 	MAILGUN_SMTP_SERVER = os.environ.get('MAILGUN_SMTP_SERVER')
@@ -409,8 +410,8 @@ def sen_mail(time_stam,car_no,loc_name,fine_amount,email_id,name_of_user):
 	
 	s.login(API_USERNAME, API_PASSWORD)
 	s.sendmail(msg['From'], msg['To'], msg.as_string())
-	s.quit()'''
-	API_KEY = os.environ.get('MAILGUN_API_KEY')
+	s.quit()
+	'''API_KEY = os.environ.get('MAILGUN_API_KEY')
 	API_MAIL_DOMAIN = os.environ.get('MAILGUN_DOMAIN')
 	#return 
 	requests.post(
@@ -419,9 +420,9 @@ def sen_mail(time_stam,car_no,loc_name,fine_amount,email_id,name_of_user):
 		data={"from": "Excited User <root@{API_MAIL_DOMAIN}>",
 			"to": "email_id",
 			"subject": "Hello",
-			"text": "Testing some Mailgun awesomness!"})
+			"text": "Testing some Mailgun awesomness!"})'''
 	verbose="Sent Mail to User "+name_of_user
-	#verbose
+	return verbose
 	
 @app.route('/payment-details-control',methods = ['POST', 'GET'])
 def payment_details_control():
