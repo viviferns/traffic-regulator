@@ -452,7 +452,7 @@ if __name__ == '__main__':
 	insertUsr=Users(1,"User1",987654321,"testuser123@gmail.com","MH-01-CH-0007")
 	db.session.add(insertUsr)
 	db.session.commit()'''
-	#addUsers(1,"User1",9876543212,"vivianfernandes6795@gmail.com","MH-01-CH-0007")
+	addUsers(1,"User1",9876543212,"vivianfernandes6795@gmail.com","MH-01-CH-0007")
 	addVoilations(1,'MH-01-CH-0007','ChurchGate')
 	addAdmins(1,'MAIN_ADMIN',12345789,'root','ROOT1234')
 	
