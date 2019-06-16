@@ -382,13 +382,13 @@ def addVoilations(setRecNo,car_no,loc_name):
 	email_id=userDetails.EMAIL_ID
 	name_of_user=userDetails.NAME_OF_USER
 	#send_mail=SendMail()
-	verbose=send_mail(time_stam,car_no,loc_name,amount,email_id,name_of_user)
+	verbose=sen_mail(time_stam,car_no,loc_name,amount,email_id,name_of_user)
 	insertVoilation=Violations(setRecNo,str(time_stam),car_no,loc_name,amount)
 	db.session.add(insertVoilation)
 	db.session.commit()
 	return render_template('verbose-page.html', verbose=verbose)
 	
-def send_mail(time_stam,car_no,loc_name,fine_amount,email_id,name_of_user):
+def sen_mail(time_stam,car_no,loc_name,fine_amount,email_id,name_of_user):
 	
 	'''API_KEY = os.environ.get('MAILGUN_API_KEY')
 	API_MAIL_DOMAIN = os.environ.get('MAILGUN_DOMAIN')
