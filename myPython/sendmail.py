@@ -22,7 +22,7 @@ class SendMail:
 			}
 		)
 		verbose="Sent Mail to User "+name_of_user
-		return verbose'''
+		return verbose
 
 		
 		'''sg = sendgrid.SendGridAPIClient(apikey=SENDGRID_API_KEY)
