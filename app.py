@@ -6,6 +6,8 @@ import urllib.parse as urlparse
 from flask_sqlalchemy import SQLAlchemy
 from myPython.sendmail import SendMail
 import time
+import smtplib
+import email.mime.text
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI']=os.environ.get('DATABASE_URL')
@@ -379,13 +381,34 @@ def addVoilations(setRecNo,car_no,loc_name):
 	userDetails=Users.query.filter_by(CAR_NO=car_no).first()
 	email_id=userDetails.EMAIL_ID
 	name_of_user=userDetails.NAME_OF_USER
-	send_mail=SendMail()
-	verbose=send_mail.send_mail(time_stam,car_no,loc_name,amount,email_id,name_of_user)
+	#send_mail=SendMail()
+	verbose=send_mail(time_stam,car_no,loc_name,amount,email_id,name_of_user)
 	insertVoilation=Violations(setRecNo,str(time_stam),car_no,loc_name,amount)
 	db.session.add(insertVoilation)
 	db.session.commit()
 	return render_template('verbose-page.html', verbose=verbose)
 	
+def send_mail(self,time_stam,car_no,loc_name,fine_amount,email_id,name_of_user):
+	
+	API_KEY = os.environ.get('MAILGUN_API_KEY')
+	API_MAIL_DOMAIN = os.environ.get('MAILGUN_DOMAIN')
+	API_URL = "https://api:#{API_KEY}@api.mailgun.net/v2/{API_MAIL_DOMAIN}"
+	API_USERNAME = os.environ.get('MAILGUN_SMTP_LOGIN')
+	API_PASSWORD = os.environ.get('MAILGUN_SMTP_PASSWORD')
+	MAILGUN_SMTP_SERVER = os.environ.get('MAILGUN_SMTP_SERVER')
+
+	msg = email.mime.text.MIMEText('Testing some Mailgun awesomness')
+	msg['Subject'] = "Hello"
+	msg['From']    = "root@"+API_MAIL_DOMAIN
+	msg['To']      = email_id
+	
+	s = smtplib.SMTP(MAILGUN_SMTP_SERVER, 587)
+	
+	s.login(API_USERNAME, API_PASSWORD)
+	s.sendmail(msg['From'], msg['To'], msg.as_string())
+	s.quit()
+	verbose="Sent Mail to User "+name_of_user
+	return verbose
 	
 @app.route('/payment-details-control',methods = ['POST', 'GET'])
 def payment_details_control():
