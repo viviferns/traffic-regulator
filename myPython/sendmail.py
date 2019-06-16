@@ -9,7 +9,7 @@ class SendMail:
 		API_URL = "https://api:#{API_KEY}@api.mailgun.net/v2/{API_MAIL_DOMAIN}"
 
 		RestClient.post API_URL+"/messages",
-			:from => "root@"+API_MAIL_DOMAIN,
+			:from => 'Administrator <root@{}>'.format(API_MAIL_DOMAIN)
 			:to => email_id,
 			:subject => "This is subject",
 			:text => "Text Test body",
