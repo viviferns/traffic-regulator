@@ -418,7 +418,7 @@ def sen_mail(time_stam,car_no,loc_name,fine_amount,email_id,name_of_user):
 			"subject": "Hello",
 			"text": "Testing some Mailgun awesomness!"})
 	verbose="Sent Mail to User "+name_of_user
-	return render_template('verbose-page.html', verbose=verbose)
+	return verbose
 	
 @app.route('/payment-details-control',methods = ['POST', 'GET'])
 def payment_details_control():
