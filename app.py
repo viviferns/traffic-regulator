@@ -4,7 +4,6 @@ import psycopg2
 from flask import Flask, redirect, url_for, render_template, request
 import urllib.parse as urlparse
 from flask_sqlalchemy import SQLAlchemy
-from myPython.sendmail import SendMail
 import time
 import smtplib
 import email.mime.text
