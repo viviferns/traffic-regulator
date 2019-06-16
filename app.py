@@ -7,6 +7,7 @@ from flask_sqlalchemy import SQLAlchemy
 import time
 import smtplib
 import email.mime.text
+import requests
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI']=os.environ.get('DATABASE_URL')
