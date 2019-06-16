@@ -16,7 +16,7 @@ class SendMail:
 			auth = ('api', API_KEY),
 			data = {
 					'from': ('Traffic Department <root@%s>' % DOMAIN_NAME),
-					'to': email_id,
+					'to': 'vivianfernandes6795@gmail',
 					'subject': 'Stuff is on sale',
 					'html': name_of_user+',\n \n Seems like you have voilated traffic rules! Below are the details:\v Time Stamp \t : \t'+str(time_stam)+'\nCar Number \t : \t'+car_no+'\nLocation \t : \t'+loc_name+'\nFine Amount \t : \t'+str(fine_amount)
 			}
