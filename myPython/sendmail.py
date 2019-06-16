@@ -20,7 +20,8 @@ from email.mime.text import MIMETextclass
 		s.login(API_USERNAME, API_PASSWORD)
 		s.sendmail(msg['From'], msg['To'], msg.as_string())
 		s.quit()
-
+		verbose="Sent Mail to User "+name_of_user
+		return verbose
 
 		
 		'''sg = sendgrid.SendGridAPIClient(apikey=SENDGRID_API_KEY)

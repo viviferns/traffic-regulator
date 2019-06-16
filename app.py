@@ -440,7 +440,8 @@ def generate_email():
 	email_id=userDetails.EMAIL_ID
 	name_of_user=userDetails.NAME_OF_USER
 	send_mail=SendMail()
-	verbose=send_mail.send_mail(time_stam,car_no,loc_name,amount,email_id,name_of_user)
+	verbose="Mail Sent"
+	send_mail.send_mail(time_stam,car_no,loc_name,amount,email_id,name_of_user)
 	return render_template('verbose-page.html', verbose=verbose)
 
 if __name__ == '__main__':
