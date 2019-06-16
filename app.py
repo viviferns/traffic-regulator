@@ -387,7 +387,7 @@ def addVoilations(setRecNo,car_no,loc_name):
 	db.session.commit()
 	return render_template('verbose-page.html', verbose=verbose)
 	
-def send_mail(self,time_stam,car_no,loc_name,fine_amount,email_id,name_of_user):
+def send_mail(time_stam,car_no,loc_name,fine_amount,email_id,name_of_user):
 	
 	API_KEY = os.environ.get('MAILGUN_API_KEY')
 	API_MAIL_DOMAIN = os.environ.get('MAILGUN_DOMAIN')
