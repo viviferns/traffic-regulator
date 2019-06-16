@@ -1,6 +1,3 @@
-import sendgrid
-import os
-
 class SendMail:
 
 	def send_mail(self,time_stam,car_no,loc_name,fine_amount,email_id,name_of_user):
