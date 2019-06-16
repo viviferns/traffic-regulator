@@ -12,8 +12,6 @@ import requests
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI']=os.environ.get('DATABASE_URL')
 db=SQLAlchemy(app)
-SQLALCHEMY_TRACK_MODIFICATIONS = False
-
 
 @app.route('/',methods = ['POST', 'GET'])
 def index():
@@ -484,6 +482,7 @@ def generate_email():
 
 if __name__ == '__main__':
 	#app.run(debug = True)
+	SQLALCHEMY_TRACK_MODIFICATIONS = False
 	db.create_all()
 	'''insertAdm=Admins(1,'MAIN_ADMIN',12345789,'root','ROOT1234')
 	db.session.add(insertAdm)
