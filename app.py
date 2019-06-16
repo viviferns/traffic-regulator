@@ -12,6 +12,7 @@ import requests
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI']=os.environ.get('DATABASE_URL')
 db=SQLAlchemy(app)
+SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
 @app.route('/',methods = ['POST', 'GET'])
@@ -382,11 +383,11 @@ def addVoilations(setRecNo,car_no,loc_name):
 	email_id=userDetails.EMAIL_ID
 	name_of_user=userDetails.NAME_OF_USER
 	#send_mail=SendMail()
-	sen_mail(time_stam,car_no,loc_name,amount,email_id,name_of_user)
+	verbose=sen_mail(time_stam,car_no,loc_name,amount,email_id,name_of_user)
 	insertVoilation=Violations(setRecNo,str(time_stam),car_no,loc_name,amount)
 	db.session.add(insertVoilation)
 	db.session.commit()
-	verbose="Sent Mail to User "+name_of_user
+	#verbose="Sent Mail to User "+name_of_user
 	print(verbose)
 	#return render_template('verbose-page.html', verbose=verbose)
 	#template = env.get_template(template_name)
@@ -421,7 +422,7 @@ def sen_mail(time_stam,car_no,loc_name,fine_amount,email_id,name_of_user):
 			"to": "email_id",
 			"subject": "Hello",
 			"text": "Testing some Mailgun awesomness!"})
-	#verbose="Sent Mail to User "+name_of_user
+	verbose="Sent Mail to User "+name_of_user
 	#verbose
 	
 @app.route('/payment-details-control',methods = ['POST', 'GET'])
