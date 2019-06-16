@@ -389,7 +389,7 @@ def addVoilations(setRecNo,car_no,loc_name):
 	
 def send_mail(time_stam,car_no,loc_name,fine_amount,email_id,name_of_user):
 	
-	API_KEY = os.environ.get('MAILGUN_API_KEY')
+	'''API_KEY = os.environ.get('MAILGUN_API_KEY')
 	API_MAIL_DOMAIN = os.environ.get('MAILGUN_DOMAIN')
 	API_URL = "https://api:#{API_KEY}@api.mailgun.net/v2/{API_MAIL_DOMAIN}"
 	API_USERNAME = os.environ.get('MAILGUN_SMTP_LOGIN')
@@ -405,9 +405,19 @@ def send_mail(time_stam,car_no,loc_name,fine_amount,email_id,name_of_user):
 	
 	s.login(API_USERNAME, API_PASSWORD)
 	s.sendmail(msg['From'], msg['To'], msg.as_string())
-	s.quit()
+	s.quit()'''
+	API_KEY = os.environ.get('MAILGUN_API_KEY')
+	API_MAIL_DOMAIN = os.environ.get('MAILGUN_DOMAIN')
+	#return 
+	requests.post(
+		"https://api.mailgun.net/v3/{API_MAIL_DOMAIN}/messages",
+		auth=("api", API_KEY),
+		data={"from": "Excited User <root@{API_MAIL_DOMAIN}>",
+			"to": "email_id",
+			"subject": "Hello",
+			"text": "Testing some Mailgun awesomness!"})
 	verbose="Sent Mail to User "+name_of_user
-	return verbose
+	return render_template('verbose-page.html', verbose=verbose)
 	
 @app.route('/payment-details-control',methods = ['POST', 'GET'])
 def payment_details_control():
