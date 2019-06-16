@@ -1,20 +1,24 @@
-class SendMail:
+import smtplib
+from email.mime.text import MIMETextclass
 
 	def send_mail(self,time_stam,car_no,loc_name,fine_amount,email_id,name_of_user):
 	
-		#require 'rest-client'
-
-		API_KEY = ENV['MAILGUN_API_KEY']
-		API_MAIL_DOMAIN = ['MAILGUN_DOMAIN']
+		API_KEY = os.environ.get('MAILGUN_API_KEY')
+		API_MAIL_DOMAIN = os.environ.get('MAILGUN_DOMAIN')
 		API_URL = "https://api:#{API_KEY}@api.mailgun.net/v2/{API_MAIL_DOMAIN}"
+		API_USERNAME = os.environ.get('MAILGUN_SMTP_LOGIN')
+		API_PASSWORD = os.environ.get('MAILGUN_SMTP_PASSWORD')
 
-		RestClient.post API_URL+"/messages",
-			:from => 'Administrator <root@{}>'.format(API_MAIL_DOMAIN)
-			:to => email_id,
-			:subject => "This is subject",
-			:text => "Text Test body",
-			:html => "<b>HTML</b> version of the body!"
-			
+		msg = MIMEText('Testing some Mailgun awesomness')
+		msg['Subject'] = "Hello"
+		msg['From']    = "root@"+API_MAIL_DOMAIN
+		msg['To']      = email_id
+		
+		s = smtplib.SMTP('smtp.mailgun.org', 587)
+		
+		s.login(API_USERNAME, API_PASSWORD)
+		s.sendmail(msg['From'], msg['To'], msg.as_string())
+		s.quit()
 
 
 		
