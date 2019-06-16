@@ -387,7 +387,10 @@ def addVoilations(setRecNo,car_no,loc_name):
 	db.session.add(insertVoilation)
 	db.session.commit()
 	verbose="Sent Mail to User "+name_of_user
-	return render_template('verbose-page.html', verbose=verbose)
+	print(verbose)
+	#return render_template('verbose-page.html', verbose=verbose)
+	#template = env.get_template(template_name)
+    #return template.render(**template_vars)
 	
 def sen_mail(time_stam,car_no,loc_name,fine_amount,email_id,name_of_user):
 	
