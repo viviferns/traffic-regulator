@@ -15,8 +15,7 @@ class SendMail:
 			:text => "Text Test body",
 			:html => "<b>HTML</b> version of the body!"
 			
-		verbose="Sent Mail to User "+name_of_user
-		return verbose
+
 
 		
 		'''sg = sendgrid.SendGridAPIClient(apikey=SENDGRID_API_KEY)
