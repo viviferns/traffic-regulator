@@ -1,5 +1,5 @@
 import smtplib
-from email.mime.text import MIMETextclass
+import email.mime.text
 
 def send_mail(self,time_stam,car_no,loc_name,fine_amount,email_id,name_of_user):
 	
@@ -10,7 +10,7 @@ def send_mail(self,time_stam,car_no,loc_name,fine_amount,email_id,name_of_user):
 	API_PASSWORD = os.environ.get('MAILGUN_SMTP_PASSWORD')
 	MAILGUN_SMTP_SERVER = os.environ.get('MAILGUN_SMTP_SERVER')
 
-	msg = MIMEText('Testing some Mailgun awesomness')
+	msg = email.mime.text.MIMEText('Testing some Mailgun awesomness')
 	msg['Subject'] = "Hello"
 	msg['From']    = "root@"+API_MAIL_DOMAIN
 	msg['To']      = email_id
