@@ -2,7 +2,7 @@ class SendMail:
 
 	def send_mail(self,time_stam,car_no,loc_name,fine_amount,email_id,name_of_user):
 	
-		require 'rest-client'
+		#require 'rest-client'
 
 		API_KEY = ENV['MAILGUN_API_KEY']
 		API_MAIL_DOMAIN = ['MAILGUN_DOMAIN']
