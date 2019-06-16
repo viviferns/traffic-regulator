@@ -2,22 +2,19 @@ class SendMail:
 
 	def send_mail(self,time_stam,car_no,loc_name,fine_amount,email_id,name_of_user):
 	
-		API_KEY = os.environ.get('API_KEY')
-		DOMAIN_NAME = os.environ.get('DOMAIN_NAME')
+		require 'rest-client'
 
-		if not (API_KEY and DOMAIN_NAME):
-			return 'Invalid environment variables'
+		API_KEY = ENV['MAILGUN_API_KEY']
+		API_MAIL_DOMAIN = ['MAILGUN_DOMAIN']
+		API_URL = "https://api:#{API_KEY}@api.mailgun.net/v2/{API_MAIL_DOMAIN}"
 
-		result = requests.post(
-			('https://api.mailgun.net/v3/%s/messages' % DOMAIN_NAME),
-			auth = ('api', API_KEY),
-			data = {
-					'from': ('Traffic Department <root@%s>' % DOMAIN_NAME),
-					'to': email_id,
-					'subject': 'Stuff is on sale',
-					'html': name_of_user+',\n \n Seems like you have voilated traffic rules! Below are the details:\v Time Stamp \t : \t'+str(time_stam)+'\nCar Number \t : \t'+car_no+'\nLocation \t : \t'+loc_name+'\nFine Amount \t : \t'+str(fine_amount)
-			}
-		)
+		RestClient.post API_URL+"/messages",
+			:from => "root@"+API_MAIL_DOMAIN,
+			:to => email_id,
+			:subject => "This is subject",
+			:text => "Text Test body",
+			:html => "<b>HTML</b> version of the body!"
+			
 		verbose="Sent Mail to User "+name_of_user
 		return verbose
 
