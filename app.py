@@ -382,10 +382,11 @@ def addVoilations(setRecNo,car_no,loc_name):
 	email_id=userDetails.EMAIL_ID
 	name_of_user=userDetails.NAME_OF_USER
 	#send_mail=SendMail()
-	verbose=sen_mail(time_stam,car_no,loc_name,amount,email_id,name_of_user)
+	sen_mail(time_stam,car_no,loc_name,amount,email_id,name_of_user)
 	insertVoilation=Violations(setRecNo,str(time_stam),car_no,loc_name,amount)
 	db.session.add(insertVoilation)
 	db.session.commit()
+	verbose="Sent Mail to User "+name_of_user
 	return render_template('verbose-page.html', verbose=verbose)
 	
 def sen_mail(time_stam,car_no,loc_name,fine_amount,email_id,name_of_user):
@@ -417,8 +418,8 @@ def sen_mail(time_stam,car_no,loc_name,fine_amount,email_id,name_of_user):
 			"to": "email_id",
 			"subject": "Hello",
 			"text": "Testing some Mailgun awesomness!"})
-	verbose="Sent Mail to User "+name_of_user
-	return verbose
+	#verbose="Sent Mail to User "+name_of_user
+	#verbose
 	
 @app.route('/payment-details-control',methods = ['POST', 'GET'])
 def payment_details_control():
