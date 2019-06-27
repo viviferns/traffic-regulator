@@ -447,7 +447,7 @@ def payment_details_control():
 		
 	elif(dropDown1=="generate-pdf"):
 	
-		return render_template('generate-pdf.html',voilationRecord=voilationRecord)
+		return render_template('generate-email.html',voilationRecord=voilationRecord)
 		
 @app.route('/make-payment-control',methods = ['POST', 'GET'])
 def make_payment_control():
@@ -463,22 +463,20 @@ def make_payment_control():
 	verbose="Payment Received from User "+usrName
 	return render_template('verbose-page.html', verbose=verbose)
 		
-@app.route('/generate-email',methods = ['POST', 'GET'])
+@app.route('/generate-email-control',methods = ['POST', 'GET'])
 def generate_email():
 
-	mob_number=request.form['mob_number']
+	time_stam=request.form['time_stam']
 	
-	userDetails=Users.query.filter_by(MOBILE_NUMBER=mob_number).first()
-	car_no=userDetails.CAR_NO
-	voilationRecord=Violations.query.filter_by(CAR_NO=car_number).first()
-	time_stam=voilationRecord.REC_NO
+	voilationRecord=Violations.query.filter_by(TIME_STAM=time_stam).first()
+	car_no=voilationRecord.CAR_NO
+	userDetails=Users.query.filter_by(CAR_NO=car_no).first()
 	loc_name=voilationRecord.LOC_NAME
 	amount=voilationRecord.FINE_AMOUNT
 	email_id=userDetails.EMAIL_ID
 	name_of_user=userDetails.NAME_OF_USER
-	send_mail=SendMail()
-	verbose="Mail Sent"
-	send_mail.send_mail(time_stam,car_no,loc_name,amount,email_id,name_of_user)
+	#send_mail=SendMail()
+	verbose=verbose=sen_mail(time_stam,car_no,loc_name,amount,email_id,name_of_user)
 	return render_template('verbose-page.html', verbose=verbose)
 
 if __name__ == '__main__':
@@ -490,7 +488,21 @@ if __name__ == '__main__':
 	insertUsr=Users(1,"User1",987654321,"testuser123@gmail.com","MH-01-CH-0007")
 	db.session.add(insertUsr)
 	db.session.commit()'''
-	addUsers(1,"User1",9876543212,"vivianfernandes6795@gmail.com","MH-01-CH-0007")
-	addVoilations(1,'MH-01-CH-0007','ChurchGate')
+	addUsers(1,"User1",9876543212,"vivianfernandes679@gmail.com","KL-01-CC-5919")
+	addUsers(1,"User1",8422065548,"vivianfernandes67@gmail.com","AP-28-DD-2438")
+	addUsers(1,"User1",9167316411,"vivianfernandes6@gmail.com","AP-29-AS-8467")
+	addUsers(1,"User1",9769483249,"vivianfernandes@gmail.com","RJ-20-CC-5851")
+	addUsers(1,"User1",9619992079,"vivianfernande@gmail.com","TS-07-EK-7622")
+	addUsers(1,"User1",8286546670,"vivianfernand@gmail.com","AP-10-BC-1485")
+	addUsers(1,"User1",7777721725,"vivianfernan@gmail.com","MH-08-AG-1886")
+	addUsers(1,"User1",8625552718,"vivianferna@gmail.com","AP-36-A-5868")
+	addVoilations(1,'KL-01-CC-5919','ChurchGate')
+	addVoilations(2,'AP-28-DD-2438','ChurchGate')
+	addVoilations(3,'AP-29-AS-8467','ChurchGate')
+	addVoilations(4,'RJ-20-CC-5851','ChurchGate')
+	addVoilations(5,'TS-07-EK-7622','ChurchGate')
+	addVoilations(6,'AP-10-BC-1485','ChurchGate')
+	addVoilations(7,'MH-08-AG-1886','ChurchGate')
+	addVoilations(8,'AP-36-A-5868','ChurchGate')
 	addAdmins(1,'MAIN_ADMIN',12345789,'root','ROOT1234')
 	

@@ -18,27 +18,27 @@
 	<form align="center" method="POST" action="/add_admin_control">
 	<tr>
     <td align="center">
-      <input type="text" name="adm_name" placeholder=" Name Of User">
+      <input type="text" name="adm_name" placeholder=" Name Of User*" required>
       </td>
     </tr>
 	</br>
 </br>
     <tr>
     <td align="center">
-      <input type="tel" name="adm_mobNo" pattern="[0-9]{10}" maxlength="10" placeholder=" Add Mobile Number">
+      <input type="tel" name="adm_mobNo" pattern="[0-9]{10}" maxlength="10" placeholder=" Add Mobile Number*" required>
       </td>
     </tr>
 	</br>
 </br>
     <tr>
     <td align="center">
-      <input type="text" name="adm_userName" placeholder=" Set Username">
+      <input type="text" name="adm_userName" placeholder=" Set Username*"required>
       </td>
     </tr>
 	</br></br>
     <tr>
     <td align="center">
-      <input type="pass" name="adm_password" placeholder=" Set Password">
+      <input type="password" name="adm_password" placeholder=" Set Password*" maxlength="16" minlength="8" required >
       </td>
     </tr>
 	</br>
