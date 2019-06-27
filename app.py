@@ -9,6 +9,7 @@ import smtplib
 import email.mime.text
 import requests
 
+#heroku run:detached python app.py -a traffic-regulator
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI']=os.environ.get('DATABASE_URL')
 db=SQLAlchemy(app)
