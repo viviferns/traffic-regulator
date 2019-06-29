@@ -1,7 +1,7 @@
 '''File controller'''
 import os
 import psycopg2
-from flask import Flask, redirect, url_for, render_template, request
+from flask import Flask, redirect, url_for, render_template, request, session, g
 import urllib.parse as urlparse
 from flask_sqlalchemy import SQLAlchemy
 import time
@@ -12,14 +12,20 @@ import requests
 #heroku run:detached python app.py -a traffic-regulator
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI']=os.environ.get('DATABASE_URL')
+app.secret_key=os.urandom(24)
 db=SQLAlchemy(app)
+
+@app.before_request
+def before_request():
+	g.user = None
+	if 'user' in session:
+		g.user = session['user']
 
 @app.route('/',methods = ['POST', 'GET'])
 def index():
 	
 	verbose="Please Enter Username and Password"
 	return render_template('admin-login.html',verbose=verbose)
-	
 		
 
 @app.route('/remove-admin',methods = ['POST', 'GET'])
@@ -28,17 +34,22 @@ def remove_admin():
 	user_name=request.form['user_name']
 	mob_number=request.form['mob_number']
 	
-	rmAdmin=Admins.query.filter_by(MOBILE_NUMBER=mob_number).first()
-	if(rmAdmin.ADMIN_USER_NAME==user_name):
+	if(session['user']=='root'):
+		rmAdmin=Admins.query.filter_by(MOBILE_NUMBER=mob_number).first()
+		if(rmAdmin.ADMIN_USER_NAME==user_name):
+			
+			db.session.delete(rmAdmin)
+			db.session.commit()
+			verbose="Removed admin "+user_name
+			return render_template('verbose-page.html', verbose=verbose)
+			
+		else:
+			verbose="Unable to remove Admin ",user_name
+			return render_template('verbose-page.html', verbose=verbose)
+	
+	elif(session['user']=='root'):
 		
-		db.session.delete(rmAdmin)
-		db.session.commit()
-		verbose="Removed admin "+user_name
-		return render_template('verbose-page.html', verbose=verbose)
-		
-	else:
-		verbose="Unable to remove Admin ",user_name
-		return render_template('verbose-page.html', verbose=verbose)
+		verbose="Only Root Admin can add new Admins"
 		
 @app.route('/remove-user',methods = ['POST', 'GET'])
 def remove_user():
@@ -67,8 +78,8 @@ def admin_login():
 
 	username=request.form['user_name']
 	password=request.form['pass_word']
+	session.pop('user', None)
 	verbose=""
-
 	
 	adminsTest=Admins.query.filter_by(ADMIN_USER_NAME=username).first()
 		
@@ -77,13 +88,10 @@ def admin_login():
 		verbose="Incorrect Username or Password, Please re-enter your Details!!!"
 		return render_template('admin-login.html',verbose=verbose)
 
-	elif(adminsTest.ADMIN_USER_NAME==username and adminsTest.ADMIN_PASSWORD==password and username=="root"):
-
-		return render_template('root-home.html')
-		
 	elif(adminsTest.ADMIN_USER_NAME==username and adminsTest.ADMIN_PASSWORD==password):
-
-		return render_template('home.html')
+		
+		session['user']=username
+		return render_template('root-home.html')
 
 @app.route('/add_admin_control',methods=['POST','GET'])
 def add_admin_control():
@@ -93,20 +101,27 @@ def add_admin_control():
 	adm_userName=request.form['adm_userName']
 	adm_password=request.form['adm_password']
 	
-	#verbose="Admin could not be Added"
+	if(session['user']=='root'):
+		#verbose="Admin could not be Added"
+		
+		#app.config['SQLALCHEMY_DATABASE_URI']=os.environ.get('DATABASE_URL')
+		#db=SQLAlchemy(app)
+		#maxAdm = Admins.query.order_by(Admins.ADM_NO.desc()).first()
+		#setAdmNo=maxAdm.ADM_NO + 1
+		#insertNew=Admins(setAdmNo,adm_name,adm_mobNo,adm_userName,adm_password)
+		#db.session.add(insertNew)
+		#db.session.commit()
+		
+		verbose="+adm_name+" Added as New Admin"
+		verbose=addAdmins(0,adm_name,adm_mobNo,adm_userName,adm_password)
+		
+		return render_template('verbose-page.html', verbose=verbose)
 	
-	#app.config['SQLALCHEMY_DATABASE_URI']=os.environ.get('DATABASE_URL')
-	#db=SQLAlchemy(app)
-	#maxAdm = Admins.query.order_by(Admins.ADM_NO.desc()).first()
-	#setAdmNo=maxAdm.ADM_NO + 1
-	#insertNew=Admins(setAdmNo,adm_name,adm_mobNo,adm_userName,adm_password)
-	#db.session.add(insertNew)
-	#db.session.commit()
-
-	#verbose="User "+adm_name+" Added as New Admin"
-	verbose=addAdmins(0,adm_name,adm_mobNo,adm_userName,adm_password)
-
-	return render_template('verbose-page.html', verbose=verbose)
+	elif(session['user']=='root'):
+		
+		verbose="Only Root Admin can add new Admins"
+		
+		
 	
 
 @app.route('/add-user-control',methods=['POST','GET'])
@@ -144,29 +159,34 @@ def update_admin():
 	admin_name=request.form['admin_name']
 	
 	admDetails=Admins.query.filter_by(MOBILE_NUMBER=mob_number).first()
+	if(session['user']=='root'):
 	
-	if(dropDown1=="name"):
+		if(dropDown1=="name"):
+			
+			admDetails.ADMIN_NAME=admin_name
+			db.session.commit()
+			updatedAdmDetails=Admins.query.filter_by(MOBILE_NUMBER=mob_number).first()
+			verbose="Updated details for Admin, Corrected Name: "+updatedAdmDetails.ADMIN_NAME
+			
+		elif(dropDown1=="mob_number"):
+			
+			admDetails.MOBILE_NUMBER=admin_name
+			db.session.commit()
+			updatedAdmDetails=Admins.query.filter_by(MOBILE_NUMBER=admin_name).first()
+			verbose="Updated details for Admin "+updatedAdmDetails.ADMIN_NAME+" Corrected/New Number: "+updatedAdmDetails.MOBILE_NUMBER
+			
+		elif(dropDown1=="user_name"):
+			
+			admDetails.ADMIN_USER_NAME=admin_name
+			db.session.commit()
+			updatedAdmDetails=Admins.query.filter_by(MOBILE_NUMBER=mob_number).first()
+			verbose="Updated details for Admin "+updatedAdmDetails.ADMIN_NAME+" Corrected/New Username: "+updatedAdmDetails.ADMIN_USER_NAME
+			
+		return render_template('verbose-page.html', verbose=verbose)
+	
+	elif(session['user']=='root'):
 		
-		admDetails.ADMIN_NAME=admin_name
-		db.session.commit()
-		updatedAdmDetails=Admins.query.filter_by(MOBILE_NUMBER=mob_number).first()
-		verbose="Updated details for Admin, Corrected Name: "+updatedAdmDetails.ADMIN_NAME
-		
-	elif(dropDown1=="mob_number"):
-		
-		admDetails.MOBILE_NUMBER=admin_name
-		db.session.commit()
-		updatedAdmDetails=Admins.query.filter_by(MOBILE_NUMBER=admin_name).first()
-		verbose="Updated details for Admin "+updatedAdmDetails.ADMIN_NAME+" Corrected/New Number: "+updatedAdmDetails.MOBILE_NUMBER
-		
-	elif(dropDown1=="user_name"):
-		
-		admDetails.ADMIN_USER_NAME=admin_name
-		db.session.commit()
-		updatedAdmDetails=Admins.query.filter_by(MOBILE_NUMBER=mob_number).first()
-		verbose="Updated details for Admin "+updatedAdmDetails.ADMIN_NAME+" Corrected/New Username: "+updatedAdmDetails.ADMIN_USER_NAME
-		
-	return render_template('verbose-page.html', verbose=verbose)
+		verbose="Only Root Admin can add new Admins"
 		
 @app.route('/update-user',methods=['POST','GET'])
 def update_user():
