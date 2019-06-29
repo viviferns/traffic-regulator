@@ -111,8 +111,7 @@ def add_admin_control():
 		#insertNew=Admins(setAdmNo,adm_name,adm_mobNo,adm_userName,adm_password)
 		#db.session.add(insertNew)
 		#db.session.commit()
-		
-		verbose="+adm_name+" Added as New Admin"
+		verbose=+adm_name+" Added as New Admin"
 		verbose=addAdmins(0,adm_name,adm_mobNo,adm_userName,adm_password)
 		
 		return render_template('verbose-page.html', verbose=verbose)
