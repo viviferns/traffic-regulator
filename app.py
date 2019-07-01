@@ -356,22 +356,37 @@ def route_removeUser():
 @app.route('/route-fetchUserDetails',methods=['POST','GET'])
 def route_fetchUserDetails():
 	
-	return render_template('payment.html')
+	try:
+	
+		if(session['user']!='' or session['user']!= None):
+	
+			return render_template('payment.html')
 	
 @app.route('/route-payment',methods=['POST','GET'])
 def route_payment():
 	
-	return render_template('payment-details.html')
+	try:
+	
+		if(session['user']!='' or session['user']!= None):	
+		
+			return render_template('payment-details.html')
 	
 @app.route('/route-generate-pdf',methods=['POST','GET'])
 def route_generate_pdf():
 	
-	return render_template('generate-pdf.html')
+	try:
+	
+		if(session['user']!='' or session['user']!= None):	
+	
+			return render_template('generate-pdf.html')
 	
 @app.route('/route-returnHome',methods=['POST','GET'])
 def route_returnHome():
+	try:
 	
-	return render_template('root-home.html')
+		if(session['user']!='' or session['user']!= None):	
+	
+			return render_template('root-home.html')
 	
 class Admins(db.Model):
 
