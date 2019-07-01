@@ -314,17 +314,44 @@ def route_removeAdmin():
 @app.route('/route-addUser',methods=['POST','GET'])
 def route_addUser():
 	
-	return render_template('addUser.html')
+	try:
+	
+		if(session['user']!='' or session['user']!= None):
+	
+			return render_template('addUser.html')
+	
+	except KeyError:
+		
+		verbose="You have not logged in, Please login to Continue"
+		return render_template('admin-login.html',verbose=verbose)
 	
 @app.route('/route-updateUser',methods=['POST','GET'])
 def route_updateUser():
 	
-	return render_template('updateUser.html')
+	try:
+	
+		if(session['user']!='' or session['user']!= None):
+		
+			return render_template('updateUser.html')
+	
+	except KeyError:
+		
+		verbose="You have not logged in, Please login to Continue"
+		return render_template('admin-login.html',verbose=verbose)
 	
 @app.route('/route-removeUser',methods=['POST','GET'])
 def route_removeUser():
 	
-	return render_template('removeUser.html')
+	try:
+	
+		if(session['user']!='' or session['user']!= None):
+	
+			return render_template('removeUser.html')
+	
+		except KeyError:
+		
+			verbose="You have not logged in, Please login to Continue"
+			return render_template('admin-login.html',verbose=verbose)
 	
 @app.route('/route-fetchUserDetails',methods=['POST','GET'])
 def route_fetchUserDetails():
