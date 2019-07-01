@@ -361,6 +361,11 @@ def route_fetchUserDetails():
 		if(session['user']!='' or session['user']!= None):
 	
 			return render_template('payment.html')
+	
+	except KeyError:
+		
+		verbose="You have not logged in, Please login to Continue"
+		return render_template('admin-login.html',verbose=verbose)
 
 @app.route('/route-payment',methods=['POST','GET'])
 def route_payment():
@@ -370,6 +375,11 @@ def route_payment():
 		if(session['user']!='' or session['user']!= None):	
 		
 			return render_template('payment-details.html')
+			
+	except KeyError:
+		
+		verbose="You have not logged in, Please login to Continue"
+		return render_template('admin-login.html',verbose=verbose)
 	
 @app.route('/route-generate-pdf',methods=['POST','GET'])
 def route_generate_pdf():
@@ -379,6 +389,11 @@ def route_generate_pdf():
 		if(session['user']!='' or session['user']!= None):	
 	
 			return render_template('generate-pdf.html')
+
+	except KeyError:
+		
+		verbose="You have not logged in, Please login to Continue"
+		return render_template('admin-login.html',verbose=verbose)
 	
 @app.route('/route-returnHome',methods=['POST','GET'])
 def route_returnHome():
@@ -387,6 +402,11 @@ def route_returnHome():
 		if(session['user']!='' or session['user']!= None):	
 	
 			return render_template('root-home.html')
+			
+	except KeyError:
+		
+		verbose="You have not logged in, Please login to Continue"
+		return render_template('admin-login.html',verbose=verbose)
 	
 class Admins(db.Model):
 
