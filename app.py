@@ -526,5 +526,5 @@ if __name__ == '__main__':
 	addVoilations(6,'AP-10-BC-1485','ChurchGate')
 	addVoilations(7,'MH-08-AG-1886','ChurchGate')
 	addVoilations(8,'AP-36-A-5868','ChurchGate')'''
-	#addAdmins(1,'MAIN_ADMIN',12345789,'root','ROOT1234')
+	addAdmins(1,'MAIN_ADMIN',12345789,'root','ROOT1234')
 	
