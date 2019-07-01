@@ -101,25 +101,20 @@ def add_admin_control():
 	adm_userName=request.form['adm_userName']
 	adm_password=request.form['adm_password']
 	
-	if(session['user']=='root'):
-		#verbose="Admin could not be Added"
-		
-		#app.config['SQLALCHEMY_DATABASE_URI']=os.environ.get('DATABASE_URL')
-		#db=SQLAlchemy(app)
-		#maxAdm = Admins.query.order_by(Admins.ADM_NO.desc()).first()
-		#setAdmNo=maxAdm.ADM_NO + 1
-		#insertNew=Admins(setAdmNo,adm_name,adm_mobNo,adm_userName,adm_password)
-		#db.session.add(insertNew)
-		#db.session.commit()
-		verbose=+adm_name+" Added as New Admin"
-		verbose=addAdmins(0,adm_name,adm_mobNo,adm_userName,adm_password)
-		
-		return render_template('verbose-page.html', verbose=verbose)
 	
-	elif(session['user']=='root'):
-		
-		verbose="Only Root Admin can add new Admins"
-		
+	#verbose="Admin could not be Added"
+	
+	#app.config['SQLALCHEMY_DATABASE_URI']=os.environ.get('DATABASE_URL')
+	#db=SQLAlchemy(app)
+	#maxAdm = Admins.query.order_by(Admins.ADM_NO.desc()).first()
+	#setAdmNo=maxAdm.ADM_NO + 1
+	#insertNew=Admins(setAdmNo,adm_name,adm_mobNo,adm_userName,adm_password)
+	#db.session.add(insertNew)
+	#db.session.commit()
+	verbose=+adm_name+" Added as New Admin"
+	verbose=addAdmins(0,adm_name,adm_mobNo,adm_userName,adm_password)
+	
+	return render_template('verbose-page.html', verbose=verbose)
 		
 	
 
@@ -262,7 +257,14 @@ def temp_password_control():
 @app.route('/route-addAdmin',methods=['POST','GET'])
 def route_addAdmin():
 	
-	return render_template('addAdmin.html')
+	if(session['user']=='root'):
+	
+		return render_template('addAdmin.html')
+	
+	elif(session['user']!='root'):
+		
+		verbose="Only Root Admin can add new Admins"
+		return render_template('admin-login.html',verbose=verbose)
 	
 @app.route('/route-updateAdminPassword',methods=['POST','GET'])
 def route_updateAdminPassword():
