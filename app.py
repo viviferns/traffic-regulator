@@ -270,18 +270,46 @@ def route_addAdmin():
 	
 	except KeyError:
 		
-		verbose="You have not logged in"
+		verbose="You have not logged in, Please login to Continue"
 		return render_template('admin-login.html',verbose=verbose)		
 	
 @app.route('/route-updateAdminPassword',methods=['POST','GET'])
 def route_updateAdminPassword():
 	
-	return render_template('updateAdmin.html')
+	try:
+	
+		if(session['user']=='root'):
+			
+			return render_template('updateAdmin.html')
+			
+		elif(session['user']!='root'):
+			
+			verbose="Only Root Admin can add new Admins"
+			return render_template('verbose-page.html', verbose=verbose)
+
+	except KeyError:
+		
+		verbose="You have not logged in, Please login to Continue"
+		return render_template('admin-login.html',verbose=verbose)
 	
 @app.route('/route-removeAdmin',methods=['POST','GET'])
 def route_removeAdmin():
 	
-	return render_template('removeAdmins.html')
+	try:
+	
+		if(session['user']=='root'):
+			
+			return render_template('removeAdmins.html')
+		
+		elif(session['user']!='root'):
+			
+			verbose="Only Root Admin can add new Admins"
+			return render_template('verbose-page.html', verbose=verbose)
+
+	except KeyError:
+		
+		verbose="You have not logged in, Please login to Continue"
+		return render_template('admin-login.html',verbose=verbose)
 	
 @app.route('/route-addUser',methods=['POST','GET'])
 def route_addUser():
