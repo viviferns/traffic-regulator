@@ -266,13 +266,12 @@ def route_addAdmin():
 		elif(session['user']!='root'):
 			
 			verbose="Only Root Admin can add new Admins"
-			return render_template('admin-login.html',verbose=verbose)
+			return render_template('verbose-page.html', verbose=verbose)
 	
 	except KeyError:
 		
-		verbose="You have not logged in,"
-		return render_template('verbose-page.html', verbose=verbose)
-		
+		verbose="You have not logged in"
+		return render_template('admin-login.html',verbose=verbose)		
 	
 @app.route('/route-updateAdminPassword',methods=['POST','GET'])
 def route_updateAdminPassword():
