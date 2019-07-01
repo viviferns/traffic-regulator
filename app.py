@@ -257,14 +257,22 @@ def temp_password_control():
 @app.route('/route-addAdmin',methods=['POST','GET'])
 def route_addAdmin():
 	
-	if(session['user']=='root'):
+	try:
 	
-		return render_template('addAdmin.html')
-	
-	elif(session['user']!='root'):
+		if(session['user']=='root'):
 		
-		verbose="Only Root Admin can add new Admins"
-		return render_template('admin-login.html',verbose=verbose)
+			return render_template('addAdmin.html')
+		
+		elif(session['user']!='root'):
+			
+			verbose="Only Root Admin can add new Admins"
+			return render_template('admin-login.html',verbose=verbose)
+	
+	except KeyError:
+		
+		verbose="You have not logged in,"
+		return render_template('verbose-page.html', verbose=verbose)
+		
 	
 @app.route('/route-updateAdminPassword',methods=['POST','GET'])
 def route_updateAdminPassword():
