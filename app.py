@@ -348,10 +348,10 @@ def route_removeUser():
 	
 			return render_template('removeUser.html')
 	
-		except KeyError:
+	except KeyError:
 		
-			verbose="You have not logged in, Please login to Continue"
-			return render_template('admin-login.html',verbose=verbose)
+		verbose="You have not logged in, Please login to Continue"
+		return render_template('admin-login.html',verbose=verbose)
 	
 @app.route('/route-fetchUserDetails',methods=['POST','GET'])
 def route_fetchUserDetails():
