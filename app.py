@@ -361,7 +361,7 @@ def route_fetchUserDetails():
 		if(session['user']!='' or session['user']!= None):
 	
 			return render_template('payment.html')
-	
+
 @app.route('/route-payment',methods=['POST','GET'])
 def route_payment():
 	
