@@ -108,6 +108,10 @@ body{
 	margin-left:10%;
 }
 
+.item1{
+	background-color: #B71C1C;
+}
+
 /*.items .item1{
 	background: url('lotusT.jpg') no-repeat;
 }
