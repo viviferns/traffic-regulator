@@ -278,11 +278,11 @@ def route_updateAdminPassword():
 	
 	try:
 	
-		if(session['username']=='root'):
+		if(format(session['username'])=='root'):
 			
 			return render_template('updateAdmin.html')
 			
-		elif(session['username']!='root'):
+		elif(format(session['username'])!='root'):
 			
 			verbose="Only Root Admin can add new Admins"
 			return render_template('verbose-page.html', verbose=verbose)
@@ -297,11 +297,11 @@ def route_removeAdmin():
 	
 	try:
 	
-		if(session['username']=='root'):
+		if(format(session['username'])=='root'):
 			
 			return render_template('removeAdmins.html')
 		
-		elif(session['username']!='root'):
+		elif(format(session['username'])!='root'):
 			
 			verbose="Only Root Admin can add new Admins"
 			return render_template('verbose-page.html', verbose=verbose)
@@ -316,7 +316,7 @@ def route_addUser():
 	
 	try:
 	
-		if(session['username']!='' or session['username']!= None):
+		if(format(session['username'])!='' or format(session['username'])!= None):
 	
 			return render_template('addUser.html')
 	
@@ -330,7 +330,7 @@ def route_updateUser():
 	
 	try:
 	
-		if(session['username']!='' or session['username']!= None):
+		if(format(session['username'])!='' or format(session['username'])!= None):
 		
 			return render_template('updateUser.html')
 	
@@ -344,7 +344,7 @@ def route_removeUser():
 	
 	try:
 	
-		if(session['username']!='' or session['username']!= None):
+		if(format(session['username'])!='' or format(session['username'])!= None):
 	
 			return render_template('removeUser.html')
 	
@@ -358,7 +358,7 @@ def route_fetchUserDetails():
 	
 	try:
 	
-		if(session['username']!='' or session['username']!= None):
+		if(format(session['username'])!='' or format(session['username'])!= None):
 	
 			return render_template('payment.html')
 	
@@ -372,7 +372,7 @@ def route_payment():
 	
 	try:
 	
-		if(session['username']!='' or session['username']!= None):	
+		if(format(session['username'])!='' or format(session['username'])!= None):	
 		
 			return render_template('payment-details.html')
 			
@@ -386,7 +386,7 @@ def route_generate_pdf():
 	
 	try:
 	
-		if(session['username']!='' or session['username']!= None):	
+		if(format(session['username'])!='' or format(session['username'])!= None):	
 	
 			return render_template('generate-pdf.html')
 
@@ -399,7 +399,7 @@ def route_generate_pdf():
 def route_returnHome():
 	try:
 	
-		if(session['username']!='' or session['username']!= None):	
+		if(format(session['username'])!='' or format(session['username'])!= None):	
 	
 			return render_template('root-home.html')
 			
