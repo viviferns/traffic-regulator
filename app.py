@@ -257,6 +257,8 @@ def temp_password_control():
 @app.route('/route-addAdmin',methods=['POST','GET'])
 def route_addAdmin():
 	
+	return session['username']
+	
 	try:
 	
 		if(session['username']=='root'):
