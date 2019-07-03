@@ -15,12 +15,6 @@ app.config['SQLALCHEMY_DATABASE_URI']=os.environ.get('DATABASE_URL')
 app.secret_key=os.urandom(24)
 db=SQLAlchemy(app)
 
-@app.before_request
-def before_request():
-
-	if 'user' in session:
-		g.user = session['user']
-
 @app.route('/',methods = ['POST', 'GET'])
 def index():
 	
@@ -34,7 +28,7 @@ def remove_admin():
 	user_name=request.form['user_name']
 	mob_number=request.form['mob_number']
 	
-	if(session['user']=='root'):
+	if(session['username']=='root'):
 		rmAdmin=Admins.query.filter_by(MOBILE_NUMBER=mob_number).first()
 		if(rmAdmin.ADMIN_USER_NAME==user_name):
 			
@@ -78,7 +72,7 @@ def admin_login():
 
 	username=request.form['user_name']
 	password=request.form['pass_word']
-	session.pop('user', None)
+	session.pop('username', None)
 	verbose=""
 	
 	adminsTest=Admins.query.filter_by(ADMIN_USER_NAME=username).first()
@@ -90,7 +84,7 @@ def admin_login():
 
 	elif(adminsTest.ADMIN_USER_NAME==username and adminsTest.ADMIN_PASSWORD==password):
 		
-		session['user']=username
+		session['username']=username
 		return render_template('root-home.html')
 
 @app.route('/add_admin_control',methods=['POST','GET'])
@@ -259,11 +253,11 @@ def route_addAdmin():
 	
 	try:
 	
-		if(session['user']=='root'):
+		if(session['username']=='root'):
 		
 			return render_template('addAdmin.html')
 		
-		elif(session['user']!='root'):
+		elif(session['username']!='root'):
 			
 			verbose="Only Root Admin can add new Admins"
 			return render_template('verbose-page.html', verbose=verbose)
@@ -278,11 +272,11 @@ def route_updateAdminPassword():
 	
 	try:
 	
-		if(session['user']=='root'):
+		if(session['username']=='root'):
 			
 			return render_template('updateAdmin.html')
 			
-		elif(session['user']!='root'):
+		elif(session['username']!='root'):
 			
 			verbose="Only Root Admin can add new Admins"
 			return render_template('verbose-page.html', verbose=verbose)
@@ -297,11 +291,11 @@ def route_removeAdmin():
 	
 	try:
 	
-		if(session['user']=='root'):
+		if(session['username']=='root'):
 			
 			return render_template('removeAdmins.html')
 		
-		elif(session['user']!='root'):
+		elif(session['username']!='root'):
 			
 			verbose="Only Root Admin can add new Admins"
 			return render_template('verbose-page.html', verbose=verbose)
@@ -316,7 +310,7 @@ def route_addUser():
 	
 	try:
 	
-		if(session['user']!='' or session['user']!= None):
+		if(session['username']!='' or session['username']!= None):
 	
 			return render_template('addUser.html')
 	
@@ -330,7 +324,7 @@ def route_updateUser():
 	
 	try:
 	
-		if(session['user']!='' or session['user']!= None):
+		if(session['username']!='' or session['username']!= None):
 		
 			return render_template('updateUser.html')
 	
@@ -344,7 +338,7 @@ def route_removeUser():
 	
 	try:
 	
-		if(session['user']!='' or session['user']!= None):
+		if(session['username']!='' or session['username']!= None):
 	
 			return render_template('removeUser.html')
 	
@@ -358,7 +352,7 @@ def route_fetchUserDetails():
 	
 	try:
 	
-		if(session['user']!='' or session['user']!= None):
+		if(session['username']!='' or session['username']!= None):
 	
 			return render_template('payment.html')
 	
@@ -372,7 +366,7 @@ def route_payment():
 	
 	try:
 	
-		if(session['user']!='' or session['user']!= None):	
+		if(session['username']!='' or session['username']!= None):	
 		
 			return render_template('payment-details.html')
 			
@@ -386,7 +380,7 @@ def route_generate_pdf():
 	
 	try:
 	
-		if(session['user']!='' or session['user']!= None):	
+		if(session['username']!='' or session['username']!= None):	
 	
 			return render_template('generate-pdf.html')
 
@@ -399,7 +393,7 @@ def route_generate_pdf():
 def route_returnHome():
 	try:
 	
-		if(session['user']!='' or session['user']!= None):	
+		if(session['username']!='' or session['username']!= None):	
 	
 			return render_template('root-home.html')
 			
