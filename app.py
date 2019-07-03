@@ -257,15 +257,13 @@ def temp_password_control():
 @app.route('/route-addAdmin',methods=['POST','GET'])
 def route_addAdmin():
 	
-	return format(session['username'])
-	
 	try:
 	
-		if(session['username']=='root'):
+		if(format(session['username'])=='root'):
 		
 			return render_template('addAdmin.html')
 		
-		elif(session['username']!='root'):
+		elif(format(session['username'])!='root'):
 			
 			verbose="Only Root Admin can add new Admins"
 			return render_template('verbose-page.html', verbose=verbose)
