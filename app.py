@@ -21,6 +21,12 @@ def index():
 	verbose="Please Enter Username and Password"
 	return render_template('admin-login.html',verbose=verbose)
 		
+@app.route('/logout',methods = ['POST', 'GET'])
+def logout():
+	
+	session.pop('username', None)
+	verbose="You have ben logged out"
+	return render_template('admin-login.html',verbose=verbose)
 
 @app.route('/remove-admin',methods = ['POST', 'GET'])
 def remove_admin():
