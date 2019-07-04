@@ -91,6 +91,34 @@ body{
 	background: #3F51B5;
 }
 
+.settingicon{
+	height: 10%;
+	margin-right : 1%;
+	float : right;
+	margin-top:0.8%;
+}
+
+.settin{
+	height: 60%;
+	margin-right : 1%;
+	position:relative;
+}
+
+.tablinks{
+	display: none;
+	margin-right : 2%;
+	position:relative;
+}
+
+.imageicon{
+		height: 60%;
+		margin-top: 1%
+}
+
+.settingicon:hover .tablinks{
+	display: block;
+}
+
 .wrapper{
 	width: 90%;
 	height: 90%;
@@ -105,7 +133,7 @@ body{
 	height: 75%;
 	text-align: center;
 	margin-top: 10%;
-	margin-left:10%;
+	margin-left:20%;
 }
 
 .item1{
