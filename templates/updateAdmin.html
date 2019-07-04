@@ -33,44 +33,38 @@
 			}
 		}
 	</script>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/formcss.css')}}">
   </head>
   <body>
     </br></br></br>
-<form align="center" method="POST" action="/update-admin">
-    <tr>
+	<div class="titleverbose" align="center">
+	    <tr>
     <td>
-      <h3 align="center">
+      <h1 align="center">
         Confirm details to be Updated
-      </h3>
+      </h1>
       </td>
     </tr>
-    </br>
-	</br>
-	<tr>
-	<td>
+	</div>
+	<div class="titleverbose" align="center">
+	<div class="formstyle" align="center">
+	<form align="center" method="POST" action="/update-admin">
+	<div class="textbox">
 	<select id="dropDown1" name="dropDwn1" onchange="editPage(this.id,'textbox1','textbox2','submitButton')">
         <option value="name" selected>Name</option>
         <option value="mob_number">Mobile Number</option>
         <option value="user_name">New Username</option>
     </select>
-	</td>
-	</tr>
-	<tr>
-    <td align="center">
-      <input type="tel" name="mob_number" id="textbox1" pattern="[0-9]{10}" maxlength="10" placeholder=" Enter Existing Mobile Number" visibility="hidden">
-      </td>
-    </tr>
-	<tr>
-    <td align="center">
-      <input type="text" name="admin_name" id="textbox2" placeholder=" Enter Correct Name Of User" visibility="hidden">
-      </td>
-    </tr>
-	
-	<tr>
-    <td align="center">
-      <input type="submit" value="Submit" id="submitButton" visibility="hidden">
-      </td>
-    </tr>
+	</div>
+	<div class="textbox">
+		<input type="tel" name="mob_number" id="textbox1" pattern="[0-9]{10}" maxlength="10" placeholder=" Enter Existing Mobile Number" visibility="hidden">
+	</div>
+	<div class="textbox">
+		<input type="text" name="admin_name" id="textbox2" placeholder=" Enter Correct Name Of User" visibility="hidden">
+	</div>
+	<div class="textbox">
+		<input type="submit" value="Submit Now" class="btn">
+	</div>
     </form>  
   </body>
 </html>

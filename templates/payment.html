@@ -1,13 +1,14 @@
 <html>
   <head>
     <title></title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/formcss.css')}}">
   </head>
   <body>
-  <form align="center" method="POST" action="/make-payment-control">
+  <div class="titleverbose" align="center">
     </br></br></br>
-	<h3 align="center">
+	<h1 align="center">
         Voilation Details
-      </h3>	
+      </h1>	
 	<table border=1 align="center">
 	<thead>
 	<tr>
@@ -30,23 +31,17 @@
 	
     <tr>
     <td>
-      <h3 align="center">
+      <h1 align="center">
         Enter Details Below to Make Payment
-      </h3>
-      </td>
-    </tr>
-	<tr>
-    <td align="center">
-      <input type="tel" name="time_stamp" maxlength="17" placeholder=" Enter Time Stamp">
-      </td>
-    </tr>
-	<tr>
-    <td align="center">
-      <input type="submit" value="Submit">
-      </td>
-    </tr>
-    </br>
-</br>
-</form>  
+      </h1>
+	  </div>
+	<div class="formstyle" align="center">
+    <form align="center" method="POST" action="/make-payment-control">
+	<div class="textbox">
+		<input type="tel" name="time_stamp" maxlength="17" placeholder=" Enter Time Stamp">
+	</div>
+		<input type="submit" value="Submit Now" class="btn">
+	</div>
+	</form>  
 </body>
 </html>

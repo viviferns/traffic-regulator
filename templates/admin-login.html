@@ -1,47 +1,36 @@
 <html>
   <head>
     <title></title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/formcss.css')}}">
   </head>
   <body>
-    </br></br></br>
-    <tr>
-    <td>
-      <h3 align="center">
-        Admin's Login
-      </h3>
-      </td>
-    </tr>
-    </br>
-</br>
-    <tr>
-    <td align="center">
-	<form align="center" method="POST" action="/admin_login">
-    <td align="center">
-      <h4 align="center">{{ verbose }}</h4>
-      </td>
-    </tr>
-	</br></br>
-	<tr>
-    <td align="center">
-      <input type="text" name="user_name" placeholder=" Enter Username">
-      </td>
-    </tr>
-	</br></br>
-    <tr>
-    <td align="center">
-      <input type="password" name="pass_word" placeholder=" Enter Password">
-      </td>
-    </tr>
-	</br></br></br></br>
-	<tr>
-    <td align="center">
-      <input type="submit" value="Submit">
-      </td>
-    </tr>
-    </form>  
+	<div class="titleverbose" align="center">
+		</br></br></br>
+		<td align="center">
+			<h4 align="center">{{ verbose }}</h4>
+		</td>
+		<tr>
+		<td>
+		<h3 align="center">
+			Admin's Login
+		</h3>
+		</td>
+		</tr>
+		</br>
+		</br>
+	</div>
+	<div class="formstyle" align="center">
+		<form align="center" method="POST" action="/admin_login">
+		<div class="textbox">
+			<input type="text" name="user_name" placeholder=" Enter Username">
+		</div>
+		<div class="textbox">
+			<input type="password" name="pass_word" placeholder=" Enter Password">
+		</div>
+			<input type="submit" value="Submit Now" class="btn">
+	</div>
+	</form>  
   </body>
 </html>
-
-
 
       

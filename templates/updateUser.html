@@ -41,43 +41,44 @@
 			}
 		}
 	</script>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/formcss.css')}}">
   </head>
   <body>
+  <div class="titleverbose" align="center">
     </br></br></br>
-  <form align="center" method="POST" action="/update-user">
     <tr>
     <td>
-      <h3 align="center">
+      <h1 align="center">
         Confirm details to be Updated
-      </h3>
+      </h1>
       </td>
     </tr>
     </br>
 	</br>
-	<tr>
-	<td>
+	</div>
+	<div class="formstyle" align="center">
+	<form align="center" method="POST" action="/update-user">
+	<div class="textbox">
 	<select id="dropDown1" name="dropDwn1" onchange="editPage(this.id,'textbox1','textbox2','carNumber','submitButton')">
         <option value="name" selected>Name</option>
         <option value="mob_number">Mobile Number</option>
         <option value="email_address">Email Address</option>
         <option value="car_number">Car Number</option>
     </select>
-	</td>
-	</tr>
-	<tr>
-    <td align="center">
-      <input type="tel" name="mob_number" id="textbox1" pattern="[0-9]{10}" maxlength="10" placeholder=" Enter Existing Mobile Number" visibility="hidden">
-      </td>
-    </tr>
-	<tr>
-    <td align="center">
-      <input type="text" name="usr_name" id="textbox2" placeholder=" Enter Correct Name Of User" visibility="hidden">
-      </td>
-    </tr>
+	</div>
+	<div class="textbox">
+    <input type="tel" name="mob_number" id="textbox1" pattern="[0-9]{10}" maxlength="10" placeholder=" Enter Existing Mobile Number" visibility="hidden">
+	</div>
+	<div class="textbox">
+    <input type="text" name="usr_name" id="textbox2" placeholder=" Enter Correct Name Of User" visibility="hidden">
+	</div>
+
 	<tr id="carNumber" visibility="hidden">
-	<td>
-		<h6>Enter New Car Number</h6>
-      <select name="state_code">
+
+	<h6>Enter New Car Number</h6>
+
+	<div class="textbox">
+	  <select name="state_code">
         <option value="MH" selected>MH</option>
       </select>
       <select name="number_code">
@@ -86,16 +87,12 @@
         <option value="03">03</option>
         <option value="04">04</option>
       </select>
+	
 	  <input type="text" name="area_code" maxlength="2" size="2">
       <input type="number" name="pin" maxlength="4" size="4">
-      </td>
-	</td>
-	</tr>
-	<tr>
-    <td align="center">
-      <input type="submit" value="Submit" id="submitButton" visibility="hidden">
-      </td>
-    </tr>
+	</div>
+			<input type="submit" value="Submit Now" class="btn">
+	</div>
     </form>  
   </body>
 </html>

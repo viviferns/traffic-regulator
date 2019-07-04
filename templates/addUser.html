@@ -1,8 +1,10 @@
 <html>
   <head>
     <title></title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/formcss.css')}}">
   </head>
   <body>
+	<div class="titleverbose" align="center">
     </br></br></br>
     <tr>
     <td>
@@ -12,56 +14,35 @@
       </td>
     </tr>
     </br>
-</br>
-    <td align="center">
+	</br>
+	</div>
+    <div class="formstyle" align="center">
 	<form align="center" method="POST" action="/add-user-control">
-    <td align="center">
-      </td>
-    </tr>
-	</br></br>
-	<tr>
-    <tr>
-    <td align="center">
-      <input type="text" name="name_of_user" placeholder=" Name Of User">
-      </td>
-    </tr>
-	</br>
-</br>
-    <tr>
-    <td align="center">
-      <input type="tel" name="mobile_number" pattern="[0-9]{10}" maxlength="10" placeholder=" Mobile Number">
-      </td>
-    </tr>
-	</br>
-</br>
-    <tr>
-    <td align="center">
-      <input type="email" name="email_address" placeholder=" Email Address">
-      </td>
-    </tr>
-	</br></br>
-	<tr>
-	<td>
-      <select name="state_code">
-        <option value="MH" selected>MH</option>
-      </select>
-      <select name="number_code">
-        <option value="01" selected>01</option>
-        <option value="02">02</option>
-        <option value="03">03</option>
-        <option value="04">04</option>
-      </select>
-	  <input type="text" name="area_code" maxlength="2" size="2">
-      <input type="number" name="pin" maxlength="4" size="4">
-      </td>
-	</td>
-	</tr>
-</br></br>
-	<tr>
-    <td align="center">
-      <input type="submit" value="Submit">
-      </td>
-    </tr>
+    <div class="textbox">
+		<input type="text" name="name_of_user" placeholder=" Name Of User">
+	</div>
+	<div class="textbox">	
+		<input type="tel" name="mobile_number" pattern="[0-9]{10}" maxlength="10" placeholder=" Mobile Number">
+	</div>
+	<div class="textbox">	
+		<input type="email" name="email_address" placeholder=" Email Address">
+	</div>
+	<div class="textbox">	
+	<select name="state_code">
+			<option value="MH" selected>MH</option>
+		</select>
+		<select name="number_code">
+			<option value="01" selected>01</option>
+			<option value="02">02</option>
+			<option value="03">03</option>
+			<option value="04">04</option>
+		</select>
+		
+		<input type="text" name="area_code" maxlength="2" size="2">
+		<input type="number" name="pin" maxlength="4" size="4">
+	</div>
+					<input type="submit" value="Submit Now" class="btn">
+	</div>
     </form>  
   </body>
 </html>

@@ -2,29 +2,29 @@
 <html>
   <head>
     <title></title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/formcss.css')}}">
   </head>
   <body>
+  <div class="titleverbose" align="center">
     </br></br></br>
-  <form align="center" method="POST" action="/remove-admin">
     <tr>
     <td>
-      <h3 align="center">
+      <h1 align="center">
         Confirm below details to remove Admin
-      </h3>
+      </h1>
       </td>
     </tr>
-    </br>
-</br>
-    <tr>
-	<td>
-	<input type="text" name="user_name" placeholder=" Confirm Username">
-	</td>
-	<td>
-	<input type="tel" name="mob_number" pattern="[0-9]{10}" maxlength="10" placeholder=" Confirm Mobile Number">
-	</td>
-	<td>
-	<input type="submit" value="Submit">
-	</td>
+	</div>
+	<div class="formstyle" align="center">
+	<form align="center" method="POST" action="/remove-admin">
+	<div class="textbox">
+		<input type="text" name="user_name" placeholder=" Confirm Username">
+	</div>
+	<div class="textbox">
+		<input type="tel" name="mob_number" pattern="[0-9]{10}" maxlength="10" placeholder=" Confirm Mobile Number">
+	</div>
+		<input type="submit" value="Submit Now" class="btn">
+	</div>
 	</form>
 	</body>
 </html>

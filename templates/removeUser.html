@@ -3,34 +3,29 @@
 <html>
   <head>
     <title></title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/formcss.css')}}">
   </head>
   <body>
     </br></br></br>
-  <form align="center" method="POST" action="/remove-user">
+	<div class="titleverbose" align="center">
     <tr>
     <td>
-      <h3 align="center">
+      <h1 align="center">
         Confirm below details to remove User
-      </h3>
+      </h1>
       </td>
     </tr>
-    </br>
-</br>
-    <tr>
-    <td align="center">
+	</div>
+	<div class="formstyle" align="center">
+    <form align="center" method="POST" action="/remove-user">
+    <div class="textbox">
       <input type="tel" name="mob_number" pattern="[0-9]{10}" maxlength="10" placeholder=" Confirm Mobile Number">
-      </td>
-    </tr>
-	<tr>
-    <td align="center">
+	</div>
+	<div class="textbox">
       <input type="email" name="email_address" placeholder=" Email Address">
-      </td>
-    </tr>
-	<tr>
-    <td align="center">
-      <input type="submit" value="Submit">
-      </td>
-    </tr>
+	</div>
+	  <input type="submit" value="Submit Now" class="btn">
+	</div>
 	</form>
 	</body>
 </html>

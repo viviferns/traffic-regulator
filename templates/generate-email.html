@@ -3,8 +3,10 @@
 <html>
   <head>
     <title></title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/formcss.css')}}">
   </head>
   <body>
+	<div class="titleverbose" align="center">
     </br></br></br>
 	<table border=1>
 	<tr>
@@ -22,31 +24,23 @@
 		
 		{% endfor %}
 	</table>
-	
-  <form align="center" method="POST" action="/generate-email-control">
-    <tr>
+	<tr>
     <td>
-      <h3 align="center">
+      <h1 align="center">
         Manually Generate Mail
-      </h3>
+      </h1>
 	  </br>
-	  </br>
-	  </br>
-	  <h6 align="center">Provide Details Below</h6>
-      </td>
+	  <h1 align="center">Provide Details Below</h1>
+     </td>
     </tr>
-	<tr>
-    <td align="center">
+	</div>
+	<div class="formstyle" align="center">
+  <form align="center" method="POST" action="/generate-email-control">
+	<div class="textbox">
       <input type="tel" name="time_stam" maxlength="17" placeholder=" Enter Time Stamp">
-      </td>
-    </tr>
-	<tr>
-    <td align="center">
-      <input type="submit" value="Submit">
-      </td>
-    </tr>
-    </br>
-</br>
-</form>  
+    </div>
+					<input type="submit" value="Submit Now" class="btn">
+	</div>
+	</form>  
   </body>
 </html>
