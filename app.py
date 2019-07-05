@@ -193,15 +193,15 @@ def update_admin():
 			
 			verbose="Only Root Admin can add new Admins"
 			
-	'''except KeyError:
-		
-		verbose="You have not logged in, Please login to Continue"
-		return render_template('admin-login.html',verbose=verbose)
-		
-	except AttributeError:
-	
-		verbose="Admin's Existing Entry does not exist"
-		return render_template('admin-login.html',verbose=verbose)'''
+#	except KeyError:
+#		
+#		verbose="You have not logged in, Please login to Continue"
+#		return render_template('admin-login.html',verbose=verbose)
+#		
+#	except AttributeError:
+#	
+#		verbose="Admin's Existing Entry does not exist"
+#		return render_template('admin-login.html',verbose=verbose)
 	
 	except Exception as e: 
 		print(e)
