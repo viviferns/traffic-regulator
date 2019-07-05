@@ -303,7 +303,7 @@ def route_updateAdminPassword():
 			
 			return render_template('updateAdmin.html')
 			
-		elif(format(session['username'])!='root'):
+		elif(str(format(session['username'])) != 'root'):
 			
 			verbose="Only Root Admin can add new Admins"
 			return render_template('verbose-page.html', verbose=verbose)
