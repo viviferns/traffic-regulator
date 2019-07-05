@@ -267,7 +267,7 @@ def route_addAdmin():
 	
 	try:
 		
-		if(format(session['username'])=='root'):
+		if(str(format(session['username'])) == 'root'):
 		
 			return render_template('addAdmin.html')
 		
@@ -286,7 +286,7 @@ def route_updateAdminPassword():
 	
 	try:
 	
-		if(format(session['username'])=='root'):
+		if(str(format(session['username'])) == 'root'):
 			
 			return render_template('updateAdmin.html')
 			
@@ -305,7 +305,7 @@ def route_removeAdmin():
 	
 	try:
 	
-		if(format(session['username'])=='root'):
+		if(str(format(session['username'])) == 'root'):
 			
 			return render_template('removeAdmins.html')
 		
