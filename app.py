@@ -162,37 +162,37 @@ def update_admin():
 	
 	admDetails=Admins.query.filter_by(MOBILE_NUMBER=mob_number).first()
 		
-	try:
+#	try:
 	
-		if(str(format(session['username'])) == 'root'):
-		
-			if(dropDown1=="name"):
-				
-				admDetails.ADMIN_NAME=admin_name
-				db.session.commit()
-				updatedAdmDetails=Admins.query.filter_by(MOBILE_NUMBER=mob_number).first()
-				verbose="Updated details for Admin, Corrected Name: "+updatedAdmDetails.ADMIN_NAME
-				
-			elif(dropDown1=="mob_number"):
-				
-				admDetails.MOBILE_NUMBER=admin_name
-				db.session.commit()
-				updatedAdmDetails=Admins.query.filter_by(MOBILE_NUMBER=admin_name).first()
-				verbose="Updated details for Admin "+updatedAdmDetails.ADMIN_NAME+" Corrected/New Number: "+updatedAdmDetails.MOBILE_NUMBER
-				
-			elif(dropDown1=="user_name"):
-				
-				admDetails.ADMIN_USER_NAME=admin_name
-				db.session.commit()
-				updatedAdmDetails=Admins.query.filter_by(MOBILE_NUMBER=mob_number).first()
-				verbose="Updated details for Admin "+updatedAdmDetails.ADMIN_NAME+" Corrected/New Username: "+updatedAdmDetails.ADMIN_USER_NAME
-				
-			return render_template('verbose-page.html', verbose=verbose)
-		
-		elif(str(format(session['username'])) != 'root'):
+	if(str(format(session['username'])) == 'root'):
+	
+		if(dropDown1=="name"):
 			
-			verbose="Only Root Admin can add new Admins"
-			return render_template('verbose-page.html', verbose=verbose)
+			admDetails.ADMIN_NAME=admin_name
+			db.session.commit()
+			updatedAdmDetails=Admins.query.filter_by(MOBILE_NUMBER=mob_number).first()
+			verbose="Updated details for Admin, Corrected Name: "+updatedAdmDetails.ADMIN_NAME
+			
+		elif(dropDown1=="mob_number"):
+			
+			admDetails.MOBILE_NUMBER=admin_name
+			db.session.commit()
+			updatedAdmDetails=Admins.query.filter_by(MOBILE_NUMBER=admin_name).first()
+			verbose="Updated details for Admin "+updatedAdmDetails.ADMIN_NAME+" Corrected/New Number: "+updatedAdmDetails.MOBILE_NUMBER
+			
+		elif(dropDown1=="user_name"):
+			
+			admDetails.ADMIN_USER_NAME=admin_name
+			db.session.commit()
+			updatedAdmDetails=Admins.query.filter_by(MOBILE_NUMBER=mob_number).first()
+			verbose="Updated details for Admin "+updatedAdmDetails.ADMIN_NAME+" Corrected/New Username: "+updatedAdmDetails.ADMIN_USER_NAME
+			
+		return render_template('verbose-page.html', verbose=verbose)
+	
+	elif(str(format(session['username'])) != 'root'):
+		
+		verbose="Only Root Admin can add new Admins"
+		return render_template('verbose-page.html', verbose=verbose)
 			
 #	except KeyError:
 #		
