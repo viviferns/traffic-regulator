@@ -192,6 +192,7 @@ def update_admin():
 		elif(str(format(session['username'])) != 'root'):
 			
 			verbose="Only Root Admin can add new Admins"
+			return render_template('verbose-page.html', verbose=verbose)
 			
 #	except KeyError:
 #		
@@ -204,7 +205,7 @@ def update_admin():
 #		return render_template('admin-login.html',verbose=verbose)
 	
 	except Exception as e: 
-		print(e)
+		return 
 		
 @app.route('/update-user',methods=['POST','GET'])
 def update_user():
