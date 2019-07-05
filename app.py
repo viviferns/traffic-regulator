@@ -324,7 +324,7 @@ def route_addUser():
 	
 	try:
 	
-		if(format(session['username'])!='' or format(session['username'])!= None):
+		if(str(format(session['username'])) != '' or str(format(session['username'])) != None):
 	
 			return render_template('addUser.html')
 	
@@ -338,7 +338,7 @@ def route_updateUser():
 	
 	try:
 	
-		if(format(session['username'])!='' or format(session['username'])!= None):
+		if(str(format(session['username'])) != '' or str(format(session['username'])) != None):
 		
 			return render_template('updateUser.html')
 	
@@ -352,7 +352,7 @@ def route_removeUser():
 	
 	try:
 	
-		if(format(session['username'])!='' or format(session['username'])!= None):
+		if(str(format(session['username'])) != '' or str(format(session['username'])) != None):
 	
 			return render_template('removeUser.html')
 	
@@ -366,7 +366,7 @@ def route_fetchUserDetails():
 	
 	try:
 	
-		if(format(session['username'])!='' or format(session['username'])!= None):
+		if(str(format(session['username'])) != '' or str(format(session['username'])) != None):
 	
 			return render_template('payment.html')
 	
@@ -380,7 +380,7 @@ def route_payment():
 	
 	try:
 	
-		if(format(session['username'])!='' or format(session['username'])!= None):	
+		if(str(format(session['username'])) != '' or str(format(session['username'])) != None):	
 		
 			return render_template('payment-details.html')
 			
@@ -394,7 +394,7 @@ def route_generate_pdf():
 	
 	try:
 	
-		if(format(session['username'])!='' or format(session['username'])!= None):	
+		if(str(format(session['username'])) != '' or str(format(session['username'])) != None):	
 	
 			return render_template('generate-pdf.html')
 
