@@ -75,7 +75,7 @@ def remove_user():
 	
 @app.route('/admin_login',methods=['POST','GET'])
 def admin_login():
-
+#
 	username=request.form['user_name']
 	password=request.form['pass_word']
 	session.pop('username', None)
@@ -103,7 +103,7 @@ def admin_login():
 
 @app.route('/add_admin_control',methods=['POST','GET'])
 def add_admin_control():
-
+#
 	adm_name=request.form['adm_name']
 	adm_mobNo=request.form['adm_mobNo']
 	adm_userName=request.form['adm_userName']
@@ -405,9 +405,12 @@ def route_generate_pdf():
 	
 @app.route('/route-returnHome',methods=['POST','GET'])
 def route_returnHome():
+	
+	user_name=format(session['username'])
+	
 	try:
 	
-		if(format(session['username'])!='' or format(session['username'])!= None):	
+		if(user_name!='' or user_name!= None):	
 	
 			return render_template('root-home.html')
 			
