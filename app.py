@@ -205,7 +205,7 @@ def update_admin():
 #		return render_template('admin-login.html',verbose=verbose)
 	
 	except Exception as e: 
-		return 
+		return e
 		
 @app.route('/update-user',methods=['POST','GET'])
 def update_user():
