@@ -407,11 +407,10 @@ def route_generate_pdf():
 def route_returnHome():
 	
 	user_name=format(session['username'])
-	return format(session['username'])
 	
 	try:
 	
-		if(user_name!='' or user_name!= None):	
+		if(str(user_name) != '' or str(user_name) != None):	
 	
 			return render_template('root-home.html')
 			
