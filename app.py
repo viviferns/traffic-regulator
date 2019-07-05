@@ -8,6 +8,7 @@ import time
 import smtplib
 import email.mime.text
 import requests
+from requests import oauthlib, requests-oauthlib
 
 #heroku run:detached python app.py -a traffic-regulator
 app = Flask(__name__)
