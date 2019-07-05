@@ -266,7 +266,7 @@ def temp_password_control():
 def route_addAdmin():
 	
 	try:
-	
+		
 		if(format(session['username'])=='root'):
 		
 			return render_template('addAdmin.html')
@@ -407,6 +407,7 @@ def route_generate_pdf():
 def route_returnHome():
 	
 	user_name=format(session['username'])
+	return format(session['username'])
 	
 	try:
 	
