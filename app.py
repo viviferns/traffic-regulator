@@ -164,7 +164,7 @@ def update_admin():
 		
 #	try:
 	
-	if(str(format(session['username'])) == 'root'):
+	if(str(format(session['username'])) == "root"):
 	
 		if(dropDown1=="name"):
 			
@@ -189,7 +189,7 @@ def update_admin():
 			
 		return render_template('verbose-page.html', verbose=verbose)
 	
-	elif(str(format(session['username'])) != 'root'):
+	elif(str(format(session['username'])) != "root"):
 		
 		verbose="Only Root Admin can add new Admins"
 		return render_template('verbose-page.html', verbose=verbose)
@@ -303,11 +303,11 @@ def route_updateAdminPassword():
 	
 	try:
 	
-		if(str(format(session['username'])) == 'root'):
+		if(str(format(session['username'])) == "root"):
 			
 			return render_template('updateAdmin.html')
 			
-		elif(str(format(session['username'])) != 'root'):
+		elif(str(format(session['username'])) != "root"):
 			
 			verbose="Only Root Admin can add new Admins"
 			return render_template('verbose-page.html', verbose=verbose)
