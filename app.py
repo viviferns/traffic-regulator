@@ -81,17 +81,25 @@ def admin_login():
 	session.pop('username', None)
 	verbose=""
 	
-	adminsTest=Admins.query.filter_by(ADMIN_USER_NAME=username).first()
+	try:
+	
+		adminsTest=Admins.query.filter_by(ADMIN_USER_NAME=username).first()
+			
+		if(adminsTest.ADMIN_USER_NAME!=username or adminsTest.ADMIN_PASSWORD!=password):
+			
+			verbose="Incorrect Username or Password, Please re-enter your Details!!!"
+			return render_template('admin-login.html',verbose=verbose)
+	
+		elif(adminsTest.ADMIN_USER_NAME==username and adminsTest.ADMIN_PASSWORD==password):
+			
+			session['username']=username
+			return render_template('root-home.html')
+			
+	except AttributeError:
 		
-	if(adminsTest.ADMIN_USER_NAME!=username or adminsTest.ADMIN_PASSWORD!=password):
-		
-		verbose="Incorrect Username or Password, Please re-enter your Details!!!"
+		verbose="Invalid Credentials, Please login to Continue"
 		return render_template('admin-login.html',verbose=verbose)
-
-	elif(adminsTest.ADMIN_USER_NAME==username and adminsTest.ADMIN_PASSWORD==password):
-		
-		session['username']=username
-		return render_template('root-home.html')
+	
 
 @app.route('/add_admin_control',methods=['POST','GET'])
 def add_admin_control():
