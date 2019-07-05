@@ -198,6 +198,11 @@ def update_admin():
 		verbose="You have not logged in, Please login to Continue"
 		return render_template('admin-login.html',verbose=verbose)
 		
+	except AttributeError:
+	
+		verbose="Admin's Existing Entry does not exist"
+		return render_template('admin-login.html',verbose=verbose)
+		
 @app.route('/update-user',methods=['POST','GET'])
 def update_user():
 
