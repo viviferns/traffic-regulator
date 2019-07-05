@@ -161,34 +161,42 @@ def update_admin():
 	admin_name=request.form['admin_name']
 	
 	admDetails=Admins.query.filter_by(MOBILE_NUMBER=mob_number).first()
-	if(session['user']=='root'):
-	
-		if(dropDown1=="name"):
-			
-			admDetails.ADMIN_NAME=admin_name
-			db.session.commit()
-			updatedAdmDetails=Admins.query.filter_by(MOBILE_NUMBER=mob_number).first()
-			verbose="Updated details for Admin, Corrected Name: "+updatedAdmDetails.ADMIN_NAME
-			
-		elif(dropDown1=="mob_number"):
-			
-			admDetails.MOBILE_NUMBER=admin_name
-			db.session.commit()
-			updatedAdmDetails=Admins.query.filter_by(MOBILE_NUMBER=admin_name).first()
-			verbose="Updated details for Admin "+updatedAdmDetails.ADMIN_NAME+" Corrected/New Number: "+updatedAdmDetails.MOBILE_NUMBER
-			
-		elif(dropDown1=="user_name"):
-			
-			admDetails.ADMIN_USER_NAME=admin_name
-			db.session.commit()
-			updatedAdmDetails=Admins.query.filter_by(MOBILE_NUMBER=mob_number).first()
-			verbose="Updated details for Admin "+updatedAdmDetails.ADMIN_NAME+" Corrected/New Username: "+updatedAdmDetails.ADMIN_USER_NAME
-			
-		return render_template('verbose-page.html', verbose=verbose)
-	
-	elif(session['user']=='root'):
 		
-		verbose="Only Root Admin can add new Admins"
+	try:
+	
+		if(str(format(session['username'])) == 'root'):
+		
+			if(dropDown1=="name"):
+				
+				admDetails.ADMIN_NAME=admin_name
+				db.session.commit()
+				updatedAdmDetails=Admins.query.filter_by(MOBILE_NUMBER=mob_number).first()
+				verbose="Updated details for Admin, Corrected Name: "+updatedAdmDetails.ADMIN_NAME
+				
+			elif(dropDown1=="mob_number"):
+				
+				admDetails.MOBILE_NUMBER=admin_name
+				db.session.commit()
+				updatedAdmDetails=Admins.query.filter_by(MOBILE_NUMBER=admin_name).first()
+				verbose="Updated details for Admin "+updatedAdmDetails.ADMIN_NAME+" Corrected/New Number: "+updatedAdmDetails.MOBILE_NUMBER
+				
+			elif(dropDown1=="user_name"):
+				
+				admDetails.ADMIN_USER_NAME=admin_name
+				db.session.commit()
+				updatedAdmDetails=Admins.query.filter_by(MOBILE_NUMBER=mob_number).first()
+				verbose="Updated details for Admin "+updatedAdmDetails.ADMIN_NAME+" Corrected/New Username: "+updatedAdmDetails.ADMIN_USER_NAME
+				
+			return render_template('verbose-page.html', verbose=verbose)
+		
+		elif(str(format(session['username'])) != 'root'):
+			
+			verbose="Only Root Admin can add new Admins"
+			
+	except KeyError:
+		
+		verbose="You have not logged in, Please login to Continue"
+		return render_template('admin-login.html',verbose=verbose)
 		
 @app.route('/update-user',methods=['POST','GET'])
 def update_user():
