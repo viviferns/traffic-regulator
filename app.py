@@ -295,7 +295,7 @@ def route_addAdmin():
 	except KeyError:
 		
 		verbose="You have not logged in, Please login to Continue"
-		return render_template('admin-login.html',verbose=verbose)		
+		return render_template('addAdmin.html')		
 	
 @app.route('/route-updateAdminPassword',methods=['POST','GET'])
 def route_updateAdminPassword():
@@ -314,7 +314,8 @@ def route_updateAdminPassword():
 	except KeyError:
 		
 		verbose="You have not logged in, Please login to Continue"
-		return render_template('admin-login.html',verbose=verbose)
+		#return render_template('admin-login.html',verbose=verbose)
+		return render_template('updateAdmin.html')
 	
 @app.route('/route-removeAdmin',methods=['POST','GET'])
 def route_removeAdmin():
@@ -333,7 +334,7 @@ def route_removeAdmin():
 	except KeyError:
 		
 		verbose="You have not logged in, Please login to Continue"
-		return render_template('admin-login.html',verbose=verbose)
+		return render_template('removeAdmins.html')
 	
 @app.route('/route-addUser',methods=['POST','GET'])
 def route_addUser():
@@ -347,7 +348,7 @@ def route_addUser():
 	except KeyError:
 		
 		verbose="You have not logged in, Please login to Continue"
-		return render_template('admin-login.html',verbose=verbose)
+		return render_template('addUser.html')
 	
 @app.route('/route-updateUser',methods=['POST','GET'])
 def route_updateUser():
