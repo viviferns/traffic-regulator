@@ -362,7 +362,8 @@ def route_updateUser():
 	except KeyError:
 		
 		verbose="You have not logged in, Please login to Continue"
-		return render_template('admin-login.html',verbose=verbose)
+		#return render_template('admin-login.html',verbose=verbose)
+		return render_template('updateUser.html')
 	
 @app.route('/route-removeUser',methods=['POST','GET'])
 def route_removeUser():
@@ -376,7 +377,8 @@ def route_removeUser():
 	except KeyError:
 		
 		verbose="You have not logged in, Please login to Continue"
-		return render_template('admin-login.html',verbose=verbose)
+		#return render_template('admin-login.html',verbose=verbose)
+		return render_template('removeUser.html')
 	
 @app.route('/route-fetchUserDetails',methods=['POST','GET'])
 def route_fetchUserDetails():
@@ -390,7 +392,8 @@ def route_fetchUserDetails():
 	except KeyError:
 		
 		verbose="You have not logged in, Please login to Continue"
-		return render_template('admin-login.html',verbose=verbose)
+		#return render_template('admin-login.html',verbose=verbose)
+		return render_template('payment.html')
 
 @app.route('/route-payment',methods=['POST','GET'])
 def route_payment():
@@ -404,7 +407,8 @@ def route_payment():
 	except KeyError:
 		
 		verbose="You have not logged in, Please login to Continue"
-		return render_template('admin-login.html',verbose=verbose)
+		#return render_template('admin-login.html',verbose=verbose)
+		return render_template('payment-details.html')
 	
 @app.route('/route-generate-pdf',methods=['POST','GET'])
 def route_generate_pdf():
@@ -418,7 +422,8 @@ def route_generate_pdf():
 	except KeyError:
 		
 		verbose="You have not logged in, Please login to Continue"
-		return render_template('admin-login.html',verbose=verbose)
+		#return render_template('admin-login.html',verbose=verbose)
+		return render_template('generate-pdf.html')
 	
 @app.route('/route-returnHome',methods=['POST','GET'])
 def route_returnHome():
@@ -431,10 +436,6 @@ def route_returnHome():
 	
 			return render_template('root-home.html')
 			
-	except KeyError:
-		
-		verbose="You have not logged in, Please login to Continue"
-		return render_template('admin-login.html',verbose=verbose)
 	
 class Admins(db.Model):
 
