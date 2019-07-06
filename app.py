@@ -435,7 +435,10 @@ def route_returnHome():
 		if(str(user_name) != '' or str(user_name) != None):	
 	
 			return render_template('root-home.html')
-			
+	
+	except Exception e:
+		
+		print(e)
 	
 class Admins(db.Model):
 
