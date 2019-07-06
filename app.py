@@ -436,9 +436,9 @@ def route_returnHome():
 	
 			return render_template('root-home.html')
 	
-	except Exception e:
+	except Exception as e: 
 		
-		print(e)
+		return str(e)
 	
 class Admins(db.Model):
 
