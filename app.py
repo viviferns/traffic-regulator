@@ -251,7 +251,6 @@ def temp_password_control():
 def route_addAdmin():
 		
 	return render_template('addAdmin.html')
-			
 	
 @app.route('/route-updateAdminPassword',methods=['POST','GET'])
 def route_updateAdminPassword():
@@ -297,6 +296,11 @@ def route_generate_pdf():
 def route_returnHome():
 	
 	return render_template('root-home.html')
+	
+@app.route('/UploadFile',methods=['POST','GET'])
+def uploadFile():
+	
+	return render_template('fileUpload.html')
 	
 class Admins(db.Model):
 
