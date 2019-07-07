@@ -11,8 +11,12 @@ import email.mime.text
 #heroku run:detached python app.py -a traffic-regulator
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI']=os.environ.get('DATABASE_URL')
-app.secret_key=os.urandom(24)
+app.secret_key='user'
 db=SQLAlchemy(app)
+
+def auth_required(f):
+	@wraps(f)
+	def decorated(
 
 @app.route('/',methods = ['POST', 'GET'])
 def index():
@@ -23,7 +27,6 @@ def index():
 @app.route('/logout',methods = ['POST', 'GET'])
 def logout():
 	
-	session.pop('username', None)
 	verbose="You have ben logged out"
 	return render_template('admin-login.html',verbose=verbose)
 
@@ -33,22 +36,18 @@ def remove_admin():
 	user_name=request.form['user_name']
 	mob_number=request.form['mob_number']
 	
-	if(session['username']=='root'):
-		rmAdmin=Admins.query.filter_by(MOBILE_NUMBER=mob_number).first()
-		if(rmAdmin.ADMIN_USER_NAME==user_name):
-			
-			db.session.delete(rmAdmin)
-			db.session.commit()
-			verbose="Removed admin "+user_name
-			return render_template('verbose-page.html', verbose=verbose)
-			
-		else:
-			verbose="Unable to remove Admin ",user_name
-			return render_template('verbose-page.html', verbose=verbose)
-	
-	elif(session['user']=='root'):
+	rmAdmin=Admins.query.filter_by(MOBILE_NUMBER=mob_number).first()
+	if(rmAdmin.ADMIN_USER_NAME==user_name):
 		
-		verbose="Only Root Admin can add new Admins"
+		db.session.delete(rmAdmin)
+		db.session.commit()
+		verbose="Removed admin "+user_name
+		return render_template('verbose-page.html', verbose=verbose)
+		
+	else:
+		verbose="Unable to remove Admin ",user_name
+		return render_template('verbose-page.html', verbose=verbose)
+
 		
 @app.route('/remove-user',methods = ['POST', 'GET'])
 def remove_user():
@@ -77,27 +76,18 @@ def admin_login():
 #
 	username=request.form['user_name']
 	password=request.form['pass_word']
-	session.pop('username', None)
 	verbose=""
 	
-	try:
-	
-		adminsTest=Admins.query.filter_by(ADMIN_USER_NAME=username).first()
-			
-		if(adminsTest.ADMIN_USER_NAME!=username or adminsTest.ADMIN_PASSWORD!=password):
-			
-			verbose="Incorrect Username or Password, Please re-enter your Details!!!"
-			return render_template('admin-login.html',verbose=verbose)
-	
-		elif(adminsTest.ADMIN_USER_NAME==username and adminsTest.ADMIN_PASSWORD==password):
-			
-			session['username']=username
-			return render_template('root-home.html')
-			
-	except AttributeError:
+	adminsTest=Admins.query.filter_by(ADMIN_USER_NAME=username).first()
 		
-		verbose="Invalid Credentials, Please login to Continue"
+	if(adminsTest.ADMIN_USER_NAME!=username or adminsTest.ADMIN_PASSWORD!=password):
+		
+		verbose="Incorrect Username or Password, Please re-enter your Details!!!"
 		return render_template('admin-login.html',verbose=verbose)
+
+	elif(adminsTest.ADMIN_USER_NAME==username and adminsTest.ADMIN_PASSWORD==password):
+		
+		return render_template('root-home.html')
 	
 
 @app.route('/add_admin_control',methods=['POST','GET'])
@@ -161,50 +151,29 @@ def update_admin():
 	
 	admDetails=Admins.query.filter_by(MOBILE_NUMBER=mob_number).first()
 		
-#	try:
-	
-	if(str(format(session['username'])) == "root"):
-	
-		if(dropDown1=="name"):
-			
-			admDetails.ADMIN_NAME=admin_name
-			db.session.commit()
-			updatedAdmDetails=Admins.query.filter_by(MOBILE_NUMBER=mob_number).first()
-			verbose="Updated details for Admin, Corrected Name: "+updatedAdmDetails.ADMIN_NAME
-			
-		elif(dropDown1=="mob_number"):
-			
-			admDetails.MOBILE_NUMBER=admin_name
-			db.session.commit()
-			updatedAdmDetails=Admins.query.filter_by(MOBILE_NUMBER=admin_name).first()
-			verbose="Updated details for Admin "+updatedAdmDetails.ADMIN_NAME+" Corrected/New Number: "+updatedAdmDetails.MOBILE_NUMBER
-			
-		elif(dropDown1=="user_name"):
-			
-			admDetails.ADMIN_USER_NAME=admin_name
-			db.session.commit()
-			updatedAdmDetails=Admins.query.filter_by(MOBILE_NUMBER=mob_number).first()
-			verbose="Updated details for Admin "+updatedAdmDetails.ADMIN_NAME+" Corrected/New Username: "+updatedAdmDetails.ADMIN_USER_NAME
-			
-		return render_template('verbose-page.html', verbose=verbose)
-	
-	elif(str(format(session['username'])) != "root"):
+	if(dropDown1=="name"):
 		
-		verbose="Only Root Admin can add new Admins"
-		return render_template('verbose-page.html', verbose=verbose)
-			
-#	except KeyError:
-#		
-#		verbose="You have not logged in, Please login to Continue"
-#		return render_template('admin-login.html',verbose=verbose)
-#		
-#	except AttributeError:
-#	
-#		verbose="Admin's Existing Entry does not exist"
-#		return render_template('admin-login.html',verbose=verbose)
-#	
-#	except Exception as e: 
-#		return str(e)
+		admDetails.ADMIN_NAME=admin_name
+		db.session.commit()
+		updatedAdmDetails=Admins.query.filter_by(MOBILE_NUMBER=mob_number).first()
+		verbose="Updated details for Admin, Corrected Name: "+updatedAdmDetails.ADMIN_NAME
+		
+	elif(dropDown1=="mob_number"):
+		
+		admDetails.MOBILE_NUMBER=admin_name
+		db.session.commit()
+		updatedAdmDetails=Admins.query.filter_by(MOBILE_NUMBER=admin_name).first()
+		verbose="Updated details for Admin "+updatedAdmDetails.ADMIN_NAME+" Corrected/New Number: "+updatedAdmDetails.MOBILE_NUMBER
+		
+	elif(dropDown1=="user_name"):
+		
+		admDetails.ADMIN_USER_NAME=admin_name
+		db.session.commit()
+		updatedAdmDetails=Admins.query.filter_by(MOBILE_NUMBER=mob_number).first()
+		verbose="Updated details for Admin "+updatedAdmDetails.ADMIN_NAME+" Corrected/New Username: "+updatedAdmDetails.ADMIN_USER_NAME
+		
+	return render_template('verbose-page.html', verbose=verbose)
+
 		
 @app.route('/update-user',methods=['POST','GET'])
 def update_user():
@@ -280,165 +249,54 @@ def temp_password_control():
 		
 @app.route('/route-addAdmin',methods=['POST','GET'])
 def route_addAdmin():
-	
-	try:
 		
-		if(str(format(session['username'])) == 'root'):
-		
-			return render_template('addAdmin.html')
-		
-		elif(format(session['username'])!='root'):
+	return render_template('addAdmin.html')
 			
-			verbose="Only Root Admin can add new Admins"
-			return render_template('verbose-page.html', verbose=verbose)
-	
-	except KeyError:
-		
-		verbose="You have not logged in, Please login to Continue"
-		return render_template('addAdmin.html')		
 	
 @app.route('/route-updateAdminPassword',methods=['POST','GET'])
 def route_updateAdminPassword():
-	
-	try:
-	
-		if(str(format(session['username'])) == "root"):
-			
-			return render_template('updateAdmin.html')
-			
-		elif(str(format(session['username'])) != "root"):
-			
-			verbose="Only Root Admin can add new Admins"
-			return render_template('verbose-page.html', verbose=verbose)
 
-	except KeyError:
-		
-		verbose="You have not logged in, Please login to Continue"
-		#return render_template('admin-login.html',verbose=verbose)
-		return render_template('updateAdmin.html')
+	return render_template('updateAdmin.html')
 	
 @app.route('/route-removeAdmin',methods=['POST','GET'])
 def route_removeAdmin():
 	
-	try:
-	
-		if(str(format(session['username'])) == 'root'):
-			
-			return render_template('removeAdmins.html')
-		
-		elif(format(session['username'])!='root'):
-			
-			verbose="Only Root Admin can add new Admins"
-			return render_template('verbose-page.html', verbose=verbose)
-
-	except KeyError:
-		
-		verbose="You have not logged in, Please login to Continue"
-		return render_template('removeAdmins.html')
+	return render_template('removeAdmins.html')
 	
 @app.route('/route-addUser',methods=['POST','GET'])
 def route_addUser():
 	
-	try:
-	
-		if(str(format(session['username'])) != '' or str(format(session['username'])) != None):
-	
-			return render_template('addUser.html')
-	
-	except KeyError:
-		
-		verbose="You have not logged in, Please login to Continue"
-		return render_template('addUser.html')
-	
+	return render_template('addUser.html')
+
 @app.route('/route-updateUser',methods=['POST','GET'])
 def route_updateUser():
 	
-	try:
-	
-		if(str(format(session['username'])) != '' or str(format(session['username'])) != None):
-		
-			return render_template('updateUser.html')
-	
-	except KeyError:
-		
-		verbose="You have not logged in, Please login to Continue"
-		#return render_template('admin-login.html',verbose=verbose)
-		return render_template('updateUser.html')
+	return render_template('updateUser.html')
 	
 @app.route('/route-removeUser',methods=['POST','GET'])
 def route_removeUser():
 	
-	try:
-	
-		if(str(format(session['username'])) != '' or str(format(session['username'])) != None):
-	
-			return render_template('removeUser.html')
-	
-	except KeyError:
-		
-		verbose="You have not logged in, Please login to Continue"
-		#return render_template('admin-login.html',verbose=verbose)
-		return render_template('removeUser.html')
+	return render_template('removeUser.html')
 	
 @app.route('/route-fetchUserDetails',methods=['POST','GET'])
 def route_fetchUserDetails():
 	
-	try:
+	return render_template('payment.html')
 	
-		if(str(format(session['username'])) != '' or str(format(session['username'])) != None):
-	
-			return render_template('payment.html')
-	
-	except KeyError:
-		
-		verbose="You have not logged in, Please login to Continue"
-		#return render_template('admin-login.html',verbose=verbose)
-		return render_template('payment.html')
-
 @app.route('/route-payment',methods=['POST','GET'])
 def route_payment():
-	
-	try:
-	
-		if(str(format(session['username'])) != '' or str(format(session['username'])) != None):	
-		
-			return render_template('payment-details.html')
-			
-	except KeyError:
-		
-		verbose="You have not logged in, Please login to Continue"
-		#return render_template('admin-login.html',verbose=verbose)
-		return render_template('payment-details.html')
+
+	return render_template('payment-details.html')
 	
 @app.route('/route-generate-pdf',methods=['POST','GET'])
 def route_generate_pdf():
 	
-	try:
-	
-		if(str(format(session['username'])) != '' or str(format(session['username'])) != None):	
-	
-			return render_template('generate-pdf.html')
-
-	except KeyError:
-		
-		verbose="You have not logged in, Please login to Continue"
-		#return render_template('admin-login.html',verbose=verbose)
-		return render_template('generate-pdf.html')
+	return render_template('generate-pdf.html')
 	
 @app.route('/route-returnHome',methods=['POST','GET'])
 def route_returnHome():
 	
-	user_name=format(session['username'])
-	
-	try:
-	
-		if(str(user_name) != '' or str(user_name) != None):	
-	
-			return render_template('root-home.html')
-	
-	except Exception as e: 
-		
-		return str(e)
+	return render_template('root-home.html')
 	
 class Admins(db.Model):
 
@@ -633,20 +491,9 @@ def generate_email():
 if __name__ == '__main__':
 	#app.run(debug = True)
 	db.create_all()
-	'''insertAdm=Admins(1,'MAIN_ADMIN',12345789,'root','ROOT1234')
+	insertAdm=Admins(1,'MAIN_ADMIN',12345789,'root','ROOT1234')
 	db.session.add(insertAdm)
 	db.session.commit()
-	insertUsr=Users(1,"User1",987654321,"testuser123@gmail.com","MH-01-CH-0007")
-	db.session.add(insertUsr)
-	db.session.commit()'''
-	#addUsers(1,"User1",9876543212,"vivianfernandes6795@gmail.com","KL-01-CC-5919")
-	'''addUsers(2,"User1",8422065548,"vivianfernandes67@gmail.com","AP-28-DD-2438")
-	addUsers(3,"User1",9167316411,"vivianfernandes6@gmail.com","AP-29-AS-8467")
-	addUsers(4,"User1",9769483249,"vivianfernandes@gmail.com","RJ-20-CC-5851")
-	addUsers(5,"User1",9619992079,"vivianfernande@gmail.com","TS-07-EK-7622")
-	addUsers(6,"User1",8286546670,"vivianfernand@gmail.com","AP-10-BC-1485")
-	addUsers(7,"User1",7777721725,"vivianfernan@gmail.com","MH-08-AG-1886")
-	addUsers(8,"User1",8625552718,"vivianferna@gmail.com","AP-36-A-5868")'''
 	#addVoilations(1,'KL-01-CC-5919','ChurchGate')
 	'''addVoilations(2,'AP-28-DD-2438','ChurchGate')
 	addVoilations(3,'AP-29-AS-8467','ChurchGate')

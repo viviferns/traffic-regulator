@@ -7,37 +7,28 @@
 		function editPage(id1,id2,id3,id4,id5)
 		{
 			var dropDown1=document.getElementById(id1);
-			var textbox1=document.getElementById(id2);
-			var textbox2=document.getElementById(id3);
-			var carNumber=document.getElementById(id4);
-			var submitButton=document.getElementById(id5);
-			
+						
 			if(dropDown1.value=="name")
 			{
-				textbox1.style.visibility = 'visible';
-				textbox2.style.visibility = 'visible';
-				submitButton.style.visibility = 'visible';
+				textbox2.placeholder=" Correct Name"
+				document.getElementById("display2").style.display="none";
+				//textbox1.style.visibility = 'visible';
+				//textbox2.style.visibility = 'visible';
+				//submitButton.style.visibility = 'visible';
 			}
 			else if(dropDown1.value=="mob_number")
-			{
-				textbox2.placeholder=" Enter New Mobile Number"
-				textbox1.style.visibility = 'visible';
-				textbox2.style.visibility = 'visible';
-				submitButton.style.visibility = 'visible';
+			{	
+				textbox2.placeholder=" New Mob No.";
+				document.getElementById("display2").style.display="none";
 			}
 			else if(dropDown1.value=="email_address")
 			{
-				textbox2.placeholder=" Enter New Email Address"
-				textbox1.style.visibility = 'visible';
-				textbox2.style.visibility = 'visible';
-				submitButton.style.visibility = 'visible';
+				textbox2.placeholder=" New Email Addr";
+				document.getElementById("display2").style.display="none";
 			}
 			else if(dropDown1.value=="car_number")
 			{
-				textbox1.style.visibility = 'visible';
-				textbox2.style.visibility = 'visible';
-				carNumber.style.visibility = 'visible';
-				submitButton.style.visibility = 'visible';
+				document.getElementById("display1").style.display="none";				
 			}
 		}
 	</script>
@@ -66,16 +57,19 @@
         <option value="car_number">Car Number</option>
     </select>
 	</div>
+	<div class="display1">
 	<div class="textbox">
-    <input type="tel" name="mob_number" id="textbox1" pattern="[0-9]{10}" maxlength="10" placeholder=" Enter Existing Mobile Number" visibility="hidden">
+    <input type="tel" name="mob_number" id="textbox1" pattern="[0-9]{10}" maxlength="10" placeholder=" Existing Mob No." visibility="hidden">
 	</div>
 	<div class="textbox">
-    <input type="text" name="usr_name" id="textbox2" placeholder=" Enter Correct Name Of User" visibility="hidden">
+    <input type="text" name="usr_name" id="textbox2" placeholder=" Correct Name" visibility="hidden">
+	</div>
 	</div>
 
 	<tr id="carNumber" visibility="hidden">
-
-	<h6>Enter New Car Number</h6>
+	
+	<div class="display2">
+	<h1>Enter New Car Number</h1>
 
 	<div class="textbox">
 	  <select name="state_code">
@@ -88,8 +82,8 @@
         <option value="04">04</option>
       </select>
 	
-	  <input type="text" name="area_code" maxlength="2" size="2">
-      <input type="number" name="pin" maxlength="4" size="4">
+	  <input type="text" name="area_code" maxlength="2" size="2" placeholder=" Letter">
+      <input type="number" name="pin" maxlength="4" size="4" placeholder=" Series Pin">
 	</div>
 			<input type="submit" value="Submit Now" class="btn">
 	</div>

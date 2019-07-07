@@ -13,23 +13,23 @@
 			
 			if(dropDown1.value=="name")
 			{
-				textbox1.style.visibility = 'visible';
-				textbox2.style.visibility = 'visible';
-				submitButton.style.visibility = 'visible';
+				textbox2.placeholder=" Correct Name";
+				//textbox1.style.visibility = 'visible';
+				//textbox2.style.visibility = 'visible';
+				textbox2.type="text";
+				
 			}
 			else if(dropDown1.value=="mob_number")
 			{
-				textbox2.placeholder=" Enter New Mobile Number"
-				textbox1.style.visibility = 'visible';
-				textbox2.style.visibility = 'visible';
-				submitButton.style.visibility = 'visible';
+				textbox2.placeholder=" New Mobile Number";
+				//submitButton.style.visibility = 'visible';
+				textbox2.type="tel";
 			}
 			else if(dropDown1.value=="user_name")
 			{
-				textbox2.placeholder=" Enter New Username"
-				textbox1.style.visibility = 'visible';
-				textbox2.style.visibility = 'visible';
-				submitButton.style.visibility = 'visible';
+				textbox2.placeholder=" New Username";
+				//submitButton.style.visibility = 'visible';
+				textbox2.type="text";
 			}
 		}
 	</script>
@@ -57,10 +57,10 @@
     </select>
 	</div>
 	<div class="textbox">
-		<input type="tel" name="mob_number" id="textbox1" pattern="[0-9]{10}" maxlength="10" placeholder=" Enter Existing Mobile Number" visibility="hidden">
+		<input type="tel" name="mob_number" id="textbox1" pattern="[0-9]{10}" maxlength="10" placeholder="  Existing Mobile Number">
 	</div>
 	<div class="textbox">
-		<input type="text" name="admin_name" id="textbox2" placeholder=" Enter Correct Name Of User" visibility="hidden">
+		<input type="text" name="admin_name" id="textbox2" placeholder=" Correct Name">
 	</div>
 	<div class="textbox">
 		<input type="submit" value="Submit Now" class="btn">
